@@ -37,6 +37,7 @@ You will need a PostgreSQL server running at least the version 9.5, because we m
 
 - Create a database with the name "hotsdata"
 - Create a user with the name "hotsdata" and grant ALL to the hotsdata database.
+- Update credentials.json with the appropriate password and server information.
 - Load the script in database/database_schema.sql into hotsdata. Please note this schema also contains the tables used by the API, data processing (ETL) and frontend that power www.hotsdata.com
 
 ## Installing python libraries
