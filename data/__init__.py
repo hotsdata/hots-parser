@@ -547,6 +547,7 @@ class _HeroTranslator(object):
         self.inverse_hero_translations.update({k.lower(): k for k in self.HERO_TRANSLATIONS.keys()})
 
     def get_base_hero_name(self, hero_name):
-        return self.inverse_hero_translations.get(hero_name.lower())
+        return self.inverse_hero_translations.get(hero_name.lower()) or \
+               self.inverse_hero_translations.get(unicode(hero_name, 'utf-8'))
 
 HeroTranslator = _HeroTranslator()
