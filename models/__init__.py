@@ -276,7 +276,7 @@ class HeroUnit(Unit):
         self.mapStats = {}
         self.playerId = player.playerId
 
-        self.name = get_base_hero_name(player.hero, HERO_TRANSLATIONS) or player.hero
+        self.name = HeroTranslator.get_base_hero_name(player.hero) or player.hero
         self.team = player.team
         self.id = player.id
         # self.userId = self.playerId
@@ -453,7 +453,7 @@ class HeroReplay:
         self.gameType = None
         self.gameVersion = None
         self.randomVal = None
-        self.mapName = get_base_map_name(details['m_title'], MAP_TRANSLATIONS)
+        self.mapName = MapTranslator().get_base_map_name(details['m_title'])
         self.mapSize = {}
         self.startTime = win_timestamp_to_date(details['m_timeUTC'])
         self.gatesOpenedAt = None  # seconds into the game when the gates open
@@ -483,7 +483,7 @@ class Player():
         self.heroLevel = 1
         self.id = player['m_workingSetSlotId']
         self.team = player['m_teamId']
-        self.hero = get_base_hero_name(player['m_hero'], HERO_TRANSLATIONS) or player['m_hero']
+        self.hero = HeroTranslator.get_base_hero_name(player['m_hero']) or player['m_hero']
         self.name = player['m_name']
         self.isHuman = (player['m_toon']['m_region'] != 0)
         self.gameResult = int(player['m_result'])

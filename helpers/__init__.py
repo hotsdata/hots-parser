@@ -5,28 +5,6 @@ from math import sqrt, sin, asin, degrees, hypot, radians
 from types import UnicodeType
 
 
-def get_base_map_name(mapName, translation):
-    if mapName.lower() in map(lambda x: x.lower(), translation.keys()):
-        return mapName
-    else:
-        for m,t in translation.items():
-            if mapName.lower() in map(lambda x: x.lower(), t):
-                return m
-
-def get_base_hero_name(heroName, translation):
-    if heroName.lower() in map(lambda x: x.lower(), translation.keys()):
-        return translation[heroName][0]
-    else:
-        for m, t in translation.items():
-            for tt in t:
-                if type(heroName) == UnicodeType:
-                    if heroName in tt:
-                        return translation[m][0]
-                elif unicode(heroName, 'utf-8') in tt:
-                    return translation[m][0]
-
-
-
 def win_timestamp_to_date(ts=None, date_format='%Y-%m-%d %H:%M:%S'):
     if ts:
         return datetime.datetime.fromtimestamp(int((ts / 10000000) - 11644473600)).strftime(date_format)
