@@ -32,6 +32,20 @@ optional arguments:
 # Configuration
 This parser tries to run as fast as possible, in order to do that we use PyPy which perform better than the default interpreter, so the first thing you need to do is to install PyPy. Please note that the default interpreter will still work, but a lot slower (about 1 second per replay on a mac with i7@2.8Ghz with 16GB of RAM)
 
+## Loading submodules
+The parser relies on Blizzard's heroprotocol project, which is included as a submodule in this repo, in order to pull the data for heroprotocol you need to run this command after cloning the repo:
+
+```
+git submodule init
+git submodule update
+```
+
+alternativelly, you can clone hots-parser recursively:
+
+```
+git clone --recursive git@github.com:crorella/hots-parser.git
+```
+
 ## Loading the database schema
 You will need a PostgreSQL server running at least the version 9.5, because we make extensive use of the JSONB datatype to store the metrics we extract from the replay.
 
