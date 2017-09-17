@@ -41,7 +41,9 @@ You will need a PostgreSQL server running at least the version 9.5, because we m
 
 ## Installing python libraries
 For now we just use jsonpickle and psycopg2ct. You can use pip to install them.
+
 > pip install jsonpickle
+
 > pip install psycopg2ct
 
 ## Testing all
