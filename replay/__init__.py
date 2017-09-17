@@ -5,6 +5,8 @@ from models import *
 from hashlib import sha256
 import re
 import sys
+from importlib import import_module
+
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -65,45 +67,52 @@ class Replay:
         return tag
 
     def process_replay_details(self):
-        import importlib
+        lobby_data = self.replayFile.read_file('replay.server.battlelobby')
+
         contents = self.replayFile.read_file('replay.details')
         headerContents = self.replayFile.header['user_data_header']['content']
         header = self.protocol.decode_replay_header(headerContents)
         baseBuild = header['m_version']['m_baseBuild']
-        lobby_data = self.replayFile.read_file('replay.server.battlelobby')
-        self.protocol = importlib.import_module('heroprotocol.protocol%s' % baseBuild, 'heroprotocol')
-        details = self.protocol.decode_replay_details(contents)
-        self.replayInfo = HeroReplay(details)
-        if self.replayInfo.mapName == 'Sandbox (Cursed Hollow)':
-            print "Sandbox map not supported"
-            exit(0)
-        self.replayInfo.gameLoops = header['m_elapsedGameLoops']
+        self.protocol = import_module('heroprotocol.protocol%s' % baseBuild, 'heroprotocol')
+        self.details = self.protocol.decode_replay_details(contents)
+        self.replayInfo = HeroReplay(self.details)
         self.replayInfo.gameVersion = baseBuild
+
+        if not self.is_valid_map():
+            exit(0)
+
+        if not self.is_valid_player_size():
+            exit(0)
+
+        self.replayInfo.gameLoops = header['m_elapsedGameLoops']
         self.players = {}
         for t in self.teams:
             t.set_map_stats(self.replayInfo.mapName)
-        if len(details['m_playerList']) < 10:
-            print "Games with less than 10 players not supported"
-            exit(0)
-        for player in xrange(0, len(details['m_playerList'])):
-            p = Player(details['m_playerList'][player])
-            p.battleTag = self.get_battle_tags(lobby_data, p.name)
-            # fix for bug when slotid is empty in the replay
-            if not p.id:
-                p.id = len(self.players)
-            self.players[player] = p
 
-            if not p.isHuman:
+
+        for i, player_details in enumerate(self.details['m_playerList']):
+            player = Player(player_details)
+            player.battleTag = self.get_battle_tags(lobby_data, player.name)
+            # fix for bug when slotid is empty in the replay
+            if not player.id:
+                player.id = len(self.players)
+            self.players[i] = player
+
+            if not player.isHuman:
                 print "Computer Player Found, Exiting"
                 exit(0)
 
     def is_valid_map(self):
-        message = ""
-        error = False
-        if self.replayInfo.mapName in ('Sandbox (Cursed Hollow)'):
-            message = "Sandbox game not supported"
-            error = True
-        return error, message
+        if self.replayInfo.mapName in ['Sandbox (Cursed Hollow)']:
+            print "Sandbox map not supported"
+            return False
+        return True
+
+    def is_valid_player_size(self):
+        if len(self.details['m_playerList']) < 10:
+            print "Games with less than 10 players not supported"
+            return False
+        return True
 
     def process_replay_initdata(self):
         # return 0
@@ -111,25 +120,9 @@ class Replay:
         initdata = self.protocol.decode_replay_initdata(contents)
         gameOptions = initdata['m_syncLobbyState']['m_gameDescription'].get('m_gameOptions', None)
         if gameOptions:
-            gameType = gameOptions.get('m_ammId', None)
-        if gameType:
-            if int(gameType) == 50001:
-                self.replayInfo.gameType = 'QuickMatch'
-            elif int(gameType) == 50021:
-                self.replayInfo.gameType = 'Versus AI'
-            elif int(gameType) == 50041:
-                self.replayInfo.gameType = 'Practice'
-            elif int(gameType) == 50031:
-                self.replayInfo.gameType = 'Brawl'
-            elif int(gameType) == 50051:
-                self.replayInfo.gameType = 'Unranked'
-            elif int(gameType) == 50061:
-                self.replayInfo.gameType = 'Hero League'
-            elif int(gameType) == 50071:
-                self.replayInfo.gameType = 'Team League'
-            else:
-                self.replayInfo.gameType = 'Unknown'
-        # player = 0
+            raw_game_type = gameOptions.get('m_ammId', None)
+        if raw_game_type:
+            self.replayInfo.gameType = GAME_TYPES.get(int(raw_game_type), 'Unknown')
 
         if not self.replayInfo.is_allowed_game_type():
             print "Game type %s not allowed for parsing" % self.replayInfo.gameType
@@ -187,10 +180,6 @@ class Replay:
             self.teams[0].generalStats['banned'].append(t1_ban2)
             self.teams[1].generalStats['banned'].append(t2_ban1)
             self.teams[1].generalStats['banned'].append(t2_ban2)
-
-
-    def get_players_in_game(self):
-        return self.players.itervalues()
 
     def process_replay(self):
         #
