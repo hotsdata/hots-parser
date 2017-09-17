@@ -11,6 +11,9 @@ def test_HeroTranslator_with_english_characters():
     assert HeroTranslator.get_base_hero_name("Gazleu /// Gazlowe") == "Gazlowe"
     assert HeroTranslator.get_base_hero_name(u"Thrall /// Thrall") == "Thrall"
     assert HeroTranslator.get_base_hero_name("Thrall /// Thrall") == "Thrall"
+    assert HeroTranslator.get_base_hero_name("Guldan") == "Gul'dan"
+    assert HeroTranslator.get_base_hero_name("FaerieDragon") == "Brightwing"
+    assert HeroTranslator.get_base_hero_name("Dryad") == "Lunara"
 
 
 def test_HeroTranslator_with_unicode_characters():
