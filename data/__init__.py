@@ -1,5 +1,15 @@
 # -*- coding: utf-8 -*-
 
+GAME_TYPES = {
+    50001: 'QuickMatch',
+    50021: 'Versus AI',
+    50041: 'Practice',
+    50031: 'Brawl',
+    50051: 'Unranked',
+    50061: 'Hero League',
+    50071: 'Team League',
+}
+
 BANNED_GAME_TYPES = {'Versus AI', 'Practice', 'Brawl'}
 
 TRIBUTEUNIT = {'RavenLordTribute'}
