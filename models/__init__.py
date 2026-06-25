@@ -12,6 +12,7 @@ ReplayEvent: TypeAlias = dict[str, Any]
 StatsDict: TypeAlias = dict[str, Any]
 
 from data import *
+from data.abilities import get_ability_definition
 from helpers import *
 
 
@@ -701,28 +702,32 @@ class BaseAbility:
     Base class for all abilities, has all the common attributes
     """
 
-    def __init__(self, event: ReplayEvent) -> None:
-        self.abilityName: str | None = None
+    def __init__(self, event: ReplayEvent, game_version: int | None = None) -> None:
+        self.gameVersion: int | None = game_version
         self.abilityTag: int = get_ability_tag(event)
+        self.abilityLink: int | None = get_ability_link(event)
+        self.abilityCmdIndex: int | None = get_ability_cmd_index(event)
+        ability_definition = get_ability_definition(self.abilityLink, self.abilityCmdIndex, game_version)
+        self.abilityCatalogName: str | None = ability_definition.catalog_name if ability_definition else None
+        self.abilityName: str | None = ability_definition.display_name if ability_definition else None
         self.castedAtGameLoops: int = event["_gameloop"]
         self.castedAt: int = get_seconds_from_event_gameloop(event)
         self.userId: int = event["_userid"]["m_userId"]
 
+    def _display_name(self) -> str:
+        return self.abilityName or str(self.abilityTag)
+
     def __str__(self) -> str:
-        return "%s" % self.abilityTag
+        return self._display_name()
 
     def __repr__(self) -> str:
-        return "BaseAbility(%r)" % (self.abilityTag)
+        return "BaseAbility(%r, %r)" % (self.abilityTag, self.abilityName)
 
 
 class TargetPointAbility(BaseAbility):
-    def __init__(self, event: ReplayEvent) -> None:
+    def __init__(self, event: ReplayEvent, game_version: int | None = None) -> None:
 
-        self.abilityName: str | None = None
-        self.abilityTag: int = get_ability_tag(event)
-        self.castedAt: int = get_seconds_from_event_gameloop(event)
-        self.userId: int = event["_userid"]["m_userId"]
-        self.castedAtGameLoops: int = event["_gameloop"]
+        super().__init__(event, game_version)
         self.x: float
         self.y: float
         self.z: float
@@ -736,10 +741,16 @@ class TargetPointAbility(BaseAbility):
             self.z = event["m_target"]["z"] / 4096.0
 
     def __repr__(self) -> str:
-        return "TargetPointAbility(%r, (%r, %r, %r))" % (self.abilityTag, self.x, self.y, self.z)
+        return "TargetPointAbility(%r, %r, (%r, %r, %r))" % (
+            self.abilityTag,
+            self.abilityName,
+            self.x,
+            self.y,
+            self.z,
+        )
 
     def __str__(self) -> str:
-        return "Skill: %s\tCoords: (%s,%s,%s)" % (self.abilityTag, self.x, self.y, self.z)
+        return "Skill: %s\tCoords: (%s,%s,%s)" % (self._display_name(), self.x, self.y, self.z)
 
 
 class UnitUpgrade:
@@ -753,12 +764,8 @@ class UnitUpgrade:
 
 
 class TargetUnitAbility(BaseAbility):
-    def __init__(self, event: ReplayEvent) -> None:
-        self.abilityName: str | None = None
-        self.abilityTag: int = get_ability_tag(event)
-        self.castedAt: int = get_seconds_from_event_gameloop(event)
-        self.userId: int = event["_userid"]["m_userId"]
-        self.castedAtGameLoops: int = event["_gameloop"]
+    def __init__(self, event: ReplayEvent, game_version: int | None = None) -> None:
+        super().__init__(event, game_version)
         self.x: float
         self.y: float
         self.z: float
@@ -781,8 +788,9 @@ class TargetUnitAbility(BaseAbility):
             self.targetUnitTag = event["m_target"]["m_tag"]
 
     def __repr__(self) -> str:
-        return "TargetUnitAbility(%r, %r, (%r, %r, %r))" % (
+        return "TargetUnitAbility(%r, %r, %r, (%r, %r, %r))" % (
             self.abilityTag,
+            self.abilityName,
             self.targetPlayerId,
             self.x,
             self.y,
@@ -791,7 +799,7 @@ class TargetUnitAbility(BaseAbility):
 
     def __str__(self) -> str:
         return "Skill: %s\tCoords: (%s,%s,%s)\tTarget: %s" % (
-            self.abilityTag,
+            self._display_name(),
             self.x,
             self.y,
             self.z,

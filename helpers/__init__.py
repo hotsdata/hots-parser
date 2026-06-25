@@ -28,10 +28,26 @@ def get_unit_tag(e):
 
 
 def get_ability_tag(e):
-    if e.get("m_abilityTag"):
+    if e.get("m_abilityTag") is not None:
         return e["m_abilityTag"]
     else:
         return e["m_abil"]["m_abilLink"] << 5 | e["m_abil"]["m_abilCmdIndex"]
+
+
+def get_ability_link(e):
+    if e.get("m_abilityTag") is not None:
+        return e["m_abilityTag"] >> 5
+    if e.get("m_abil"):
+        return e["m_abil"]["m_abilLink"]
+    return None
+
+
+def get_ability_cmd_index(e):
+    if e.get("m_abilityTag") is not None:
+        return e["m_abilityTag"] & 0x1F
+    if e.get("m_abil"):
+        return e["m_abil"]["m_abilCmdIndex"]
+    return None
 
 
 def calculate_distance(x1, y1, x2, y2):

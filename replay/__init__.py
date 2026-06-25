@@ -90,6 +90,11 @@ class Replay:
         self.stage: str = stage if stage else "None"
         self.endGameStatsProcessed: bool = False
 
+    def _ability_game_version(self) -> int | None:
+        if self.replayInfo is None or self.replayInfo.gameVersion is None:
+            return None
+        return int(self.replayInfo.gameVersion)
+
     def get_replay_id(self):
         _id = list()
         for t in self.teams:
@@ -1756,13 +1761,13 @@ class Replay:
 
         if event["m_abil"]:  # If this is an actual user available ability
             if event["m_data"].get("TargetPoint"):
-                ability = TargetPointAbility(event)
+                ability = TargetPointAbility(event, self._ability_game_version())
 
             elif event["m_data"].get("TargetUnit"):
-                ability = TargetUnitAbility(event)
+                ability = TargetUnitAbility(event, self._ability_game_version())
 
             else:  # e['m_data'].get('None'):
-                ability = BaseAbility(event)
+                ability = BaseAbility(event, self._ability_game_version())
 
         if ability:
             # update hero stat
@@ -1804,7 +1809,10 @@ class Replay:
                             self.utpe.get(event["_gameloop"])["m_abilityTag"] = abilities[
                                 list(abilities.keys())[-1]
                             ].abilityTag  # use last known ability (it's a repetition)
-                            ability = TargetPointAbility(self.utpe.get(event["_gameloop"]))
+                            ability = TargetPointAbility(
+                                self.utpe.get(event["_gameloop"]),
+                                self._ability_game_version(),
+                            )
                             if ability:
                                 self.heroList[playerId].generalStats["castedAbilities"][ability.castedAtGameLoops] = (
                                     ability
@@ -1817,7 +1825,10 @@ class Replay:
                         self.utue.get(event["_gameloop"])["m_abilityTag"] = abilities[
                             list(abilities.keys())[-1]
                         ].abilityTag
-                        ability = TargetUnitAbility(self.utue.get(event["_gameloop"]))
+                        ability = TargetUnitAbility(
+                            self.utue.get(event["_gameloop"]),
+                            self._ability_game_version(),
+                        )
                         if ability:
                             self.heroList[playerId].generalStats["castedAbilities"][ability.castedAtGameLoops] = ability
                             seconds = get_seconds_from_int_gameloop(ability.castedAtGameLoops)
@@ -1832,7 +1843,7 @@ class Replay:
                     abilities = self.heroList[playerId].generalStats["castedAbilities"]
                     if len(abilities) > 0:
                         event["m_abilityTag"] = abilities[list(abilities.keys())[-1]].abilityTag
-                        ability = BaseAbility(event)
+                        ability = BaseAbility(event, self._ability_game_version())
                         if ability:
                             self.heroList[playerId].generalStats["castedAbilities"][ability.castedAtGameLoops] = ability
         except Exception as e:
