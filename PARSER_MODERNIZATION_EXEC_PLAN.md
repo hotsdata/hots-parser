@@ -22,7 +22,10 @@ The primary observable result is behavioral compatibility: for representative re
 - [x] 2026-06-25: Modernized dependencies, packaging, CLI entry points, README setup, and Ruff/Pytest tooling.
 - [x] 2026-06-25: Added `utils/payloads.py` so parser output generation is separated from PostgreSQL writes.
 - [x] 2026-06-25: Replaced `psycopg2ct` with `psycopg` and added `HOTSDATA_DATABASE_URL` / `DATABASE_URL` support with `credentials.json` fallback.
-- [ ] Remove or quarantine dead legacy MySQL/TrueSkill persistence code.
+- [x] 2026-06-25: Added `--dump-payloads` CLI support for standard JSON payload files without using `jsonpickle`.
+- [x] 2026-06-25: Removed dead legacy MySQL/TrueSkill persistence code in `utils/db.py`.
+- [x] 2026-06-25: Added optional PostgreSQL integration test path that runs only when a database URL and local replay fixture are available.
+- [x] 2026-06-25: Decided not to commit a public replay fixture until a non-private replay is selected.
 - [x] 2026-06-25: Added CI-ready validation commands and documentation; local validation passes.
 
 ## Surprises & Discoveries
@@ -111,6 +114,18 @@ Rationale: The generated protocol files produce hundreds of style findings outsi
 
 Date/Author: 2026-06-25 / Codex
 
+Decision: Keep the legacy `jsonpickle` dump flags for backward compatibility and add `--dump-payloads` as the preferred standard-JSON inspection path.
+
+Rationale: Existing users may still rely on `--dump-teams`, `--dump-all`, and the timestamped legacy files. `--dump-payloads` gives developers clean table-shaped JSON files for team stats, player stats, timeline, and related payloads without breaking existing CLI behavior.
+
+Date/Author: 2026-06-25 / Codex
+
+Decision: Do not commit a public replay fixture in this pass.
+
+Rationale: The available golden replay is user-provided and may contain player-identifying data. The local ignored fixture remains useful for development, but a committed fixture should wait until a public or sanitized replay is explicitly selected.
+
+Date/Author: 2026-06-25 / Codex
+
 ## Outcomes & Retrospective
 
 Implementation pass completed on 2026-06-25. The parser now runs on Python 3.10, opens the selected Silver City replay, decodes it with protocol fallback `96477`, and produces stable local golden payloads. The fixture parse produced replay id `5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5`, map `Silver City`, build `97039`, 10 players, 10 heroes, 3890 units, and 176 timeline events.
@@ -119,7 +134,13 @@ The local golden generator wrote 10 payload files under `tests/golden/local/silv
 
 Validation passed with `.venv/bin/python -m pytest -q`, `.venv/bin/python -m ruff check .`, `.venv/bin/python -m ruff format --check .`, `.venv/bin/python -m hots_parser --help`, and a `main.py --dump-all` smoke test against the local replay. Pytest emits one warning from upstream `heroprotocol` using deprecated `imp`, and the dump smoke test emits `jsonpickle` deprecation warnings; both are non-blocking follow-ups.
 
-Remaining work: remove or quarantine `utils/db.py`, add optional PostgreSQL integration tests against `database/database_schema.sql`, decide whether to commit a public replay fixture, and eventually replace `jsonpickle` dump compatibility with explicit standard-JSON output once downstream consumers are checked.
+Follow-up implementation after PR #7 added `--dump-payloads`, removed `utils/db.py`, added optional PostgreSQL integration coverage, and documented the local-only fixture policy. The preferred manual inspection command is now:
+
+    .venv/bin/python main.py --dump-payloads --output-dir /tmp/hots-parser-payloads path/to/replay.StormReplay
+
+That command writes standard JSON files including `teamgeneralstats.json`, `teammapstats.json`, `generalstats.json`, `mapstats.json`, `players.json`, and `timeline.json`. The older `jsonpickle` dump flags remain available for compatibility.
+
+Current remaining work: run the PostgreSQL integration test against a real disposable database, choose a public/sanitized replay fixture if CI replay-level coverage should run without local private data, and later deprecate the legacy `jsonpickle` dump flags after checking downstream usage.
 
 ## Context and Orientation
 
@@ -146,6 +167,8 @@ The parser entry point is `main.py`. It parses CLI arguments, opens a `.StormRep
 `utils/pg_persistence.py` writes parser output into PostgreSQL. It uses `psycopg` version 3, reads `HOTSDATA_DATABASE_URL` or `DATABASE_URL` when set, falls back to `credentials.json`, and serializes payload dictionaries with `jsonpickle` for compatibility.
 
 `database/database_schema.sql` defines the shared PostgreSQL schema used by the parser, API, ETL, and frontend.
+
+`main.py --dump-payloads` writes the same standard JSON payloads that `utils/payloads.py` builds for persistence and golden tests. Unlike the legacy `--dump-teams` and `--dump-all` flags, it does not use `jsonpickle` and does not add timestamp prefixes to file names.
 
 Terms used in this plan:
 
