@@ -2,9 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from data.abilities import DEFAULT_ABILITY_BUILD
-
-
 @dataclass(frozen=True)
 class AbilityKey:
     ability_link: int
@@ -25,10 +22,19 @@ class SkillshotLandingRule:
     evidence_description: str = ""
 
 
+@dataclass(frozen=True)
+class SkillshotLandingRuleSet:
+    game_version: int
+    rules: tuple[SkillshotLandingRule, ...]
+
+
 def get_skillshot_landing_rules(game_version: int | None) -> tuple[SkillshotLandingRule, ...]:
-    if game_version != DEFAULT_ABILITY_BUILD:
+    if game_version is None:
         return ()
 
-    from data.skillshot_landing_rules_97039 import SKILLSHOT_LANDING_RULES_97039
+    from data.skillshot_landing_rule_sets import SKILLSHOT_LANDING_RULE_SETS_BY_BUILD
 
-    return SKILLSHOT_LANDING_RULES_97039
+    rule_set = SKILLSHOT_LANDING_RULE_SETS_BY_BUILD.get(game_version)
+    if rule_set is None:
+        return ()
+    return rule_set.rules
