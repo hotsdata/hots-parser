@@ -25,8 +25,11 @@ The primary observable result is behavioral compatibility: for representative re
 - [x] 2026-06-25: Added `--dump-payloads` CLI support for standard JSON payload files without using `jsonpickle`.
 - [x] 2026-06-25: Removed dead legacy MySQL/TrueSkill persistence code in `utils/db.py`.
 - [x] 2026-06-25: Added optional PostgreSQL integration test path that runs only when a database URL and local replay fixture are available.
+- [x] 2026-06-25: Ran the optional PostgreSQL integration test against disposable Docker PostgreSQL 16 with the Silver City replay fixture; it passed.
 - [x] 2026-06-25: Decided not to commit a public replay fixture until a non-private replay is selected.
 - [x] 2026-06-25: Added CI-ready validation commands and documentation; local validation passes.
+- [x] 2026-06-25: Checked downstream HotsData repositories for legacy dump-flag usage; only `hots-parser` itself referenced those flags.
+- [x] 2026-06-25: Marked legacy `jsonpickle` dump flags as deprecated in CLI help/docs and added a one-line runtime warning while keeping behavior intact.
 
 ## Surprises & Discoveries
 
@@ -51,6 +54,10 @@ The latest upstream `heroprotocol` package layout changed from root-level `herop
 Decoded protocol objects on Python 3 contain byte strings in some fields that the legacy code compared against text constants. The parser now normalizes decoded protocol objects to text at the boundary before event handling.
 
 Python 3 exposed two legacy semantic assumptions: integer division was needed for team/index values, and Python 2 allowed comparisons between `None` and integers. These were fixed in the port.
+
+Running the host-side PostgreSQL integration test from the Codex sandbox without elevated local network access produced `psycopg.OperationalError: connection is bad: no error details available` when connecting to `127.0.0.1:55432`. Rerunning the same command with local host access succeeded. This appears to be a sandbox limitation, not a parser or database compatibility issue.
+
+Repository-wide search across `api`, `etl`, `uploader`, `hotsdata-frontend`, and `heroesinfo` found no downstream use of `--dump-all`, `--dump-teams`, `--dump-heroes`, `--dump-timeline`, `--dump-units`, or `--dump-players`. The API and ETL continue to consume PostgreSQL JSONB tables such as `replayinfo`, `players`, `teamgeneralstats`, `teammapstats`, `generalstats`, and `mapstats`.
 
 ## Decision Log
 
@@ -126,6 +133,12 @@ Rationale: The available golden replay is user-provided and may contain player-i
 
 Date/Author: 2026-06-25 / Codex
 
+Decision: Deprecate the legacy `jsonpickle` dump flags gently rather than removing them.
+
+Rationale: Downstream repository search found no automated use of the legacy dump flags, but direct CLI users may still depend on their exact object-dump output. Marking the flags as legacy in help/docs and emitting one warning when used moves users toward `--dump-payloads` without breaking existing workflows.
+
+Date/Author: 2026-06-25 / Codex
+
 ## Outcomes & Retrospective
 
 Implementation pass completed on 2026-06-25. The parser now runs on Python 3.10, opens the selected Silver City replay, decodes it with protocol fallback `96477`, and produces stable local golden payloads. The fixture parse produced replay id `5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5`, map `Silver City`, build `97039`, 10 players, 10 heroes, 3890 units, and 176 timeline events.
@@ -140,7 +153,13 @@ Follow-up implementation after PR #7 added `--dump-payloads`, removed `utils/db.
 
 That command writes standard JSON files including `teamgeneralstats.json`, `teammapstats.json`, `generalstats.json`, `mapstats.json`, `players.json`, and `timeline.json`. The older `jsonpickle` dump flags remain available for compatibility.
 
-Current remaining work: run the PostgreSQL integration test against a real disposable database, choose a public/sanitized replay fixture if CI replay-level coverage should run without local private data, and later deprecate the legacy `jsonpickle` dump flags after checking downstream usage.
+PostgreSQL validation on 2026-06-25 used disposable `postgres:16-alpine` bound to `127.0.0.1:55432`. The repository schema loaded successfully after creating the dump roles `hotstats` and `hotsdata`. The replay-backed persistence test passed and verified rows in `replayinfo`, `teamgeneralstats`, `players`, `generalstats`, and `timeline`.
+
+Legacy dump flag deprecation was added after checking downstream repositories. The old flags still produce the same timestamped `jsonpickle` object files, but CLI help, README usage, and a one-line runtime warning now point users to `--dump-payloads` for stable standard JSON.
+
+Validation after the deprecation change passed with `.venv/bin/python -m pytest -q`, `.venv/bin/python -m ruff check .`, `.venv/bin/python -m ruff format --check .`, `.venv/bin/python main.py --help`, and a `--dump-teams` smoke test against the local Silver City replay.
+
+Current remaining work: choose a public/sanitized replay fixture if CI replay-level coverage should run without local private data.
 
 ## Context and Orientation
 
@@ -361,6 +380,40 @@ The first selected replay fixture was copied locally on 2026-06-25:
 
     SHA-256:
     9ddd0723b5608a9b8ef504197ae3018bc74c570088fdb641ff790521a5fba664
+
+PostgreSQL integration validation from 2026-06-25:
+
+    docker run --rm -d --name hots-parser-pg-test-20260625 -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=hotsdata -p 127.0.0.1:55432:5432 postgres:16-alpine
+    docker exec hots-parser-pg-test-20260625 psql -U postgres -d hotsdata -v ON_ERROR_STOP=1 -c "CREATE ROLE hotstats"
+    docker exec hots-parser-pg-test-20260625 psql -U postgres -d hotsdata -v ON_ERROR_STOP=1 -c "CREATE ROLE hotsdata WITH LOGIN PASSWORD 'hotsdata'"
+    docker cp database/database_schema.sql hots-parser-pg-test-20260625:/tmp/database_schema.sql
+    docker exec hots-parser-pg-test-20260625 psql -U postgres -d hotsdata -v ON_ERROR_STOP=1 -f /tmp/database_schema.sql
+    env HOTSDATA_DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:55432/hotsdata .venv/bin/python -m pytest tests/test_postgres_persistence.py -q
+
+Expected and observed pytest result:
+
+    1 passed, 27 warnings in 0.51s
+
+Downstream legacy dump-flag usage check from 2026-06-25:
+
+    rg -n "dump-all|dump-teams|dump-heroes|dump-timeline|dump-units|dump-players|dump_payloads|dump-payloads|jsonpickle|hots-parser|main.py" /home/crorella/Documents/HotsData --glob "!uploader/node_modules/**" --glob "!hots-parser/.venv/**" --glob "!hots-parser/heroprotocol/heroprotocol/versions/**" --glob "!hots-parser/tests/golden/local/**"
+
+Observed result: only `hots-parser` code, README, tests, and this plan referenced the legacy dump flags. API and ETL references were to database tables and JSONB documents, not parser dump files.
+
+Legacy dump deprecation validation from 2026-06-25:
+
+    .venv/bin/python -m pytest -q
+    7 passed, 1 skipped, 1 warning in 0.47s
+
+    .venv/bin/python -m ruff check .
+    All checks passed!
+
+    .venv/bin/python -m ruff format --check .
+    21 files already formatted
+
+    .venv/bin/python main.py --dump-teams --output-dir /tmp/hots-parser-legacy-warning-test tests/fixtures/replays/local/2026-06-24_15-49-48_Silver_City.StormReplay
+    Warning: legacy dump flags write jsonpickle object dumps and are deprecated. Use --dump-payloads for stable standard JSON payload files.
+    dumping teams data into /tmp/hots-parser-legacy-warning-test/2026-06-25_000129_teams.json
 
 ## Interfaces and Dependencies
 

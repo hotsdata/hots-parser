@@ -12,7 +12,7 @@ python3 -m venv .venv
 .venv/bin/python -m pytest -q
 ```
 
-Parse a replay and dump JSON files:
+Parse a replay and dump legacy object JSON files:
 
 ```bash
 .venv/bin/python main.py --dump-all --output-dir /tmp/hots-parser-output path/to/replay.StormReplay
@@ -25,6 +25,8 @@ Dump the cleaner standard JSON payload files used by persistence and golden test
 ```
 
 Useful payload files include `teamgeneralstats.json`, `teammapstats.json`, `generalstats.json`, `mapstats.json`, `players.json`, and `timeline.json`.
+
+The older `--dump-heroes`, `--dump-teams`, `--dump-timeline`, `--dump-units`, `--dump-players`, and `--dump-all` flags are kept for compatibility, but they write `jsonpickle` object dumps. Prefer `--dump-payloads` for stable JSON inspection and tests.
 
 The package entry point is also available:
 
@@ -83,13 +85,15 @@ optional arguments:
   -h, --help            show this help message and exit
   -o OUTPUT_DIR, --output-dir OUTPUT_DIR
                         Path to the output directory
-  -r, --dump-heroes     Indicates you want to dump hero data
-  -t, --dump-teams      Indicates you want to dump teams data
-  -l, --dump-timeline   Indicates you want to dump timeline data
-  -u, --dump-units      Indicates you want to dump units data
-  -p, --dump-players    Indicates you want to dump player data
-  -a, --dump-all        Shortcut for --dump-heroes --dump-teams --dump-units
+  -r, --dump-heroes     Legacy jsonpickle dump of hero objects
+  -t, --dump-teams      Legacy jsonpickle dump of team objects
+  -l, --dump-timeline   Legacy jsonpickle dump of timeline objects
+  -u, --dump-units      Legacy jsonpickle dump of unit objects
+  -p, --dump-players    Legacy jsonpickle dump of player objects
+  -a, --dump-all        Legacy shortcut for --dump-heroes --dump-teams --dump-units
                         --dump-players --dump-timeline
+  --dump-payloads       Dump standard JSON payload files used by persistence
+                        and golden tests
 ```
 
 # Configuration

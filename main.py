@@ -5,11 +5,34 @@ import datetime
 import json
 from os import path
 from pathlib import Path
+import sys
 
 from hotsparser import processEvents
 import jsonpickle
 from protocol_loader import get_header_protocol, get_mpyq_archive_class
 from utils.payloads import build_payloads
+
+
+LEGACY_DUMP_FLAG_NAMES = (
+    "dump_all",
+    "dump_heroes",
+    "dump_teams",
+    "dump_units",
+    "dump_players",
+    "dump_timeline",
+)
+LEGACY_DUMP_WARNING = (
+    "Warning: legacy dump flags write jsonpickle object dumps and are deprecated. "
+    "Use --dump-payloads for stable standard JSON payload files."
+)
+
+
+def uses_legacy_dump_flags(args):
+    return any(getattr(args, flag_name, False) for flag_name in LEGACY_DUMP_FLAG_NAMES)
+
+
+def warn_legacy_dump_flags():
+    print(LEGACY_DUMP_WARNING, file=sys.stderr)
 
 
 def save_to_db(replayData, path):
@@ -125,26 +148,46 @@ def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("-o", "--output-dir", help="Path to the output directory")
     parser.add_argument(
-        "-r", "--dump-heroes", action="store_true", default=False, help="Indicates you want to dump hero data"
+        "-r",
+        "--dump-heroes",
+        action="store_true",
+        default=False,
+        help="Legacy jsonpickle dump of hero objects",
     )
     parser.add_argument(
-        "-t", "--dump-teams", action="store_true", default=False, help="Indicates you want to dump teams data"
+        "-t",
+        "--dump-teams",
+        action="store_true",
+        default=False,
+        help="Legacy jsonpickle dump of team objects",
     )
     parser.add_argument(
-        "-l", "--dump-timeline", action="store_true", default=False, help="Indicates you want to dump timeline data"
+        "-l",
+        "--dump-timeline",
+        action="store_true",
+        default=False,
+        help="Legacy jsonpickle dump of timeline objects",
     )
     parser.add_argument(
-        "-u", "--dump-units", action="store_true", default=False, help="Indicates you want to dump units data"
+        "-u",
+        "--dump-units",
+        action="store_true",
+        default=False,
+        help="Legacy jsonpickle dump of unit objects",
     )
     parser.add_argument(
-        "-p", "--dump-players", action="store_true", default=False, help="Indicates you want to dump player data"
+        "-p",
+        "--dump-players",
+        action="store_true",
+        default=False,
+        help="Legacy jsonpickle dump of player objects",
     )
     parser.add_argument(
         "-a",
         "--dump-all",
         action="store_true",
         default=False,
-        help="Shortcut for --dump-heroes --dump-teams --dump-units --dump-players --dump-timeline",
+        help="Legacy shortcut for --dump-heroes --dump-teams --dump-units --dump-players --dump-timeline",
     )
     parser.add_argument(
         "--dump-payloads",
@@ -179,8 +222,10 @@ def main(argv=None):
     if args.dump_payloads:
         dump_payloads(data=replayData, output_path=output_path, replay_path=args.replay_path)
     elif args.dump_all:
+        warn_legacy_dump_flags()
         dump_data(entities="all", file_path=output_path, replay_data=replayData)
-    elif args.dump_heroes or args.dump_teams or args.dump_units or args.dump_players or args.dump_timeline:
+    elif uses_legacy_dump_flags(args):
+        warn_legacy_dump_flags()
         if args.dump_heroes:
             dump_data(entities="heroes", file_path=output_path, replay_data=replayData)
         if args.dump_teams:
