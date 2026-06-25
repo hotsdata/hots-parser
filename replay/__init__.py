@@ -8,6 +8,7 @@ from typing import Any, ClassVar, TypeAlias
 from models import *
 
 from protocol_loader import get_protocol_for_build
+from replay.skillshot_landing import apply_skillshot_landing_stats
 
 __author__: str = "Rodrigo Duenas, Cristian Orellana"
 
@@ -252,6 +253,37 @@ class Replay:
             events = getattr(self.protocol, self.EVENT_FILES[meta])(contents)
             for event in events:
                 self.process_event(event)
+
+    def process_replay_game_ability_events(self) -> None:
+        contents = self.replayFile.read_file("replay.game.events")
+        for event in self.protocol.decode_replay_game_events(contents):
+            event = _normalize_protocol_value(event)
+            if event["_event"] != "NNet.Game.SCmdEvent":
+                continue
+            ability = self._ability_from_command_event(event)
+            if ability:
+                self._record_ability_cast(ability)
+
+    def process_skillshot_landings(self) -> None:
+        apply_skillshot_landing_stats(self.heroList, self._ability_game_version())
+
+    def _ability_from_command_event(self, event: ReplayEvent) -> BaseAbility | None:
+        if event["_event"] != "NNet.Game.SCmdEvent" or not event["m_abil"]:
+            return None
+
+        if event["m_data"].get("TargetPoint"):
+            return TargetPointAbility(event, self._ability_game_version())
+
+        if event["m_data"].get("TargetUnit"):
+            return TargetUnitAbility(event, self._ability_game_version())
+
+        return BaseAbility(event, self._ability_game_version())
+
+    def _record_ability_cast(self, ability: BaseAbility) -> None:
+        playerId = find_player_key_from_user_id(self.players, ability.userId)
+        if playerId is None or playerId not in self.heroList:
+            return
+        self.heroList[playerId].generalStats["castedAbilities"][ability.castedAtGameLoops] = ability
 
     def get_lifespan_time_in_gameloops(self, unitTag):
         return (
@@ -1757,25 +1789,9 @@ class Replay:
         if event["_event"] != "NNet.Game.SCmdEvent":
             return None
 
-        ability = None
-
-        if event["m_abil"]:  # If this is an actual user available ability
-            if event["m_data"].get("TargetPoint"):
-                ability = TargetPointAbility(event, self._ability_game_version())
-
-            elif event["m_data"].get("TargetUnit"):
-                ability = TargetUnitAbility(event, self._ability_game_version())
-
-            else:  # e['m_data'].get('None'):
-                ability = BaseAbility(event, self._ability_game_version())
-
+        ability = self._ability_from_command_event(event)
         if ability:
-            # update hero stat
-            playerId = find_player_key_from_user_id(self.players, ability.userId)
-            try:
-                self.heroList[playerId].generalStats["castedAbilities"][ability.castedAtGameLoops] = ability
-            except Exception as e:
-                print("Error %s" % e)
+            self._record_ability_cast(ability)
 
     def NNet_Game_SCmdUpdateTargetPointEvent(self, event):
         self.utpe[event["_gameloop"]] = event

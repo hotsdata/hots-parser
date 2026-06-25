@@ -314,6 +314,7 @@ class HeroUnit(Unit):
             "totalOutDmg": 0,
             "votesReceivedBy": [],
             "castedAbilities": OrderedDict(),  # key" : gameloops when the ability was casted, value" : ability instance
+            "skillshotStats": {},
         }
         self.set_hero_stats()
 

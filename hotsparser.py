@@ -17,9 +17,11 @@ def processEvents(protocol=None, replayFile=None, team1=None, team2=None, event=
     replay_data.process_replay_details()
     replay_data.process_replay_initdata()
     replay_data.process_replay()
+    replay_data.process_replay_game_ability_events()
     replay_data.process_replay_attributes()
     replay_data.calculate_army_strength()
     replay_data.process_map_events()
     replay_data.process_generic_events()
+    replay_data.process_skillshot_landings()
 
     return replay_data
