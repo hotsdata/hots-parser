@@ -96,7 +96,7 @@ Parser-only usage and JSON dumping do not require database credentials. Database
 Optional PostgreSQL integration tests use the same database URL and require the schema in `database/database_schema.sql` to already be loaded:
 
 ```bash
-HOTSDATA_DATABASE_URL=postgresql://user:password@localhost:5432/hotsdata .venv/bin/python -m pytest tests/test_postgres_persistence.py -q
+HOTSDATA_DATABASE_URL=postgresql://hotstats:hotstats@localhost:5432/hotsdata .venv/bin/python -m pytest tests/test_postgres_persistence.py -q
 ```
 
 
@@ -149,18 +149,28 @@ git clone --recursive git@github.com:crorella/hots-parser.git
 ## Loading the database schema
 You will need a PostgreSQL server running at least the version 9.5, because we make extensive use of the JSONB datatype to store the metrics we extract from the replay.
 
-- Create a database with the name "hotsdata"
-- Create a user with the name "hotsdata" and grant ALL to the hotsdata database.
+The schema dump expects two PostgreSQL roles to already exist:
 
-```
-CREATE DATABASE hotsdata;
-CREATE ROLE hotsdata WITH LOGIN PASSWORD 'hotsdata';
-REVOKE CONNECT ON DATABASE hotsdata FROM PUBLIC;
-GRANT ALL ON DATABASE hotsdata TO hotsdata;
+- `hotstats`: schema owner and parser write role
+- `hotsdata`: read/API role used by downstream services
+
+For local development, create the roles and database, then load the schema:
+
+```bash
+psql -d postgres -f database/bootstrap_roles.sql
+createdb -O hotstats hotsdata
+psql -d hotsdata -f database/database_schema.sql
 ```
 
-- Set `HOTSDATA_DATABASE_URL` or `DATABASE_URL`, or update `credentials.json` with the appropriate password and server information for the legacy fallback path.
-- Load the script in database/database_schema.sql into hotsdata. Please note this schema also contains the tables used by the API, data processing (ETL) and frontend that power www.hotsdata.com
+`database/bootstrap_roles.sql` uses local-development passwords `hotstats` and `hotsdata`. Use stronger credentials outside a disposable local database.
+
+Set `HOTSDATA_DATABASE_URL` or `DATABASE_URL` for parser database writes:
+
+```bash
+export HOTSDATA_DATABASE_URL=postgresql://hotstats:hotstats@localhost:5432/hotsdata
+```
+
+Alternatively, update `credentials.json` with the appropriate password and server information for the legacy fallback path. Please note `database/database_schema.sql` also contains the tables used by the API, data processing (ETL), and frontend that power www.hotsdata.com.
 
 ## Installing python libraries
 Install the project dependencies from `pyproject.toml`:
