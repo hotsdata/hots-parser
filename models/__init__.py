@@ -1,22 +1,32 @@
-__author__ = "Rodrigo Duenas, Cristian Orellana"
+from __future__ import annotations
 
 from collections import OrderedDict
+from typing import Any, TypeAlias
+
+__author__: str = "Rodrigo Duenas, Cristian Orellana"
+
+Number: TypeAlias = int | float
+OwnerRecord: TypeAlias = list[int | None]
+Position: TypeAlias = list[Number]
+ReplayEvent: TypeAlias = dict[str, Any]
+StatsDict: TypeAlias = dict[str, Any]
 
 from data import *
+from data.abilities import get_ability_definition
 from helpers import *
 
 
-def _to_text(value, encoding="utf-8"):
+def _to_text(value: Any, encoding: str = "utf-8") -> Any:
     if isinstance(value, bytes):
         return value.decode(encoding, errors="replace")
     return value
 
 
 class Team:
-    def __init__(self):
+    def __init__(self) -> None:
 
         # General team attributes
-        self.generalStats = {
+        self.generalStats: StatsDict = {
             "teamId": None,
             "level": 0,
             "memberList": list(),
@@ -41,11 +51,11 @@ class Team:
             "totalHeroesKilledByEnemy": 0,  # how many times the heroes of this team were killed by the enemy?
             "banned": [],  # Banned heroes, if any
         }
-        self.mapStats = {}
+        self.mapStats: StatsDict = {}
 
-    def set_map_stats(self, map):
+    def set_map_stats(self, map: str) -> None:
         # Tomb of the spider queen map
-        tombOfSpiderStats = {
+        tombOfSpiderStats: StatsDict = {
             "pickedSoulGems": 0,
             "wastedSoulGems": 0,
             "summonedSpiderBosses": 0,
@@ -64,10 +74,10 @@ class Team:
         }
 
         # Braxis Holdout Map specific stats
-        braxisHoldoutStats = {"ZergWaveStrength": 0}
+        braxisHoldoutStats: StatsDict = {"ZergWaveStrength": 0}
 
         # Sky Temple map
-        skyTempleStats = {
+        skyTempleStats: StatsDict = {
             "luxoriaTemplesCaptured": 0,
             "luxoriaTemplesCapturedSeconds": 0,
             "luxoriaTempleNorthCapturedSeconds": 0,
@@ -91,7 +101,7 @@ class Team:
         }
 
         # Garden of Terror Map
-        gardenStats = {
+        gardenStats: StatsDict = {
             "plantSummonedAt": [],
             "totalPlantsSummoned": 0,
             "totalWastedPlants": 0,
@@ -110,10 +120,10 @@ class Team:
         }
 
         # Warhead Junction
-        warheadJunctionStats = {"droppedNukes": 0, "launchedNukes": 0}
+        warheadJunctionStats: StatsDict = {"droppedNukes": 0, "launchedNukes": 0}
 
         # Dragon Shire
-        dragonShireStats = {
+        dragonShireStats: StatsDict = {
             "dragonCaptureTimes": [],  # in seconds
             "totalDragonsDuration": 0,
             "dragonDuration": [],
@@ -127,7 +137,7 @@ class Team:
         }  # How many seconds the dragon was available to be controlled but no one used it.
 
         # Haunted Mines Map
-        hauntedMinesStats = {
+        hauntedMinesStats: StatsDict = {
             "totalGolemsSummoned": 0,
             "totalGolemDistanceTraveled": 0,
             "golemDistanceTraveled": [],
@@ -145,7 +155,7 @@ class Team:
         }
 
         # Blackheart's Bay Map
-        blackheartsBayStats = {
+        blackheartsBayStats: StatsDict = {
             "totalShipsControlled": 0,
             "totalUnitsKilledDuringShip": [],
             "shipDurations": [],
@@ -155,7 +165,7 @@ class Team:
         }
 
         # Infernal Shrine Map
-        infernalShrinesStats = {
+        infernalShrinesStats: StatsDict = {
             "summonedPunishers": 0,
             "punisherSummonedAt": [],
             "punisherTotalAliveTime": [],
@@ -169,7 +179,7 @@ class Team:
         }
 
         # Cursed Hollow Map
-        cursedHollowStats = {
+        cursedHollowStats: StatsDict = {
             "tributesCapturedAt": [],  # When the tribute was captured
             "curseCaptures": [],  # How many tributes the team captured for each curse. 3": team won the curse
             "curseActivatedAt": [],
@@ -177,7 +187,7 @@ class Team:
         }
 
         # Towers of Doom Map
-        towersOfDoomStats = {
+        towersOfDoomStats: StatsDict = {
             "totalTowersCaptured": 0,  # for Towers of Doom Maps
             "towersCapturedAtFire": [],
             "towersCapturedAt": [],
@@ -186,7 +196,7 @@ class Team:
         }
 
         # Battlefield of Eternity Map
-        battlefieldEternityStats = {
+        battlefieldEternityStats: StatsDict = {
             "totalImmortalsSummoned": 0,
             "immortalSummonedAt": [],
             "immortalFightDuration": [],
@@ -224,7 +234,7 @@ class Team:
         elif map == "Braxis Holdout":
             self.mapStats = braxisHoldoutStats
 
-    def add_member(self, hero, player):
+    def add_member(self, hero: HeroUnit, player: Player) -> None:
         if hero.playerId is not None:
             self.generalStats["memberList"].append(hero.playerId)
             if self.generalStats["isWinner"] is None:
@@ -232,10 +242,10 @@ class Team:
                 self.generalStats["isWinner"] = player.is_winner()
                 self.generalStats["isLoser"] = player.is_loser()
 
-    def get_total_members(self):
+    def get_total_members(self) -> int:
         return len(self.generalStats["memberList"])
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "%15s\t%15s\t%15s\t%15s" % (
             self.generalStats["teamId"],
             self.generalStats["level"],
@@ -245,48 +255,51 @@ class Team:
 
 
 class Unit:
-    def __init__(self):
-        self.bornAtX = -1
-        self.bornAtY = -1
+    def __init__(self) -> None:
+        self.bornAtX: Number = -1
+        self.bornAtY: Number = -1
+        self.unitTagIndex: int | None = None
+        self.unitTagRecycle: int | None = None
+        self.unitTag: int | None = None
 
-    def unit_tag(self):
+    def unit_tag(self) -> int | None:
         try:
             return (self.unitTagIndex << 18) + self.unitTagRecycle
         except Exception as e:
             print("Error: %s" % e.message)
 
 
-def unit_tag_index(self):
+def unit_tag_index(self: Any) -> int:
     return (self.unitTag >> 18) & 0x00003FFF
 
 
-def unit_tag_recycle(self):
+def unit_tag_recycle(self: Any) -> int:
     return (self.unitTag) & 0x0003FFFF
 
 
-def is_hero(self):
+def is_hero(self: Any) -> bool:
     return False
 
 
 class HeroUnit(Unit):
-    def __init__(self, player):
+    def __init__(self, player: Player) -> None:
 
         # General data
-        self.isHuman = False
+        self.isHuman: bool = False
 
-        self.mapStats = {}
-        self.playerId = player.playerId
+        self.mapStats: StatsDict = {}
+        self.playerId: int | None = player.playerId
 
-        self.name = HeroTranslator.get_base_hero_name(player.hero) or player.hero
-        self.team = player.team
-        self.id = player.id
+        self.name: str = HeroTranslator.get_base_hero_name(player.hero) or player.hero
+        self.team: int = player.team
+        self.id: int = player.id
         # self.userId = self.playerId
-        self.unitTagIndex = None  # Set at unit born event
-        self.unitTagRecycle = None  # Set at unit born event
-        self.internalName = None  # Set at unit born event
+        self.unitTagIndex: int | None = None  # Set at unit born event
+        self.unitTagRecycle: int | None = None  # Set at unit born event
+        self.internalName: str | None = None  # Set at unit born event
         # self.unitTag = self.unit_tag()
         # General Metrics
-        self.generalStats = {
+        self.generalStats: StatsDict = {
             "pickedTalents": [],  # list of dicts
             "deathCount": 0,
             "deaths": [],  # At what point in game (in seconds) the hero died, who killed them and was solo death?
@@ -304,7 +317,7 @@ class HeroUnit(Unit):
         }
         self.set_hero_stats()
 
-    def set_hero_stats(self):
+    def set_hero_stats(self) -> None:
         if self.name == "Gazlowe":
             self.generalStats["scrapTaken"] = 0
             self.generalStats["scrapMissed"] = 0
@@ -314,7 +327,7 @@ class HeroUnit(Unit):
         elif self.name == "Lunara":
             self.generalStats["wispsPlaced"] = 0
 
-    def set_total_out_damage(self):
+    def set_total_out_damage(self) -> None:
         self.generalStats["totalOutDmg"] = (
             self.generalStats["SiegeDamage"]
             + self.generalStats["StructureDamage"]
@@ -324,16 +337,16 @@ class HeroUnit(Unit):
             + self.generalStats["SummonDamage"]
         )
 
-    def set_map_stats(self, map):
-        cursedHollowStats = {
+    def set_map_stats(self, map: str) -> None:
+        cursedHollowStats: StatsDict = {
             "capturedTributes": 0,  # Number of tributes captured by this hero in the Curse map
             "clickedTributes": 0,  # How many times the hero clicked a tribute in the Curse map
         }
 
-        mineStats = {"skullsCollected": 0}
+        mineStats: StatsDict = {"skullsCollected": 0}
 
         # Garden map
-        gardenStats = {
+        gardenStats: StatsDict = {
             "gardensSeedsCollected": 0,
             "totalPlantsControlled": 0,
             "unitsKilledAsPlant": [],
@@ -349,27 +362,27 @@ class HeroUnit(Unit):
         }
 
         # Warhead junction
-        warheadJunctionStats = {"droppedNukes": 0, "launchedNukes": 0}
+        warheadJunctionStats: StatsDict = {"droppedNukes": 0, "launchedNukes": 0}
 
         # Punisher map
-        infernalShrinesStats = {
+        infernalShrinesStats: StatsDict = {
             "totalShrineMinionDmg": 0,  # Damage inflicted to minions in punisher map
             "totalMinionsKilled": 0,
         }
 
         # Spider map
-        tombOfSpiderStats = {
+        tombOfSpiderStats: StatsDict = {
             "totalSoulsTaken": 0,  # How many times the hero collected soul shards on the tomb of the spider queen map
             "totalGemsTurnedIn": 0,
         }
 
         # Sky temple map
-        skyTempleStats = {
+        skyTempleStats: StatsDict = {
             "totaltimeInTemples": 0,  # How many seconds was the hero holding the temples
         }
 
         # Dragon map
-        dragonShireStats = {
+        dragonShireStats: StatsDict = {
             "totalDragonsControlled": 0,
             "totalShrinesCaptured": 0,
             "totalBuildingsKilledAsDragon": [],
@@ -379,13 +392,13 @@ class HeroUnit(Unit):
         }
 
         # Pirate map
-        blackheartsBayStats = {
+        blackheartsBayStats: StatsDict = {
             "coinsTurnedIn": 0,
             "coinsCollected": 0,
             "coinsEffectiveness": 0,
         }
 
-        battlefieldEternityStats = {
+        battlefieldEternityStats: StatsDict = {
             "totalImmortalDmg": 0,  # Total damage done to the immortals
         }
 
@@ -412,7 +425,7 @@ class HeroUnit(Unit):
         elif map == "Warhead Junction":
             self.mapStats = warheadJunctionStats
 
-    def get_total_damage(self):
+    def get_total_damage(self) -> Number:
         return (
             self.generalStats["totalSiegeDmg"]
             + self.generalStats["totalStructureDmg"]
@@ -421,7 +434,7 @@ class HeroUnit(Unit):
             + self.generalStats["totalCreepDmg"]
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "%15s\t%15s\t%15s\t%15s\t%15s\t%15s\t%15s\t%15s" % (
             self.name,
             self.internalName,
@@ -433,40 +446,40 @@ class HeroUnit(Unit):
             self.get_total_casted_abilities(),
         )
 
-    def get_total_casted_abilities(self):
+    def get_total_casted_abilities(self) -> int:
         return len(self.generalStats["castedAbilities"])
 
-    def get_total_picked_talents(self):
+    def get_total_picked_talents(self) -> int:
         return len(self.pickedTalents)
 
-    def is_hero(self):
+    def is_hero(self) -> bool:
         return True
 
 
 class HeroReplay:
-    def __init__(self, details):
+    def __init__(self, details: ReplayEvent) -> None:
         # General Data
-        self.startTime = None  # UTC
-        self.gameLoops = None  # duration of the game in gameloops
-        self.speed = 0
-        self.gameType = None
-        self.gameVersion = None
-        self.randomVal = None
-        self.mapName = MapTranslator().get_base_map_name(details["m_title"])
-        self.mapSize = {}
+        self.startTime: str | None = None  # UTC
+        self.gameLoops: int | None = None  # duration of the game in gameloops
+        self.speed: int = 0
+        self.gameType: str | None = None
+        self.gameVersion: Any | None = None
+        self.randomVal: Any | None = None
+        self.mapName: str = MapTranslator().get_base_map_name(details["m_title"])
+        self.mapSize: StatsDict = {}
         self.startTime = win_timestamp_to_date(details["m_timeUTC"])
-        self.gatesOpenedAt = None  # seconds into the game when the gates open
+        self.gatesOpenedAt: int | None = None  # seconds into the game when the gates open
 
-    def duration_in_secs(self):
+    def duration_in_secs(self) -> int:
         if self.gameLoops:
             return self.gameLoops // 16
         else:
             return 0
 
-    def is_allowed_game_type(self):
+    def is_allowed_game_type(self) -> bool:
         return self.gameType not in BANNED_GAME_TYPES
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "Title: %s\nStarted at: %s\nDuration (min/gl): %d/%d\nSpeed: %s\nGame Type: %s" % (
             self.mapName,
             self.startTime,
@@ -478,22 +491,22 @@ class HeroReplay:
 
 
 class Player:
-    def __init__(self, player):
-        self.playerId = None  # Set at process_player_init
-        self.heroLevel = 1
-        self.id = player["m_workingSetSlotId"]
-        self.team = player["m_teamId"]
-        self.hero = HeroTranslator.get_base_hero_name(player["m_hero"]) or _to_text(player["m_hero"])
-        self.name = _to_text(player["m_name"])
-        self.isHuman = player["m_toon"]["m_region"] != 0
-        self.gameResult = int(player["m_result"])
-        self.toonHandle = self.get_toon_handle(player)
-        self.battleTag = None
-        self.realm = player["m_toon"]["m_realm"]
-        self.region = player["m_toon"]["m_region"]
-        self.rank = None
+    def __init__(self, player: ReplayEvent) -> None:
+        self.playerId: int | None = None  # Set at process_player_init
+        self.heroLevel: int = 1
+        self.id: int = player["m_workingSetSlotId"]
+        self.team: int = player["m_teamId"]
+        self.hero: str = HeroTranslator.get_base_hero_name(player["m_hero"]) or _to_text(player["m_hero"])
+        self.name: str = _to_text(player["m_name"])
+        self.isHuman: bool = player["m_toon"]["m_region"] != 0
+        self.gameResult: int = int(player["m_result"])
+        self.toonHandle: str = self.get_toon_handle(player)
+        self.battleTag: str | None = None
+        self.realm: int = player["m_toon"]["m_realm"]
+        self.region: int = player["m_toon"]["m_region"]
+        self.rank: Any | None = None
 
-    def get_toon_handle(self, player):
+    def get_toon_handle(self, player: ReplayEvent) -> str:
         return "-".join(
             [
                 str(player["m_toon"]["m_region"]),
@@ -503,7 +516,7 @@ class Player:
             ]
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "%10s\t%10s\t%10s\t%12s\t%10s\t%15s\t%15s\t%15s" % (
             self.id,
             self.team,
@@ -515,144 +528,144 @@ class Player:
             self.battleTag,
         )
 
-    def is_winner(self):
+    def is_winner(self) -> bool:
         return self.gameResult == 1
 
-    def is_loser(self):
+    def is_loser(self) -> bool:
         return self.gameResult == 2
 
 
 class GameUnit(Unit):
-    def __init__(self, e):
+    def __init__(self, e: ReplayEvent) -> None:
         # General Data
 
-        self.isDead = False
-        self.diedAt = -1  # Seconds into the game when it was destroyed (-1 means never died)
-        self.diedAtX = None
-        self.diedAtY = None
-        self.diedAtGameLoops = None
-        self.gameLoopsAlive = -1  # -1 means never died.
-        self.controlPlayerId = e["m_controlPlayerId"]
-        self.killerTeam = None
-        self.killerTag = None
-        self.killerTagIndex = None
-        self.killerTagRecycle = None
-        self.killerPlayerId = None
-        self.ownerList = list()  # owner, when, duration (None = forever)
-        self.clickerList = OrderedDict()  # key = gameloop , value = player id
-        self.isHero = False
-        self.unitsKilled = 0
-        self.buildingsKilled = 0
-        self.unitTagIndex = e["m_unitTagIndex"]
-        self.unitTagRecycle = e["m_unitTagRecycle"]
-        self.unitTag = self.unit_tag()
-        self.bornAt = get_seconds_from_event_gameloop(e)  # Seconds into the game when it was created
-        self.bornAtGameLoops = get_gameloops(e)
-        self.internalName = _to_text(e["m_unitTypeName"])  # Internal unit name
-        self.team = (
+        self.isDead: bool = False
+        self.diedAt: int = -1  # Seconds into the game when it was destroyed (-1 means never died)
+        self.diedAtX: Number | None = None
+        self.diedAtY: Number | None = None
+        self.diedAtGameLoops: int | None = None
+        self.gameLoopsAlive: int = -1  # -1 means never died.
+        self.controlPlayerId: int = e["m_controlPlayerId"]
+        self.killerTeam: int | None = None
+        self.killerTag: int | None = None
+        self.killerTagIndex: int | None = None
+        self.killerTagRecycle: int | None = None
+        self.killerPlayerId: int | None = None
+        self.ownerList: list[OwnerRecord] = list()  # owner, when, duration (None = forever)
+        self.clickerList: OrderedDict[int, int] = OrderedDict()  # key = gameloop , value = player id
+        self.isHero: bool = False
+        self.unitsKilled: int = 0
+        self.buildingsKilled: int = 0
+        self.unitTagIndex: int = e["m_unitTagIndex"]
+        self.unitTagRecycle: int = e["m_unitTagRecycle"]
+        self.unitTag: int | None = self.unit_tag()
+        self.bornAt: int = get_seconds_from_event_gameloop(e)  # Seconds into the game when it was created
+        self.bornAtGameLoops: int = get_gameloops(e)
+        self.internalName: str = _to_text(e["m_unitTypeName"])  # Internal unit name
+        self.team: int = (
             e["m_upkeepPlayerId"] - 11 if e["m_upkeepPlayerId"] > 10 else e["m_upkeepPlayerId"] - 1
         )  # Team this unit belongs to, or Hero controlling it at born time (if it's <= 10)
-        self.bornAtX = e["m_x"]
-        self.bornAtY = e["m_y"]
-        self.positions = {self.bornAt: [self.bornAtX, self.bornAtY]}  # key seconds, val = dict {'x','y'}
-        self.distanceFromKiller = -1
+        self.bornAtX: Number = e["m_x"]
+        self.bornAtY: Number = e["m_y"]
+        self.positions: dict[int, Position] = {self.bornAt: [self.bornAtX, self.bornAtY]}
+        self.distanceFromKiller: Number = -1
         if not self.is_plant_vehicle():
             self.positions[get_seconds_from_int_gameloop(self.bornAtGameLoops)] = [self.bornAtX, self.bornAtY]
 
-    def is_map_resource(self):
+    def is_map_resource(self) -> bool:
         return self.internalName in PICKUNITS
 
-    def is_warhead_dropped_nuke(self):
+    def is_warhead_dropped_nuke(self) -> bool:
         return self.internalName in WARHEAD_DROPPED_NUKE
 
-    def is_warhead_launched(self):
+    def is_warhead_launched(self) -> bool:
         return self.internalName in WARHEAD_LAUNCHED_NUKE
 
-    def is_braxis_antenna(self):
+    def is_braxis_antenna(self) -> bool:
         return self.internalName in BRAXIS_ANTENNA
 
-    def is_braxis_zerg_unit(self):
+    def is_braxis_zerg_unit(self) -> bool:
         return self.internalName in BRAXIS_ZERG_WAVE_UNIT
 
-    def was_picked(self):
+    def was_picked(self) -> bool:
         if self.internalName in PICKUNITS:
             return self.gameLoopsAlive < PICKUNITS[self.internalName]
         else:
             return False
 
-    def is_building(self):
+    def is_building(self) -> bool:
         return self.internalName in BUILDINGS
 
-    def is_regen_globe(self):
+    def is_regen_globe(self) -> bool:
         return self.internalName in REGEN_GLOBES_PICKABLE
 
-    def is_regen_globe_neutral(self):
+    def is_regen_globe_neutral(self) -> bool:
         return self.internalName == "RegenGlobeNeutral"
 
-    def is_spider_summon(self):
+    def is_spider_summon(self) -> bool:
         return self.internalName == "SoulEater"
 
-    def is_plant_pot(self):
+    def is_plant_pot(self) -> bool:
         return self.internalName == "PlantHorrorOvergrowthPlant"
 
-    def is_mercenary(self):
+    def is_mercenary(self) -> bool:
         return self.internalName in MERCUNITSNPC or self.internalName in MERCUNITSTEAM
 
-    def is_hired_mercenary(self):
+    def is_hired_mercenary(self) -> bool:
         return self.internalName in MERCUNITSTEAM
 
-    def is_army_unit(self):
+    def is_army_unit(self) -> bool:
         return self.internalName in NORMALUNIT and self.internalName not in PICKUNITS
 
-    def is_pickable_unit(self):
+    def is_pickable_unit(self) -> bool:
         return self.internalName in PICKUNITS
 
-    def is_tomb_of_the_spider_pickable(self):
+    def is_tomb_of_the_spider_pickable(self) -> bool:
         return self.internalName in TOMB_OF_THE_SPIDER_PICKABLE
 
-    def is_seed_pickable(self):
+    def is_seed_pickable(self) -> bool:
         return self.internalName == "ItemSeedPickup"
 
-    def is_sky_temple_tower(self):
+    def is_sky_temple_tower(self) -> bool:
         return self.internalName in SKY_TEMPLE_TOWER
 
-    def is_beacon(self):
+    def is_beacon(self) -> bool:
         return self.internalName in BEACONUNIT
 
-    def is_tribute(self):
+    def is_tribute(self) -> bool:
         return self.internalName in TRIBUTEUNIT
 
-    def is_advanced_unit(self):
+    def is_advanced_unit(self) -> bool:
         return self.internalName in ADVANCEDUNIT
 
-    def get_death_time(self, total_time):
+    def get_death_time(self, total_time: int) -> int:
         return self.diedAt if (self.diedAt >= 0) else total_time
 
-    def is_plant_vehicle(self):
+    def is_plant_vehicle(self) -> bool:
         return self.internalName in PLANT_CONTROLLABLE
 
-    def is_dragon_statue(self):
+    def is_dragon_statue(self) -> bool:
         return self.internalName in DRAGON_STATUE
 
-    def is_golem(self):
+    def is_golem(self) -> bool:
         return self.internalName in GOLEM_UNIT
 
-    def is_golem_body(self):
+    def is_golem_body(self) -> bool:
         return self.internalName in GOLEM_BODY
 
-    def is_ghostship(self):
+    def is_ghostship(self) -> bool:
         return self.internalName in GHOST_SHIP
 
-    def is_punisher(self):
+    def is_punisher(self) -> bool:
         return self.internalName in PUNISHER_UNIT
 
-    def is_shrine_minion(self):
+    def is_shrine_minion(self) -> bool:
         return self.internalName in SHRINE_MINION
 
-    def is_hero(self):
+    def is_hero(self) -> bool:
         return self.isHero
 
-    def get_strength(self):
+    def get_strength(self) -> Number:
         if self.is_hired_mercenary():
             return MERCUNITSTEAM[self.internalName]
         elif self.is_advanced_unit():
@@ -664,8 +677,8 @@ class GameUnit(Unit):
         else:
             return 0
 
-    def __str__(self):
-        val = "%s\t%s\t(%s)\tcreated: %d s (%d,%d) \tdied: %s s\tlifespan: %s gls\tpicked? (%s)\tkilledby: %s" % (
+    def __str__(self) -> str:
+        val: str = "%s\t%s\t(%s)\tcreated: %d s (%d,%d) \tdied: %s s\tlifespan: %s gls\tpicked? (%s)\tkilledby: %s" % (
             self.unitTag,
             self.internalName,
             self.team,
@@ -689,27 +702,35 @@ class BaseAbility:
     Base class for all abilities, has all the common attributes
     """
 
-    def __init__(self, event):
-        self.abilityName = None
-        self.abilityTag = get_ability_tag(event)
-        self.castedAtGameLoops = event["_gameloop"]
-        self.castedAt = get_seconds_from_event_gameloop(event)
-        self.userId = event["_userid"]["m_userId"]
+    def __init__(self, event: ReplayEvent, game_version: int | None = None) -> None:
+        self.gameVersion: int | None = game_version
+        self.abilityTag: int = get_ability_tag(event)
+        self.abilityLink: int | None = get_ability_link(event)
+        self.abilityCmdIndex: int | None = get_ability_cmd_index(event)
+        ability_definition = get_ability_definition(self.abilityLink, self.abilityCmdIndex, game_version)
+        self.abilityCatalogName: str | None = ability_definition.catalog_name if ability_definition else None
+        self.abilityName: str | None = ability_definition.display_name if ability_definition else None
+        self.castedAtGameLoops: int = event["_gameloop"]
+        self.castedAt: int = get_seconds_from_event_gameloop(event)
+        self.userId: int = event["_userid"]["m_userId"]
 
-    def __str__(self):
-        return "%s" % self.abilityTag
+    def _display_name(self) -> str:
+        return self.abilityName or str(self.abilityTag)
 
-    def __repr__(self):
-        return "BaseAbility(%r)" % (self.abilityTag)
+    def __str__(self) -> str:
+        return self._display_name()
+
+    def __repr__(self) -> str:
+        return "BaseAbility(%r, %r)" % (self.abilityTag, self.abilityName)
 
 
 class TargetPointAbility(BaseAbility):
-    def __init__(self, event):
+    def __init__(self, event: ReplayEvent, game_version: int | None = None) -> None:
 
-        self.abilityTag = get_ability_tag(event)
-        self.castedAt = get_seconds_from_event_gameloop(event)
-        self.userId = event["_userid"]["m_userId"]
-        self.castedAtGameLoops = event["_gameloop"]
+        super().__init__(event, game_version)
+        self.x: float
+        self.y: float
+        self.z: float
         if event.get("m_data"):
             self.x = event["m_data"]["TargetPoint"]["x"] / 4096.0
             self.y = event["m_data"]["TargetPoint"]["y"] / 4096.0
@@ -719,29 +740,38 @@ class TargetPointAbility(BaseAbility):
             self.y = event["m_target"]["y"] / 4096.0
             self.z = event["m_target"]["z"] / 4096.0
 
-    def __repr__(self):
-        return "TargetPointAbility(%r, (%r, %r, %r))" % (self.abilityTag, self.x, self.y, self.z)
+    def __repr__(self) -> str:
+        return "TargetPointAbility(%r, %r, (%r, %r, %r))" % (
+            self.abilityTag,
+            self.abilityName,
+            self.x,
+            self.y,
+            self.z,
+        )
 
-    def __str__(self):
-        return "Skill: %s\tCoords: (%s,%s,%s)" % (self.abilityTag, self.x, self.y, self.z)
+    def __str__(self) -> str:
+        return "Skill: %s\tCoords: (%s,%s,%s)" % (self._display_name(), self.x, self.y, self.z)
 
 
 class UnitUpgrade:
-    def __init__(self, event):
-        self.gameloops = event["_gameloop"]
-        self.upgradedPlayerId = event["m_playerId"] - 1
-        self.internalName = _to_text(event["m_upgradeTypeName"])
+    def __init__(self, event: ReplayEvent) -> None:
+        self.gameloops: int = event["_gameloop"]
+        self.upgradedPlayerId: int = event["m_playerId"] - 1
+        self.internalName: str = _to_text(event["m_upgradeTypeName"])
 
-    def is_dragon_upgrade(self):
+    def is_dragon_upgrade(self) -> bool:
         return self.internalName in DRAGON_CONTROLLABLE
 
 
 class TargetUnitAbility(BaseAbility):
-    def __init__(self, event):
-        self.abilityTag = get_ability_tag(event)
-        self.castedAt = get_seconds_from_event_gameloop(event)
-        self.userId = event["_userid"]["m_userId"]
-        self.castedAtGameLoops = event["_gameloop"]
+    def __init__(self, event: ReplayEvent, game_version: int | None = None) -> None:
+        super().__init__(event, game_version)
+        self.x: float
+        self.y: float
+        self.z: float
+        self.targetPlayerId: int
+        self.targetTeamId: int
+        self.targetUnitTag: int
         if event.get("m_data"):
             self.x = event["m_data"]["TargetUnit"]["m_snapshotPoint"]["x"] / 4096.0
             self.y = event["m_data"]["TargetUnit"]["m_snapshotPoint"]["y"] / 4096.0
@@ -757,18 +787,19 @@ class TargetUnitAbility(BaseAbility):
             self.targetTeamId = event["m_target"]["m_snapshotUpkeepPlayerId"]
             self.targetUnitTag = event["m_target"]["m_tag"]
 
-    def __repr__(self):
-        return "TargetUnitAbility(%r, %r, (%r, %r, %r))" % (
+    def __repr__(self) -> str:
+        return "TargetUnitAbility(%r, %r, %r, (%r, %r, %r))" % (
             self.abilityTag,
+            self.abilityName,
             self.targetPlayerId,
             self.x,
             self.y,
             self.z,
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "Skill: %s\tCoords: (%s,%s,%s)\tTarget: %s" % (
-            self.abilityTag,
+            self._display_name(),
             self.x,
             self.y,
             self.z,

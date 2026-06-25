@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+from __future__ import annotations
+
+from typing import Any, ClassVar
+
 
 GAME_TYPES = {
     50001: "QuickMatch",
@@ -13,7 +17,7 @@ GAME_TYPES = {
 BANNED_GAME_TYPES = {"Versus AI", "Practice", "Brawl"}
 
 
-def _to_text(value, encoding="utf-8"):
+def _to_text(value: Any, encoding: str = "utf-8") -> Any:
     if isinstance(value, bytes):
         return value.decode(encoding, errors="replace")
     return value
@@ -182,7 +186,7 @@ BANNED_SCORE_RESULT_EVENTS = {
 
 
 class MapTranslator(object):
-    MAP_TRANSLATIONS = {
+    MAP_TRANSLATIONS: ClassVar[dict[str, set[str]]] = {
         "Lost Cavern": {"Lost Cavern", "Vergessene Höhle"},
         "Battlefield of Eternity": {
             "Campo de Batalha da Eternidade",
@@ -347,21 +351,21 @@ class MapTranslator(object):
         "Braxis Outpost": {"Braxis Outpost"},
     }
 
-    def __init__(self):
-        self.inverse_map_translations = dict(
+    def __init__(self) -> None:
+        self.inverse_map_translations: dict[str, str] = dict(
             (map_.lower(), orig_map)
             for orig_map, translated_maps in list(self.MAP_TRANSLATIONS.items())
             for map_ in translated_maps
         )
         self.inverse_map_translations.update({k.lower(): k for k in list(self.MAP_TRANSLATIONS.keys())})
 
-    def get_base_map_name(self, map_name):
+    def get_base_map_name(self, map_name: Any) -> str | None:
         map_name = _to_text(map_name)
         return self.inverse_map_translations.get(map_name.lower())
 
 
 class _HeroTranslator(object):
-    HERO_TRANSLATIONS = {
+    HERO_TRANSLATIONS: ClassVar[dict[str, list[str]]] = {
         "Abathur": [
             "Abathur",
             "Abathur",
@@ -1260,17 +1264,17 @@ class _HeroTranslator(object):
         ],
     }
 
-    def __init__(self):
-        self.inverse_hero_translations = dict(
+    def __init__(self) -> None:
+        self.inverse_hero_translations: dict[str, str] = dict(
             (hero.lower(), orig_hero)
             for orig_hero, translated_heroes in self.HERO_TRANSLATIONS.items()
             for hero in translated_heroes
         )
         self.inverse_hero_translations.update({k.lower(): k for k in list(self.HERO_TRANSLATIONS.keys())})
 
-    def get_base_hero_name(self, hero_name):
+    def get_base_hero_name(self, hero_name: Any) -> str | None:
         hero_name = _to_text(hero_name)
         return self.inverse_hero_translations.get(hero_name.lower())
 
 
-HeroTranslator = _HeroTranslator()
+HeroTranslator: _HeroTranslator = _HeroTranslator()
