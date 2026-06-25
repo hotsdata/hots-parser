@@ -1,20 +1,27 @@
 # -*- coding: utf-8 -*-
-__author__ = "Rodrigo Duenas, Cristian Orellana"
+from __future__ import annotations
 
-from models import *
 from hashlib import sha256
 import re
+from typing import Any, ClassVar, TypeAlias
+
+from models import *
 
 from protocol_loader import get_protocol_for_build
 
+__author__: str = "Rodrigo Duenas, Cristian Orellana"
 
-def _to_text(value, encoding="utf-8"):
+PlayerCollection: TypeAlias = dict[int, Player] | list[Any]
+TimelineEvent: TypeAlias = dict[str, Any]
+
+
+def _to_text(value: Any, encoding: str = "utf-8") -> Any:
     if isinstance(value, bytes):
         return value.decode(encoding, errors="replace")
     return value
 
 
-def _normalize_protocol_value(value):
+def _normalize_protocol_value(value: Any) -> Any:
     if isinstance(value, bytes):
         return _to_text(value)
     if isinstance(value, list):
@@ -27,51 +34,61 @@ def _normalize_protocol_value(value):
 
 
 class Replay:
-    EVENT_FILES = {
+    EVENT_FILES: ClassVar[dict[str, str]] = {
         "replay.tracker.events": "decode_replay_tracker_events",
         # 'replay.game.events': 'decode_replay_game_events'
     }
 
-    replayInfo = None
-    unitsInGame = {}
-    temp_indexes = {}  # key = UnitTagIndex, UnitTag
-    timeLine = []  # key = when (in seconds), value = event {} key = team - value = description
-    heroList = {}  # key = playerId - content = hero instance
-    upgrades = {}  # key = gameloop - content = upgrade instance
-    teams = [Team(), Team()]
-    abilityList = list()
-    time = None
-    players = []
+    replayInfo: ClassVar[HeroReplay | None] = None
+    unitsInGame: ClassVar[dict[int | None, GameUnit]] = {}
+    temp_indexes: ClassVar[dict[int, int | None]] = {}  # key = UnitTagIndex, UnitTag
+    # key = when (in seconds), value = event {} key = team - value = description
+    timeLine: ClassVar[list[TimelineEvent]] = []
+    heroList: ClassVar[dict[int, HeroUnit]] = {}  # key = playerId - content = hero instance
+    upgrades: ClassVar[dict[int, UnitUpgrade]] = {}  # key = gameloop - content = upgrade instance
+    teams: ClassVar[list[Team]] = [Team(), Team()]
+    abilityList: ClassVar[list[BaseAbility]] = list()
+    time: ClassVar[Any | None] = None
+    players: ClassVar[PlayerCollection] = []
     # stores NNet_Game_SCmdUpdateTargetPointEvent events
-    utpe = {}
-    utue = {}
-    team1 = None
-    team2 = None
-    event = "Generic"
-    stage = None
+    utpe: ClassVar[dict[int, ReplayEvent]] = {}
+    utue: ClassVar[dict[int, ReplayEvent]] = {}
+    team1: ClassVar[str | None] = None
+    team2: ClassVar[str | None] = None
+    event: ClassVar[str] = "Generic"
+    stage: ClassVar[str | None] = None
     # Flag used to prevent the processing of more than one endgamestats event in case the replay has several of them
-    endGameStatsProcessed = False
+    endGameStatsProcessed: ClassVar[bool] = False
 
-    def __init__(self, protocol, replayFile, team1, team2, event, stage):
-        self.protocol = protocol
-        self.replayFile = replayFile
-        self.replayInfo = None
-        self.unitsInGame = {}
-        self.temp_indexes = {}
-        self.timeLine = []
-        self.heroList = {}
-        self.upgrades = {}
-        self.teams = [Team(), Team()]
-        self.abilityList = []
-        self.time = None
-        self.players = []
-        self.utpe = {}
-        self.utue = {}
-        self.team1 = team1 if team1 else "Blue"
-        self.team2 = team2 if team2 else "Red"
-        self.event = event if event else "Generic"
-        self.stage = stage if stage else "None"
-        self.endGameStatsProcessed = False
+    def __init__(
+        self,
+        protocol: Any,
+        replayFile: Any,
+        team1: str | None,
+        team2: str | None,
+        event: str | None,
+        stage: str | None,
+    ) -> None:
+        self.protocol: Any = protocol
+        self.replayFile: Any = replayFile
+        self.replayInfo: HeroReplay | None = None
+        self.unitsInGame: dict[int | None, GameUnit] = {}
+        self.temp_indexes: dict[int, int | None] = {}
+        self.timeLine: list[TimelineEvent] = []
+        self.heroList: dict[int, HeroUnit] = {}
+        self.upgrades: dict[int, UnitUpgrade] = {}
+        self.teams: list[Team] = [Team(), Team()]
+        self.abilityList: list[BaseAbility] = []
+        self.time: Any | None = None
+        self.players: PlayerCollection = []
+        self.details: ReplayEvent = {}
+        self.utpe: dict[int, ReplayEvent] = {}
+        self.utue: dict[int, ReplayEvent] = {}
+        self.team1: str = team1 if team1 else "Blue"
+        self.team2: str = team2 if team2 else "Red"
+        self.event: str = event if event else "Generic"
+        self.stage: str = stage if stage else "None"
+        self.endGameStatsProcessed: bool = False
 
     def get_replay_id(self):
         _id = list()
