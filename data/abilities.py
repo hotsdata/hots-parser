@@ -36,9 +36,21 @@ def _hero_ability_catalog_names(
     return {hero_catalog_name: tuple(catalog_names) for hero_catalog_name, catalog_names in hero_abilities.items()}
 
 
+def _hero_catalog_names_by_display_name(
+    rows: tuple[tuple[str, str | None, str | None, str], ...],
+) -> dict[str, str]:
+    hero_catalog_names: dict[str, str] = {}
+    for _, hero_catalog_name, hero_name, _ in rows:
+        if hero_catalog_name is not None and hero_name is not None:
+            hero_catalog_names[hero_name] = hero_catalog_name
+    return hero_catalog_names
+
+
 ABILITY_CATALOG_DEFINITIONS_97039 = _catalog_definitions(ABILITY_CATALOG_ROWS_97039)
 
 HERO_ABILITY_CATALOG_NAMES_97039 = _hero_ability_catalog_names(ABILITY_CATALOG_ROWS_97039)
+
+HERO_CATALOG_NAMES_BY_DISPLAY_NAME_97039 = _hero_catalog_names_by_display_name(ABILITY_CATALOG_ROWS_97039)
 
 
 # Build 97039 ability catalog links observed in the replay fixture and checked
@@ -147,6 +159,10 @@ HERO_ABILITY_CATALOG_NAMES_BY_BUILD: dict[int, dict[str, tuple[str, ...]]] = {
     DEFAULT_ABILITY_BUILD: HERO_ABILITY_CATALOG_NAMES_97039,
 }
 
+HERO_CATALOG_NAMES_BY_DISPLAY_NAME_BY_BUILD: dict[int, dict[str, str]] = {
+    DEFAULT_ABILITY_BUILD: HERO_CATALOG_NAMES_BY_DISPLAY_NAME_97039,
+}
+
 SUPPORTED_ABILITY_BUILDS = tuple(sorted(ABILITY_DEFINITIONS_BY_BUILD))
 
 
@@ -193,3 +209,17 @@ def get_hero_ability_definitions(
         return ()
     catalog_names = catalog_names_by_hero.get(hero_catalog_name, ())
     return tuple(definitions[catalog_name] for catalog_name in catalog_names)
+
+
+def get_hero_catalog_name(
+    hero_name: str | None,
+    game_version: int | None = None,
+) -> str | None:
+    if hero_name is None:
+        return None
+    if game_version is None:
+        return None
+    hero_catalog_names = HERO_CATALOG_NAMES_BY_DISPLAY_NAME_BY_BUILD.get(game_version)
+    if hero_catalog_names is None:
+        return None
+    return hero_catalog_names.get(hero_name)

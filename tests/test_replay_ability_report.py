@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from scripts.replay_ability_report import _build_report, _replay_files
+from scripts.replay_ability_report import _build_report, _hero_catalog_name, _replay_files
 
 
 REPLAY_DIR = Path(__file__).parent / "fixtures" / "replays"
@@ -27,3 +27,9 @@ def test_replay_ability_report_groups_casts_by_build_hero_and_link():
     assert hogger_dynamite["abilityName"] == "Ez-Thro Dynamite"
     assert hogger_dynamite["targetTypes"] == {"TargetPoint": 96}
     assert len(hogger_dynamite["examples"]) == 1
+
+
+def test_hero_catalog_name_resolves_display_names():
+    assert _hero_catalog_name("Kael'thas", 97039) == "Kaelthas"
+    assert _hero_catalog_name("Li Li", 97039) == "LiLi"
+    assert _hero_catalog_name("Nazeebo", 97039) == "WitchDoctor"

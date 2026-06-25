@@ -15,7 +15,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from data import HeroTranslator
-from data.abilities import get_ability_definition, get_hero_ability_definitions
+from data.abilities import get_ability_definition, get_hero_ability_definitions, get_hero_catalog_name
 from helpers import get_ability_cmd_index, get_ability_link, get_ability_tag
 from protocol_loader import get_header_protocol, get_mpyq_archive_class, get_protocol_for_build
 
@@ -50,11 +50,7 @@ def _replay_files(corpus_dir: Path, recursive: bool, limit: int | None) -> list[
 
 
 def _hero_catalog_name(hero_name: str | None, game_version: int) -> str | None:
-    if hero_name is None:
-        return None
-    for definition in get_hero_ability_definitions(hero_name, game_version):
-        return definition.hero_catalog_name
-    return None
+    return get_hero_catalog_name(hero_name, game_version)
 
 
 def _hero_candidate_abilities(hero_catalog_name: str | None, game_version: int) -> tuple[dict[str, str], ...]:
