@@ -1,0 +1,822 @@
+[
+  {
+    "army_strength": "",
+    "banned": [],
+    "bossTaken": 0,
+    "id": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5-Blue",
+    "isLoser": false,
+    "isWinner": false,
+    "level": 29,
+    "levelEvents": [
+      {
+        "level": 1,
+        "seconds": 40
+      },
+      {
+        "level": 2,
+        "seconds": 125
+      },
+      {
+        "level": 3,
+        "seconds": 159
+      },
+      {
+        "level": 4,
+        "seconds": 186
+      },
+      {
+        "level": 5,
+        "seconds": 198
+      },
+      {
+        "level": 6,
+        "seconds": 236
+      },
+      {
+        "level": 7,
+        "seconds": 264
+      },
+      {
+        "level": 8,
+        "seconds": 289
+      },
+      {
+        "level": 9,
+        "seconds": 344
+      },
+      {
+        "level": 10,
+        "seconds": 364
+      },
+      {
+        "level": 11,
+        "seconds": 411
+      },
+      {
+        "level": 12,
+        "seconds": 425
+      },
+      {
+        "level": 13,
+        "seconds": 477
+      },
+      {
+        "level": 14,
+        "seconds": 516
+      },
+      {
+        "level": 15,
+        "seconds": 534
+      },
+      {
+        "level": 16,
+        "seconds": 589
+      },
+      {
+        "level": 17,
+        "seconds": 625
+      },
+      {
+        "level": 18,
+        "seconds": 652
+      },
+      {
+        "level": 19,
+        "seconds": 691
+      },
+      {
+        "level": 20,
+        "seconds": 769
+      },
+      {
+        "level": 21,
+        "seconds": 798
+      },
+      {
+        "level": 22,
+        "seconds": 871
+      },
+      {
+        "level": 23,
+        "seconds": 930
+      },
+      {
+        "level": 24,
+        "seconds": 1056
+      },
+      {
+        "level": 25,
+        "seconds": 1149
+      },
+      {
+        "level": 26,
+        "seconds": 1226
+      },
+      {
+        "level": 27,
+        "seconds": 1306
+      },
+      {
+        "level": 28,
+        "seconds": 1456
+      },
+      {
+        "level": 29,
+        "seconds": 1562
+      }
+    ],
+    "memberList": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "merc_strength": "",
+    "mercsTaken": 0,
+    "missedRegenGlobes": 175,
+    "periodicXPBreakdown": [
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 1014.605712890625,
+        "MinionXP": 1120.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 776.30615234375,
+        "level": 2,
+        "seconds": 60.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 1741.021728515625,
+        "MinionXP": 3064.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 2708.50830078125,
+        "level": 4,
+        "seconds": 120.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 2517.022705078125,
+        "MinionXP": 5032.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 4709.77783203125,
+        "level": 6,
+        "seconds": 180.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 5304.913330078125,
+        "MinionXP": 7024.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 6780.11474609375,
+        "level": 8,
+        "seconds": 240.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 6831.280517578125,
+        "MinionXP": 8704.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 8919.51904296875,
+        "level": 10,
+        "seconds": 300.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 9799.639892578125,
+        "MinionXP": 11084.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 11127.99072265625,
+        "level": 12,
+        "seconds": 360.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 11261.041259765625,
+        "MinionXP": 12460.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 13405.52978515625,
+        "level": 13,
+        "seconds": 420.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 16717.913818359375,
+        "MinionXP": 13852.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 15752.13623046875,
+        "level": 15,
+        "seconds": 480.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 16717.913818359375,
+        "MinionXP": 16668.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 18167.81005859375,
+        "level": 16,
+        "seconds": 540.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 24405.450439453125,
+        "MinionXP": 19338.0,
+        "StructureXP": 125.0,
+        "TrickleXP": 20652.55126953125,
+        "level": 18,
+        "seconds": 600.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 318.0,
+        "HeroXP": 24405.450439453125,
+        "MinionXP": 20958.0,
+        "StructureXP": 125.0,
+        "TrickleXP": 23206.35986328125,
+        "level": 19,
+        "seconds": 660.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 318.0,
+        "HeroXP": 28655.841064453125,
+        "MinionXP": 24052.0,
+        "StructureXP": 125.0,
+        "TrickleXP": 25829.23583984375,
+        "level": 20,
+        "seconds": 720.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 318.0,
+        "HeroXP": 32710.565185546875,
+        "MinionXP": 26444.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 28521.17919921875,
+        "level": 21,
+        "seconds": 780.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1002.0,
+        "HeroXP": 38897.79052734375,
+        "MinionXP": 27932.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 31282.18994140625,
+        "level": 22,
+        "seconds": 840.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1002.0,
+        "HeroXP": 38897.79052734375,
+        "MinionXP": 31692.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 34319.217529296875,
+        "level": 23,
+        "seconds": 900.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1002.0,
+        "HeroXP": 41173.681640625,
+        "MinionXP": 33972.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 37494.295654296875,
+        "level": 23,
+        "seconds": 960.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1002.0,
+        "HeroXP": 41173.681640625,
+        "MinionXP": 35892.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 40738.441162109375,
+        "level": 24,
+        "seconds": 1020.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1368.0,
+        "HeroXP": 46093.90869140625,
+        "MinionXP": 40354.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 44051.654052734375,
+        "level": 25,
+        "seconds": 1080.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1368.0,
+        "HeroXP": 50802.64892578125,
+        "MinionXP": 43882.0,
+        "StructureXP": 1050.0,
+        "TrickleXP": 47433.934326171875,
+        "level": 25,
+        "seconds": 1140.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1368.0,
+        "HeroXP": 62166.064453125,
+        "MinionXP": 47248.0,
+        "StructureXP": 1050.0,
+        "TrickleXP": 50885.281982421875,
+        "level": 26,
+        "seconds": 1200.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1368.0,
+        "HeroXP": 62166.064453125,
+        "MinionXP": 50848.0,
+        "StructureXP": 1050.0,
+        "TrickleXP": 54649.4375,
+        "level": 27,
+        "seconds": 1260.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1368.0,
+        "HeroXP": 64516.845703125,
+        "MinionXP": 51858.0,
+        "StructureXP": 1050.0,
+        "TrickleXP": 58514.8525390625,
+        "level": 27,
+        "seconds": 1320.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1368.0,
+        "HeroXP": 66915.087890625,
+        "MinionXP": 56346.0,
+        "StructureXP": 1050.0,
+        "TrickleXP": 62449.3349609375,
+        "level": 27,
+        "seconds": 1380.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1368.0,
+        "HeroXP": 78453.60717773438,
+        "MinionXP": 62320.0,
+        "StructureXP": 1050.0,
+        "TrickleXP": 66452.884765625,
+        "level": 28,
+        "seconds": 1440.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1368.0,
+        "HeroXP": 78453.60717773438,
+        "MinionXP": 64400.0,
+        "StructureXP": 1050.0,
+        "TrickleXP": 70525.501953125,
+        "level": 29,
+        "seconds": 1500.0,
+        "team": 0
+      },
+      {
+        "CreepXP": 1776.0,
+        "HeroXP": 87867.79174804688,
+        "MinionXP": 69440.0,
+        "StructureXP": 1050.0,
+        "TrickleXP": 74667.1865234375,
+        "level": 29,
+        "seconds": 1560.0,
+        "team": 0
+      }
+    ],
+    "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+    "siegeCampTaken": 5,
+    "team": 0,
+    "teamId": "Blue",
+    "totalCreepXP": 0,
+    "totalEnemyHeroesTakenDown": 46,
+    "totalHeroXP": 0,
+    "totalHeroesKilledByEnemy": 49,
+    "totalMinionXP": 0,
+    "totalStructureXP": 0,
+    "totalTrickleXP": 0,
+    "totalXP": 0,
+    "watchTowersTaken": 0
+  },
+  {
+    "army_strength": "",
+    "banned": [],
+    "bossTaken": 0,
+    "id": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5-Red",
+    "isLoser": false,
+    "isWinner": false,
+    "level": 28,
+    "levelEvents": [
+      {
+        "level": 1,
+        "seconds": 40
+      },
+      {
+        "level": 2,
+        "seconds": 125
+      },
+      {
+        "level": 3,
+        "seconds": 148
+      },
+      {
+        "level": 4,
+        "seconds": 168
+      },
+      {
+        "level": 5,
+        "seconds": 197
+      },
+      {
+        "level": 6,
+        "seconds": 232
+      },
+      {
+        "level": 7,
+        "seconds": 259
+      },
+      {
+        "level": 8,
+        "seconds": 283
+      },
+      {
+        "level": 9,
+        "seconds": 312
+      },
+      {
+        "level": 10,
+        "seconds": 330
+      },
+      {
+        "level": 11,
+        "seconds": 359
+      },
+      {
+        "level": 12,
+        "seconds": 380
+      },
+      {
+        "level": 13,
+        "seconds": 445
+      },
+      {
+        "level": 14,
+        "seconds": 452
+      },
+      {
+        "level": 15,
+        "seconds": 510
+      },
+      {
+        "level": 16,
+        "seconds": 521
+      },
+      {
+        "level": 17,
+        "seconds": 543
+      },
+      {
+        "level": 18,
+        "seconds": 617
+      },
+      {
+        "level": 19,
+        "seconds": 677
+      },
+      {
+        "level": 20,
+        "seconds": 700
+      },
+      {
+        "level": 21,
+        "seconds": 778
+      },
+      {
+        "level": 22,
+        "seconds": 865
+      },
+      {
+        "level": 23,
+        "seconds": 951
+      },
+      {
+        "level": 24,
+        "seconds": 1017
+      },
+      {
+        "level": 25,
+        "seconds": 1098
+      },
+      {
+        "level": 26,
+        "seconds": 1227
+      },
+      {
+        "level": 27,
+        "seconds": 1367
+      },
+      {
+        "level": 28,
+        "seconds": 1491
+      }
+    ],
+    "memberList": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "merc_strength": "",
+    "mercsTaken": 0,
+    "missedRegenGlobes": 177,
+    "periodicXPBreakdown": [
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 893.29833984375,
+        "MinionXP": 960.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 776.30615234375,
+        "level": 2,
+        "seconds": 60.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 2491.131591796875,
+        "MinionXP": 3228.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 2708.50830078125,
+        "level": 4,
+        "seconds": 120.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 0.0,
+        "HeroXP": 4105.8837890625,
+        "MinionXP": 4704.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 4709.77783203125,
+        "level": 6,
+        "seconds": 180.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 552.0,
+        "HeroXP": 8596.087646484375,
+        "MinionXP": 5700.0,
+        "StructureXP": 0.0,
+        "TrickleXP": 6780.11474609375,
+        "level": 9,
+        "seconds": 240.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 552.0,
+        "HeroXP": 13784.820556640625,
+        "MinionXP": 7548.0,
+        "StructureXP": 125.0,
+        "TrickleXP": 8919.51904296875,
+        "level": 11,
+        "seconds": 300.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 552.0,
+        "HeroXP": 13784.820556640625,
+        "MinionXP": 10098.0,
+        "StructureXP": 125.0,
+        "TrickleXP": 11127.99072265625,
+        "level": 12,
+        "seconds": 360.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1152.0,
+        "HeroXP": 17277.996826171875,
+        "MinionXP": 11990.0,
+        "StructureXP": 125.0,
+        "TrickleXP": 13405.52978515625,
+        "level": 14,
+        "seconds": 420.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1152.0,
+        "HeroXP": 24610.638427734375,
+        "MinionXP": 14774.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 15752.13623046875,
+        "level": 17,
+        "seconds": 480.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1152.0,
+        "HeroXP": 24610.638427734375,
+        "MinionXP": 16358.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 18167.81005859375,
+        "level": 17,
+        "seconds": 540.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1152.0,
+        "HeroXP": 26281.732177734375,
+        "MinionXP": 17604.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 20652.55126953125,
+        "level": 18,
+        "seconds": 600.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1476.0,
+        "HeroXP": 29616.68701171875,
+        "MinionXP": 21204.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 23206.35986328125,
+        "level": 20,
+        "seconds": 660.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1476.0,
+        "HeroXP": 33103.9306640625,
+        "MinionXP": 23752.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 25829.23583984375,
+        "level": 21,
+        "seconds": 720.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1476.0,
+        "HeroXP": 33103.9306640625,
+        "MinionXP": 26144.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 28521.17919921875,
+        "level": 21,
+        "seconds": 780.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1476.0,
+        "HeroXP": 37052.74658203125,
+        "MinionXP": 26888.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 31282.18994140625,
+        "level": 22,
+        "seconds": 840.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1476.0,
+        "HeroXP": 43450.67138671875,
+        "MinionXP": 29708.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 34112.26806640625,
+        "level": 23,
+        "seconds": 900.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1476.0,
+        "HeroXP": 45480.43212890625,
+        "MinionXP": 33318.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 37011.41357421875,
+        "level": 24,
+        "seconds": 960.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1476.0,
+        "HeroXP": 51587.786865234375,
+        "MinionXP": 36774.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 40025.615234375,
+        "level": 24,
+        "seconds": 1020.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1842.0,
+        "HeroXP": 55592.633056640625,
+        "MinionXP": 39102.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 43338.828125,
+        "level": 25,
+        "seconds": 1080.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1842.0,
+        "HeroXP": 55592.633056640625,
+        "MinionXP": 41258.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 46721.1083984375,
+        "level": 25,
+        "seconds": 1140.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1842.0,
+        "HeroXP": 55592.633056640625,
+        "MinionXP": 44624.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 50172.4560546875,
+        "level": 26,
+        "seconds": 1200.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 1842.0,
+        "HeroXP": 55592.633056640625,
+        "MinionXP": 49424.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 53692.87109375,
+        "level": 26,
+        "seconds": 1260.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 2622.0,
+        "HeroXP": 60576.617431640625,
+        "MinionXP": 53868.0,
+        "StructureXP": 250.0,
+        "TrickleXP": 57282.353515625,
+        "level": 27,
+        "seconds": 1320.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 2622.0,
+        "HeroXP": 63008.843994140625,
+        "MinionXP": 56316.0,
+        "StructureXP": 650.0,
+        "TrickleXP": 60940.9033203125,
+        "level": 27,
+        "seconds": 1380.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 2622.0,
+        "HeroXP": 65660.28442382812,
+        "MinionXP": 57758.0,
+        "StructureXP": 650.0,
+        "TrickleXP": 64668.5205078125,
+        "level": 28,
+        "seconds": 1440.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 3030.0,
+        "HeroXP": 68303.86962890625,
+        "MinionXP": 63998.0,
+        "StructureXP": 650.0,
+        "TrickleXP": 68465.205078125,
+        "level": 28,
+        "seconds": 1500.0,
+        "team": 1
+      },
+      {
+        "CreepXP": 3030.0,
+        "HeroXP": 70987.09716796875,
+        "MinionXP": 65048.0,
+        "StructureXP": 650.0,
+        "TrickleXP": 72330.95703125,
+        "level": 28,
+        "seconds": 1560.0,
+        "team": 1
+      }
+    ],
+    "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+    "siegeCampTaken": 9,
+    "team": 1,
+    "teamId": "Red",
+    "totalCreepXP": 0,
+    "totalEnemyHeroesTakenDown": 49,
+    "totalHeroXP": 0,
+    "totalHeroesKilledByEnemy": 46,
+    "totalMinionXP": 0,
+    "totalStructureXP": 0,
+    "totalTrickleXP": 0,
+    "totalXP": 0,
+    "watchTowersTaken": 0
+  }
+]

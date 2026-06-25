@@ -36,6 +36,20 @@ The package entry point is also available:
 
 ## Golden replay tests
 
+The repository includes one user-approved CI replay fixture:
+
+```text
+tests/fixtures/replays/ci/silver_city_2026-06-24.StormReplay
+```
+
+Its expected payloads are committed under:
+
+```text
+tests/golden/ci/silver_city_2026-06-24/
+```
+
+The committed expected payloads redact player names, BattleTags, and toon handles. This lets CI run a real replay-level regression test while keeping the text fixtures free of direct player identifiers.
+
 Private replay fixtures stay out of Git. Put local fixtures under:
 
 ```text
@@ -55,6 +69,25 @@ Generate or refresh its ignored golden JSON payloads with:
 ```
 
 The golden test skips on machines without the local replay or generated local golden output.
+
+Regenerate the committed CI golden payloads with:
+
+```bash
+.venv/bin/python scripts/generate_golden.py \
+  --replay tests/fixtures/replays/ci/silver_city_2026-06-24.StormReplay \
+  --output-dir tests/golden/ci/silver_city_2026-06-24 \
+  --redact-player-identities \
+  --update
+```
+
+Run a local corpus report against a replay folder with:
+
+```bash
+HOTSDATA_REPLAY_CORPUS_DIR="/path/to/Replays/Multiplayer" \
+  .venv/bin/python scripts/replay_corpus_report.py
+```
+
+Use `--limit N` for a bounded sample, `--progress-every N` for long runs, and `--fail-on-error` when you want the command to exit non-zero if any replay fails to parse.
 
 ## Database configuration
 

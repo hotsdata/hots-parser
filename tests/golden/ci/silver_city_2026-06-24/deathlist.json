@@ -1,0 +1,1352 @@
+{
+  "deaths": {
+    "team0": [
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 151,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Azmodan",
+        "x": 113.218017578125,
+        "y": 103.568359375
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 319,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Azmodan",
+        "x": 108.11865234375,
+        "y": 102.76708984375
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 367,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Azmodan",
+        "x": 112.125,
+        "y": 96.758056640625
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara"
+        ],
+        "seconds": 518,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Azmodan",
+        "x": 106.57373046875,
+        "y": 91.90478515625
+      },
+      {
+        "killers": [
+          "Muradin",
+          "Hogger"
+        ],
+        "seconds": 865,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Azmodan",
+        "x": 115.55859375,
+        "y": 104.65966796875
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Hogger"
+        ],
+        "seconds": 974,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Azmodan",
+        "x": 137.544677734375,
+        "y": 112.880615234375
+      },
+      {
+        "killers": [
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara"
+        ],
+        "seconds": 1491,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Azmodan",
+        "x": 183.049560546875,
+        "y": 112.872314453125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 236,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Diablo",
+        "x": 128.538330078125,
+        "y": 95.483154296875
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 283,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Diablo",
+        "x": 112.50146484375,
+        "y": 90.5078125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 312,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Diablo",
+        "x": 120.146728515625,
+        "y": 94.54150390625
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 361,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Diablo",
+        "x": 97.604736328125,
+        "y": 97.845947265625
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 450,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Diablo",
+        "x": 120.546142578125,
+        "y": 103.10595703125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 518,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Diablo",
+        "x": 116.097412109375,
+        "y": 82.125
+      },
+      {
+        "killers": [
+          "Kel'Thuzad",
+          "Zagara"
+        ],
+        "seconds": 542,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Diablo",
+        "x": 110.121826171875,
+        "y": 106.695068359375
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Zagara"
+        ],
+        "seconds": 878,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Diablo",
+        "x": 118.316650390625,
+        "y": 80.70556640625
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 962,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Diablo",
+        "x": 161.687255859375,
+        "y": 93.84912109375
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 1046,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Diablo",
+        "x": 132.6943359375,
+        "y": 81.880126953125
+      },
+      {
+        "killers": [
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 1112,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Diablo",
+        "x": 94.199462890625,
+        "y": 95.18701171875
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 96,
+        "soloDeath": true,
+        "team": 0,
+        "victim": "Gazlowe",
+        "x": 111.403076171875,
+        "y": 104.01220703125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 125,
+        "soloDeath": true,
+        "team": 0,
+        "victim": "Gazlowe",
+        "x": 115.806884765625,
+        "y": 112.464111328125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 280,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Gazlowe",
+        "x": 110.018310546875,
+        "y": 88.2431640625
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Hogger"
+        ],
+        "seconds": 359,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Gazlowe",
+        "x": 95.440185546875,
+        "y": 90.63037109375
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Kel'Thuzad",
+          "Hogger"
+        ],
+        "seconds": 448,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Gazlowe",
+        "x": 117.511474609375,
+        "y": 97.63818359375
+      },
+      {
+        "killers": [
+          "Muradin",
+          "Zagara"
+        ],
+        "seconds": 526,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Gazlowe",
+        "x": 110.575439453125,
+        "y": 107.802734375
+      },
+      {
+        "killers": [
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 685,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Gazlowe",
+        "x": 127.3203125,
+        "y": 97.936767578125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Hogger"
+        ],
+        "seconds": 778,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Gazlowe",
+        "x": 105.140869140625,
+        "y": 116.03173828125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Hogger"
+        ],
+        "seconds": 1017,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Gazlowe",
+        "x": 122.111083984375,
+        "y": 126.23291015625
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 1370,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Gazlowe",
+        "x": 121.1904296875,
+        "y": 97.2060546875
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 148,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 116.415283203125,
+        "y": 99.958984375
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 182,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 115.124267578125,
+        "y": 107.880126953125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 262,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 113.525634765625,
+        "y": 84.028564453125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 310,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 119.6455078125,
+        "y": 96.762939453125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 356,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 110.9228515625,
+        "y": 93.541748046875
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 451,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 121.7802734375,
+        "y": 87.69873046875
+      },
+      {
+        "killers": [
+          "Zagara"
+        ],
+        "seconds": 530,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 105.133056640625,
+        "y": 110.40185546875
+      },
+      {
+        "killers": [
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 700,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 115.625244140625,
+        "y": 104.673583984375
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 788,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 114.015380859375,
+        "y": 113.967041015625
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 945,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 159.732666015625,
+        "y": 118.35498046875
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Hogger"
+        ],
+        "seconds": 1041,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 125.65673828125,
+        "y": 107.027587890625
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 1117,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 87.022705078125,
+        "y": 99.782958984375
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 1342,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 153.701171875,
+        "y": 93.7470703125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Hogger"
+        ],
+        "seconds": 1409,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 84.004638671875,
+        "y": 124.071044921875
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 1518,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 177.947509765625,
+        "y": 113.665283203125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 1593,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Maiev",
+        "x": 130.01904296875,
+        "y": 82.15087890625
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 248,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Nova",
+        "x": 98.518798828125,
+        "y": 87.326171875
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 330,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Nova",
+        "x": 108.347412109375,
+        "y": 103.6455078125
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 518,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Nova",
+        "x": 114.66162109375,
+        "y": 82.484130859375
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Hogger"
+        ],
+        "seconds": 666,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Nova",
+        "x": 119.6240234375,
+        "y": 82.6826171875
+      },
+      {
+        "killers": [
+          "Stitches",
+          "Muradin",
+          "Kel'Thuzad",
+          "Zagara",
+          "Hogger"
+        ],
+        "seconds": 1072,
+        "soloDeath": false,
+        "team": 0,
+        "victim": "Nova",
+        "x": 103.585205078125,
+        "y": 102.609375
+      }
+    ],
+    "team1": [
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 198,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 128.697021484375,
+        "y": 97.925537109375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Nova"
+        ],
+        "seconds": 364,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 94.1103515625,
+        "y": 88.71728515625
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 447,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 122.67431640625,
+        "y": 94.6533203125
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 516,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 119.20166015625,
+        "y": 81.919677734375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 667,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 122.30224609375,
+        "y": 93.340576171875
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 845,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 101.255126953125,
+        "y": 104.641845703125
+      },
+      {
+        "killers": [
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 892,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 138.531494140625,
+        "y": 84.355712890625
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 1125,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 86.037353515625,
+        "y": 115.4208984375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 1190,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 119.271240234375,
+        "y": 101.45068359375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 1264,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 120.949462890625,
+        "y": 127.962890625
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 1370,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 94.412353515625,
+        "y": 91.755859375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 1456,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 129.373779296875,
+        "y": 105.1884765625
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 1601,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Stitches",
+        "x": 120.6728515625,
+        "y": 82.934814453125
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 100,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Muradin",
+        "x": 125.69091796875,
+        "y": 100.48681640625
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev"
+        ],
+        "seconds": 264,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Muradin",
+        "x": 112.8173828125,
+        "y": 90.40185546875
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 416,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Muradin",
+        "x": 126.207275390625,
+        "y": 107.327392578125
+      },
+      {
+        "killers": [
+          "Gazlowe",
+          "Maiev"
+        ],
+        "seconds": 523,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Muradin",
+        "x": 119.554931640625,
+        "y": 98.826171875
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 625,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Muradin",
+        "x": 120.963623046875,
+        "y": 93.280029296875
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 785,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Muradin",
+        "x": 111.345703125,
+        "y": 112.47216796875
+      },
+      {
+        "killers": [
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 883,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Muradin",
+        "x": 122.361572265625,
+        "y": 85.1318359375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 1124,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Muradin",
+        "x": 90.31005859375,
+        "y": 105.495361328125
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 1226,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Muradin",
+        "x": 174.15771484375,
+        "y": 100.642333984375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 1421,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Muradin",
+        "x": 74.259765625,
+        "y": 99.076416015625
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 1489,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Muradin",
+        "x": 197.944091796875,
+        "y": 94.12255859375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 1591,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Muradin",
+        "x": 120.934814453125,
+        "y": 83.69091796875
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 125,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Kel'Thuzad",
+        "x": 131.512451171875,
+        "y": 105.455078125
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 186,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Kel'Thuzad",
+        "x": 125.387939453125,
+        "y": 102.214599609375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 278,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Kel'Thuzad",
+        "x": 111.9453125,
+        "y": 80.500732421875
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 411,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Kel'Thuzad",
+        "x": 115.054443359375,
+        "y": 97.8125
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 622,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Kel'Thuzad",
+        "x": 127.4853515625,
+        "y": 94.06005859375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Nova"
+        ],
+        "seconds": 798,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Kel'Thuzad",
+        "x": 109.769287109375,
+        "y": 93.2998046875
+      },
+      {
+        "killers": [
+          "Diablo",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 1024,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Kel'Thuzad",
+        "x": 110.50146484375,
+        "y": 106.460693359375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 1181,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Kel'Thuzad",
+        "x": 122.4501953125,
+        "y": 106.686767578125
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Nova"
+        ],
+        "seconds": 1269,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Kel'Thuzad",
+        "x": 145.05078125,
+        "y": 110.500732421875
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 1461,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Kel'Thuzad",
+        "x": 142.784912109375,
+        "y": 110.0849609375
+      },
+      {
+        "killers": [
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 1503,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Kel'Thuzad",
+        "x": 195.275634765625,
+        "y": 113.52294921875
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 278,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Zagara",
+        "x": 113.07470703125,
+        "y": 80.375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 638,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Zagara",
+        "x": 139.531005859375,
+        "y": 84.333984375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 1227,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Zagara",
+        "x": 186.0517578125,
+        "y": 104.115478515625
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Gazlowe",
+          "Maiev"
+        ],
+        "seconds": 1594,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Zagara",
+        "x": 129.654296875,
+        "y": 80.375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 514,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Hogger",
+        "x": 120.822998046875,
+        "y": 83.04833984375
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 790,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Hogger",
+        "x": 106.8662109375,
+        "y": 124.088134765625
+      },
+      {
+        "killers": [
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 871,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Hogger",
+        "x": 117.71533203125,
+        "y": 101.1953125
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Maiev",
+          "Nova"
+        ],
+        "seconds": 1234,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Hogger",
+        "x": 163.12939453125,
+        "y": 102.9013671875
+      },
+      {
+        "killers": [
+          "Diablo",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 1463,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Hogger",
+        "x": 144.703369140625,
+        "y": 113.1953125
+      },
+      {
+        "killers": [
+          "Azmodan",
+          "Diablo",
+          "Gazlowe",
+          "Nova"
+        ],
+        "seconds": 1600,
+        "soloDeath": false,
+        "team": 1,
+        "victim": "Hogger",
+        "x": 116.511962890625,
+        "y": 81.148681640625
+      }
+    ]
+  },
+  "mapName": "Silver City"
+}

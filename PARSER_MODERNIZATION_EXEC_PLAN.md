@@ -30,6 +30,9 @@ The primary observable result is behavioral compatibility: for representative re
 - [x] 2026-06-25: Added CI-ready validation commands and documentation; local validation passes.
 - [x] 2026-06-25: Checked downstream HotsData repositories for legacy dump-flag usage; only `hots-parser` itself referenced those flags.
 - [x] 2026-06-25: Marked legacy `jsonpickle` dump flags as deprecated in CLI help/docs and added a one-line runtime warning while keeping behavior intact.
+- [x] 2026-06-25: User approved using replays from the local Multiplayer replay directory as fixtures/corpus input.
+- [x] 2026-06-25: Added one committed user-approved CI replay fixture with redacted golden payloads so replay-level parser coverage runs in CI.
+- [x] 2026-06-25: Added a replay corpus report helper for opt-in local parsing across the approved replay directory.
 
 ## Surprises & Discoveries
 
@@ -58,6 +61,8 @@ Python 3 exposed two legacy semantic assumptions: integer division was needed fo
 Running the host-side PostgreSQL integration test from the Codex sandbox without elevated local network access produced `psycopg.OperationalError: connection is bad: no error details available` when connecting to `127.0.0.1:55432`. Rerunning the same command with local host access succeeded. This appears to be a sandbox limitation, not a parser or database compatibility issue.
 
 Repository-wide search across `api`, `etl`, `uploader`, `hotsdata-frontend`, and `heroesinfo` found no downstream use of `--dump-all`, `--dump-teams`, `--dump-heroes`, `--dump-timeline`, `--dump-units`, or `--dump-players`. The API and ETL continue to consume PostgreSQL JSONB tables such as `replayinfo`, `players`, `teamgeneralstats`, `teammapstats`, `generalstats`, and `mapstats`.
+
+The approved replay corpus contains incomplete and edge-case files that currently do not parse cleanly. A bounded sample of the first 40 replay files parsed 23 successfully and reported 17 failures, mostly `KeyError` around player IDs and `AttributeError` from missing hero values. These are parser-hardening targets, not blockers for the representative CI fixture.
 
 ## Decision Log
 
@@ -139,6 +144,18 @@ Rationale: Downstream repository search found no automated use of the legacy dum
 
 Date/Author: 2026-06-25 / Codex
 
+Decision: Commit a single user-approved raw replay fixture for CI and commit only redacted golden JSON payloads.
+
+Rationale: A true replay-level CI test needs a real `.StormReplay` binary. The user explicitly approved using the local Multiplayer replay directory. To minimize exposure, only the existing representative Silver City replay is committed, and expected JSON payloads replace player names, BattleTags, and toon handles with synthetic identities before comparison.
+
+Date/Author: 2026-06-25 / Codex
+
+Decision: Keep the full replay directory as an opt-in corpus check instead of required CI.
+
+Rationale: The approved directory includes hundreds of real replays, including incomplete or unsupported games. Running all of them is too slow for normal CI and currently exposes parser-hardening failures. The `scripts/replay_corpus_report.py` helper lets developers run bounded samples or full local reports when working on robustness.
+
+Date/Author: 2026-06-25 / Codex
+
 ## Outcomes & Retrospective
 
 Implementation pass completed on 2026-06-25. The parser now runs on Python 3.10, opens the selected Silver City replay, decodes it with protocol fallback `96477`, and produces stable local golden payloads. The fixture parse produced replay id `5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5`, map `Silver City`, build `97039`, 10 players, 10 heroes, 3890 units, and 176 timeline events.
@@ -159,7 +176,9 @@ Legacy dump flag deprecation was added after checking downstream repositories. T
 
 Validation after the deprecation change passed with `.venv/bin/python -m pytest -q`, `.venv/bin/python -m ruff check .`, `.venv/bin/python -m ruff format --check .`, `.venv/bin/python main.py --help`, and a `--dump-teams` smoke test against the local Silver City replay.
 
-Current remaining work: choose a public/sanitized replay fixture if CI replay-level coverage should run without local private data.
+The CI replay fixture decision is complete. The repository now contains `tests/fixtures/replays/ci/silver_city_2026-06-24.StormReplay` and redacted expected payloads under `tests/golden/ci/silver_city_2026-06-24/`. The test `tests/test_ci_replay_fixture.py` parses the committed replay, redacts player identities in the actual payloads, and compares to the committed redacted golden output.
+
+The parser modernization plan is complete. Follow-up work should focus on parser hardening against incomplete or unusual replays discovered by the corpus report, and then on API/ETL modernization.
 
 ## Context and Orientation
 
@@ -414,6 +433,24 @@ Legacy dump deprecation validation from 2026-06-25:
     .venv/bin/python main.py --dump-teams --output-dir /tmp/hots-parser-legacy-warning-test tests/fixtures/replays/local/2026-06-24_15-49-48_Silver_City.StormReplay
     Warning: legacy dump flags write jsonpickle object dumps and are deprecated. Use --dump-payloads for stable standard JSON payload files.
     dumping teams data into /tmp/hots-parser-legacy-warning-test/2026-06-25_000129_teams.json
+
+CI replay fixture validation from 2026-06-25:
+
+    .venv/bin/python scripts/generate_golden.py --replay tests/fixtures/replays/ci/silver_city_2026-06-24.StormReplay --output-dir tests/golden/ci/silver_city_2026-06-24 --redact-player-identities --update
+    wrote 10 golden payloads to tests/golden/ci/silver_city_2026-06-24
+
+    sha256sum tests/fixtures/replays/ci/silver_city_2026-06-24.StormReplay
+    9ddd0723b5608a9b8ef504197ae3018bc74c570088fdb641ff790521a5fba664
+
+    .venv/bin/python -m pytest tests/test_ci_replay_fixture.py -q
+    1 passed, 1 warning in 0.44s
+
+Replay corpus helper validation from 2026-06-25:
+
+    .venv/bin/python scripts/replay_corpus_report.py '/media/crorella/44108A78108A70AA/Users/crore/OneDrive/Documents/Heroes of the Storm/Accounts/222876/1-Hero-1-1440382/Replays/Multiplayer' --limit 40 --max-failures 8 --progress-every 20
+    Replay corpus: 40 total, 23 passed, 17 failed
+
+Observed failure classes in the bounded sample included `KeyError` for player IDs and `AttributeError: 'NoneType' object has no attribute 'replace'` for missing hero values. A full corpus pass is intentionally left to a hardening follow-up because it takes several minutes and may need per-file timeout/progress handling.
 
 ## Interfaces and Dependencies
 

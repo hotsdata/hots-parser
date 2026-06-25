@@ -1,0 +1,1142 @@
+{
+  "id": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+  "tl": [
+    {
+      "event": "levelUp",
+      "level": 1,
+      "seconds": 40,
+      "team": 1
+    },
+    {
+      "event": "levelUp",
+      "level": 1,
+      "seconds": 40,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 96,
+      "soloDeath": true,
+      "team": 0,
+      "unitName": "Gazlowe"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 100,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Muradin"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 125,
+      "soloDeath": true,
+      "team": 0,
+      "unitName": "Gazlowe"
+    },
+    {
+      "event": "levelUp",
+      "level": 2,
+      "seconds": 125,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 125,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Kel'Thuzad"
+    },
+    {
+      "event": "levelUp",
+      "level": 2,
+      "seconds": 125,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 148,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "levelUp",
+      "level": 3,
+      "seconds": 148,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 151,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Azmodan"
+    },
+    {
+      "event": "levelUp",
+      "level": 3,
+      "seconds": 159,
+      "team": 0
+    },
+    {
+      "event": "levelUp",
+      "level": 4,
+      "seconds": 168,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 182,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 186,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Kel'Thuzad"
+    },
+    {
+      "event": "levelUp",
+      "level": 4,
+      "seconds": 186,
+      "team": 0
+    },
+    {
+      "event": "levelUp",
+      "level": 5,
+      "seconds": 197,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 198,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    },
+    {
+      "event": "levelUp",
+      "level": 5,
+      "seconds": 198,
+      "team": 0
+    },
+    {
+      "event": "levelUp",
+      "level": 6,
+      "seconds": 232,
+      "team": 1
+    },
+    {
+      "event": "levelUp",
+      "level": 6,
+      "seconds": 236,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 236,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Diablo"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 248,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Nova"
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 257,
+      "team": 1
+    },
+    {
+      "event": "levelUp",
+      "level": 7,
+      "seconds": 259,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 262,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 264,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Muradin"
+    },
+    {
+      "event": "levelUp",
+      "level": 7,
+      "seconds": 264,
+      "team": 0
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 277,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 278,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Kel'Thuzad"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 278,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Zagara"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 280,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Gazlowe"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 283,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Diablo"
+    },
+    {
+      "event": "levelUp",
+      "level": 8,
+      "seconds": 283,
+      "team": 1
+    },
+    {
+      "event": "levelUp",
+      "level": 8,
+      "seconds": 289,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 310,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 312,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Diablo"
+    },
+    {
+      "event": "levelUp",
+      "level": 9,
+      "seconds": 312,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 319,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Azmodan"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 330,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Nova"
+    },
+    {
+      "event": "levelUp",
+      "level": 10,
+      "seconds": 330,
+      "team": 1
+    },
+    {
+      "event": "levelUp",
+      "level": 9,
+      "seconds": 344,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 356,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "levelUp",
+      "level": 11,
+      "seconds": 359,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 359,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Gazlowe"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 361,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Diablo"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 364,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    },
+    {
+      "event": "levelUp",
+      "level": 10,
+      "seconds": 364,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 367,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Azmodan"
+    },
+    {
+      "event": "levelUp",
+      "level": 12,
+      "seconds": 380,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 411,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Kel'Thuzad"
+    },
+    {
+      "event": "levelUp",
+      "level": 11,
+      "seconds": 411,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 416,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Muradin"
+    },
+    {
+      "event": "levelUp",
+      "level": 12,
+      "seconds": 425,
+      "team": 0
+    },
+    {
+      "event": "levelUp",
+      "level": 13,
+      "seconds": 445,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 447,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 448,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Gazlowe"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 450,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Diablo"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 451,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "levelUp",
+      "level": 14,
+      "seconds": 452,
+      "team": 1
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 471,
+      "team": 1
+    },
+    {
+      "event": "levelUp",
+      "level": 13,
+      "seconds": 477,
+      "team": 0
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 479,
+      "team": 1
+    },
+    {
+      "event": "levelUp",
+      "level": 15,
+      "seconds": 510,
+      "team": 1
+    },
+    {
+      "event": "buildingDestroyed",
+      "seconds": 372,
+      "team": 0,
+      "unitName": "TownCannonTowerL2"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 514,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Hogger"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 516,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    },
+    {
+      "event": "levelUp",
+      "level": 14,
+      "seconds": 516,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 518,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Azmodan"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 518,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Nova"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 518,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Diablo"
+    },
+    {
+      "event": "levelUp",
+      "level": 16,
+      "seconds": 521,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 523,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Muradin"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 526,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Gazlowe"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 530,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "levelUp",
+      "level": 15,
+      "seconds": 534,
+      "team": 0
+    },
+    {
+      "event": "buildingDestroyed",
+      "seconds": 536,
+      "team": 0,
+      "unitName": "TownCannonTowerL2"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 542,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Diablo"
+    },
+    {
+      "event": "levelUp",
+      "level": 17,
+      "seconds": 543,
+      "team": 1
+    },
+    {
+      "event": "levelUp",
+      "level": 16,
+      "seconds": 589,
+      "team": 0
+    },
+    {
+      "event": "levelUp",
+      "level": 18,
+      "seconds": 617,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 622,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Kel'Thuzad"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 625,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Muradin"
+    },
+    {
+      "event": "levelUp",
+      "level": 17,
+      "seconds": 625,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 638,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Zagara"
+    },
+    {
+      "event": "levelUp",
+      "level": 18,
+      "seconds": 652,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 666,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Nova"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 667,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    },
+    {
+      "event": "levelUp",
+      "level": 19,
+      "seconds": 677,
+      "team": 1
+    },
+    {
+      "event": "buildingDestroyed",
+      "seconds": 659,
+      "team": 1,
+      "unitName": "TownCannonTowerL2"
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 682,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 685,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Gazlowe"
+    },
+    {
+      "event": "levelUp",
+      "level": 19,
+      "seconds": 691,
+      "team": 0
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 699,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 700,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "levelUp",
+      "level": 20,
+      "seconds": 700,
+      "team": 1
+    },
+    {
+      "event": "levelUp",
+      "level": 20,
+      "seconds": 769,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 778,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Gazlowe"
+    },
+    {
+      "event": "levelUp",
+      "level": 21,
+      "seconds": 778,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 785,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Muradin"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 788,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 790,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Hogger"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 798,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Kel'Thuzad"
+    },
+    {
+      "event": "levelUp",
+      "level": 21,
+      "seconds": 798,
+      "team": 0
+    },
+    {
+      "event": "buildingDestroyed",
+      "seconds": 819,
+      "team": 1,
+      "unitName": "TownCannonTowerL2"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 845,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 865,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Azmodan"
+    },
+    {
+      "event": "levelUp",
+      "level": 22,
+      "seconds": 865,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 871,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Hogger"
+    },
+    {
+      "event": "levelUp",
+      "level": 22,
+      "seconds": 871,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 878,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Diablo"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 883,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Muradin"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 892,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 899,
+      "team": 0
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 913,
+      "team": 0
+    },
+    {
+      "event": "levelUp",
+      "level": 23,
+      "seconds": 930,
+      "team": 0
+    },
+    {
+      "event": "buildingDestroyed",
+      "seconds": 930,
+      "team": 1,
+      "unitName": "TownTownHallL2"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 945,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "levelUp",
+      "level": 23,
+      "seconds": 951,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 962,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Diablo"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 974,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Azmodan"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1017,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Gazlowe"
+    },
+    {
+      "event": "levelUp",
+      "level": 24,
+      "seconds": 1017,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1024,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Kel'Thuzad"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1041,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1046,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Diablo"
+    },
+    {
+      "event": "levelUp",
+      "level": 24,
+      "seconds": 1056,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1072,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Nova"
+    },
+    {
+      "event": "buildingDestroyed",
+      "seconds": 1085,
+      "team": 0,
+      "unitName": "TownTownHallL2"
+    },
+    {
+      "event": "levelUp",
+      "level": 25,
+      "seconds": 1098,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1112,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Diablo"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1117,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1124,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Muradin"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1125,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 1149,
+      "team": 0
+    },
+    {
+      "event": "levelUp",
+      "level": 25,
+      "seconds": 1149,
+      "team": 0
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 1151,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1181,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Kel'Thuzad"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1190,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    },
+    {
+      "event": "buildingDestroyed",
+      "seconds": 1201,
+      "team": 1,
+      "unitName": "TownCannonTowerL3"
+    },
+    {
+      "event": "buildingDestroyed",
+      "seconds": 1201,
+      "team": 1,
+      "unitName": "TownCannonTowerL3"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1226,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Muradin"
+    },
+    {
+      "event": "levelUp",
+      "level": 26,
+      "seconds": 1226,
+      "team": 0
+    },
+    {
+      "event": "levelUp",
+      "level": 26,
+      "seconds": 1227,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1227,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Zagara"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1234,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Hogger"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1264,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1269,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Kel'Thuzad"
+    },
+    {
+      "event": "buildingDestroyed",
+      "seconds": 1282,
+      "team": 1,
+      "unitName": "TownTownHallL3"
+    },
+    {
+      "event": "levelUp",
+      "level": 27,
+      "seconds": 1306,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1342,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 1366,
+      "team": 1
+    },
+    {
+      "event": "levelUp",
+      "level": 27,
+      "seconds": 1367,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1370,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1370,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Gazlowe"
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 1381,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1409,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1421,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Muradin"
+    },
+    {
+      "event": "buildingDestroyed",
+      "seconds": 1417,
+      "team": 0,
+      "unitName": "TownCannonTowerL3"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1456,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    },
+    {
+      "event": "levelUp",
+      "level": 28,
+      "seconds": 1456,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1461,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Kel'Thuzad"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1463,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Hogger"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1489,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Muradin"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1491,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Azmodan"
+    },
+    {
+      "event": "levelUp",
+      "level": 28,
+      "seconds": 1491,
+      "team": 1
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1503,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Kel'Thuzad"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1518,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 1556,
+      "team": 1
+    },
+    {
+      "event": "levelUp",
+      "level": 29,
+      "seconds": 1562,
+      "team": 0
+    },
+    {
+      "event": "siegeCampTaken",
+      "seconds": 1583,
+      "team": 0
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1591,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Muradin"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1593,
+      "soloDeath": false,
+      "team": 0,
+      "unitName": "Maiev"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1594,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Zagara"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1600,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Hogger"
+    },
+    {
+      "event": "heroDeath",
+      "seconds": 1601,
+      "soloDeath": false,
+      "team": 1,
+      "unitName": "Stitches"
+    }
+  ]
+}
