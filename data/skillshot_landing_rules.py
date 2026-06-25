@@ -9,6 +9,15 @@ class AbilityKey:
 
 
 @dataclass(frozen=True)
+class AreaPositionRule:
+    impact_delay_gameloops: int
+    radius: float
+    target: str
+    outcome_stat: str
+    attempt_dedupe_window_gameloops: int = 0
+
+
+@dataclass(frozen=True)
 class SkillshotLandingRule:
     hero_name: str
     ability_catalog_name: str
@@ -20,6 +29,7 @@ class SkillshotLandingRule:
     followup_abilities: tuple[AbilityKey, ...] = ()
     followup_window_gameloops: int = 0
     quest_counter: QuestCounterRule | None = None
+    area_position: AreaPositionRule | None = None
     evidence_description: str = ""
 
 

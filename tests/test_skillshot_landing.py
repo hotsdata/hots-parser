@@ -2,7 +2,7 @@ from collections import OrderedDict
 from types import SimpleNamespace
 
 from data.abilities import DEFAULT_ABILITY_BUILD
-from models import BaseAbility
+from models import BaseAbility, TargetPointAbility
 from replay.skillshot_landing import SkillshotQuestEvent, apply_skillshot_landing_stats
 
 
@@ -23,10 +23,29 @@ def _ability(ability_link, gameloop, user_id=7):
     )
 
 
-def _hero(casts):
+def _target_point_ability(ability_link, gameloop, x, y, user_id=7):
+    return TargetPointAbility(
+        {
+            "_event": "NNet.Game.SCmdEvent",
+            "_gameloop": gameloop,
+            "_userid": {"m_userId": user_id},
+            "m_abil": {
+                "m_abilLink": ability_link,
+                "m_abilCmdIndex": 0,
+                "m_abilCmdData": None,
+            },
+            "m_data": {"TargetPoint": {"x": x * 4096, "y": y * 4096, "z": 0}},
+        },
+        DEFAULT_ABILITY_BUILD,
+    )
+
+
+def _hero(casts, name="Kel'Thuzad", player_id=6, team=0, unit_tag=100):
     return SimpleNamespace(
-        name="Kel'Thuzad",
-        playerId=6,
+        name=name,
+        playerId=player_id,
+        team=team,
+        unitTag=unit_tag,
         generalStats={
             "castedAbilities": OrderedDict((cast.castedAtGameLoops, cast) for cast in casts),
             "skillshotStats": {},
@@ -123,3 +142,84 @@ def test_skillshot_rules_are_versioned_by_build():
     apply_skillshot_landing_stats({6: hero}, DEFAULT_ABILITY_BUILD + 1)
 
     assert hero.generalStats["skillshotStats"] == {}
+
+
+def test_kelthuzad_frost_nova_counts_enemy_heroes_inside_root_radius():
+    hero = _hero([_target_point_ability(1105, 100, 10, 10)], player_id=6, team=0, unit_tag=1)
+    enemy_hit = _hero([], name="Enemy Hit", player_id=2, team=1, unit_tag=2)
+    enemy_miss = _hero([], name="Enemy Miss", player_id=3, team=1, unit_tag=3)
+    ally_inside_area = _hero([], name="Ally", player_id=4, team=0, unit_tag=4)
+    units = {
+        2: SimpleNamespace(positions={7: [11.0, 10.0]}),
+        3: SimpleNamespace(positions={7: [12.0, 10.0]}),
+        4: SimpleNamespace(positions={7: [10.0, 10.0]}),
+    }
+
+    apply_skillshot_landing_stats(
+        {6: hero, 2: enemy_hit, 3: enemy_miss, 4: ally_inside_area},
+        DEFAULT_ABILITY_BUILD,
+        units_in_game=units,
+    )
+
+    frost_nova = hero.generalStats["skillshotStats"]["KelThuzadFrostNova"]
+    assert frost_nova["totalAttempts"] == 1
+    assert frost_nova["landed"] == 1
+    assert frost_nova["missed"] == 0
+    assert frost_nova["hitRate"] == 1.0
+    assert frost_nova["totalTargetsHit"] == 1
+    assert frost_nova["rootedHeroUnits"] == 1
+    assert frost_nova["sampleEvidence"] == [
+        {
+            "castGameLoop": 100,
+            "evidenceType": "area_position_overlap",
+            "evidenceGameLoop": 116,
+            "deltaGameloops": 16,
+            "evidenceAbilityLink": None,
+            "evidenceAbilityCmdIndex": None,
+            "evidenceAbilityName": None,
+            "evidenceEventName": None,
+            "evidenceValue": None,
+            "targetCount": 1,
+            "targetHeroNames": ["Enemy Hit"],
+            "targetPlayerIds": [2],
+            "targetDistances": [1.0],
+        }
+    ]
+
+
+def test_kelthuzad_frost_nova_misses_when_no_enemy_hero_is_inside_root_radius():
+    hero = _hero([_target_point_ability(1105, 100, 10, 10)], player_id=6, team=0, unit_tag=1)
+    enemy = _hero([], name="Enemy", player_id=2, team=1, unit_tag=2)
+    units = {2: SimpleNamespace(positions={7: [12.0, 10.0]})}
+
+    apply_skillshot_landing_stats({6: hero, 2: enemy}, DEFAULT_ABILITY_BUILD, units_in_game=units)
+
+    frost_nova = hero.generalStats["skillshotStats"]["KelThuzadFrostNova"]
+    assert frost_nova["totalAttempts"] == 1
+    assert frost_nova["landed"] == 0
+    assert frost_nova["missed"] == 1
+    assert frost_nova["hitRate"] == 0.0
+    assert frost_nova["totalTargetsHit"] == 0
+    assert frost_nova["rootedHeroUnits"] == 0
+    assert frost_nova["sampleEvidence"] == []
+
+
+def test_kelthuzad_frost_nova_deduplicates_target_point_updates():
+    hero = _hero(
+        [
+            _target_point_ability(1105, 100, 10, 10),
+            _target_point_ability(1105, 102, 10, 10),
+        ],
+        player_id=6,
+        team=0,
+        unit_tag=1,
+    )
+    enemy = _hero([], name="Enemy", player_id=2, team=1, unit_tag=2)
+    units = {2: SimpleNamespace(positions={7: [10.5, 10.0]})}
+
+    apply_skillshot_landing_stats({6: hero, 2: enemy}, DEFAULT_ABILITY_BUILD, units_in_game=units)
+
+    frost_nova = hero.generalStats["skillshotStats"]["KelThuzadFrostNova"]
+    assert frost_nova["totalAttempts"] == 1
+    assert frost_nova["landed"] == 1
+    assert frost_nova["rootedHeroUnits"] == 1

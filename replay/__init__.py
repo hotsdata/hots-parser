@@ -301,6 +301,7 @@ class Replay:
             self.heroList,
             self._ability_game_version(),
             tuple(self.skillshotQuestEvents),
+            self.unitsInGame,
         )
 
     def _ability_from_command_event(self, event: ReplayEvent) -> BaseAbility | None:

@@ -1,7 +1,13 @@
 from __future__ import annotations
 
 from data.abilities import DEFAULT_ABILITY_BUILD
-from data.skillshot_landing_rules import AbilityKey, QuestCounterRule, SkillshotLandingRule, SkillshotLandingRuleSet
+from data.skillshot_landing_rules import (
+    AbilityKey,
+    AreaPositionRule,
+    QuestCounterRule,
+    SkillshotLandingRule,
+    SkillshotLandingRuleSet,
+)
 
 
 CURRENT_BUILD_RULE_SET = SkillshotLandingRuleSet(
@@ -40,6 +46,29 @@ CURRENT_BUILD_RULE_SET = SkillshotLandingRuleSet(
                 "Counts the initial Chains cast as landed when the same user produces "
                 "a Chains Link, Chains Pull, or Kel'Thuzad quest-progress event before "
                 "the next Chains attempt and within the configured evidence window."
+            ),
+        ),
+        SkillshotLandingRule(
+            hero_name="Kel'Thuzad",
+            ability_catalog_name="KelThuzadFrostNova",
+            ability_name="Frost Nova",
+            attempt=AbilityKey(1105, 0),
+            detector="area_position_overlap",
+            confidence="geometry_proxy",
+            rule_version="97039.1",
+            area_position=AreaPositionRule(
+                impact_delay_gameloops=16,
+                radius=1.5,
+                target="enemy_heroes",
+                outcome_stat="rootedHeroUnits",
+                attempt_dedupe_window_gameloops=96,
+            ),
+            evidence_description=(
+                "Counts a Frost Nova cast as landed when one or more enemy Hero units "
+                "overlap the center-root radius at the configured impact delay. The "
+                "target count is the number of enemy Hero units inside that center area; "
+                "repeated target-point updates inside the configured dedupe window are "
+                "treated as one cast."
             ),
         ),
     ),

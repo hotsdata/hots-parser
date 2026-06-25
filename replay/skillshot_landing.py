@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from math import hypot
 from typing import Any
 
 from data.skillshot_landing_rules import AbilityKey, SkillshotLandingRule, get_skillshot_landing_rules
+from helpers import get_seconds_from_int_gameloop
 from models import BaseAbility
 
 
@@ -26,6 +28,10 @@ class SkillshotLandingResult:
     evidence_ability_name: str | None = None
     evidence_event_name: str | None = None
     evidence_value: int | None = None
+    target_count: int = 0
+    target_hero_names: tuple[str, ...] = ()
+    target_player_ids: tuple[int, ...] = ()
+    target_distances: tuple[float, ...] = ()
 
     @property
     def delta_gameloops(self) -> int | None:
@@ -38,6 +44,7 @@ def apply_skillshot_landing_stats(
     hero_list: dict[int, Any],
     game_version: int | None,
     quest_events: tuple[SkillshotQuestEvent, ...] = (),
+    units_in_game: dict[int | None, Any] | None = None,
 ) -> None:
     rules = get_skillshot_landing_rules(game_version)
     if not rules:
@@ -51,9 +58,12 @@ def apply_skillshot_landing_stats(
 
         stats = {}
         for rule in hero_rules:
-            if rule.detector != "same_user_followup":
+            if rule.detector == "same_user_followup":
+                results = _process_same_user_followup(hero, rule, quest_events)
+            elif rule.detector == "area_position_overlap":
+                results = _process_area_position_overlap(hero, hero_list, units_in_game or {}, rule)
+            else:
                 continue
-            results = _process_same_user_followup(hero, rule, quest_events)
             stats[rule.ability_catalog_name] = _aggregate_results(rule, game_version, results)
         hero.generalStats["skillshotStats"] = stats
 
@@ -131,6 +141,178 @@ def _process_same_user_followup(
     return results
 
 
+def _process_area_position_overlap(
+    hero: Any,
+    hero_list: dict[int, Any],
+    units_in_game: dict[int | None, Any],
+    rule: SkillshotLandingRule,
+) -> list[SkillshotLandingResult]:
+    if rule.area_position is None:
+        return []
+
+    casted_abilities = hero.generalStats["castedAbilities"]
+    casts = sorted(casted_abilities.values(), key=lambda ability: ability.castedAtGameLoops)
+    attempts = [ability for ability in casts if _ability_matches(ability, rule.attempt)]
+    attempts = _dedupe_area_attempts(attempts, rule.area_position.attempt_dedupe_window_gameloops)
+    results = []
+
+    for attempt in attempts:
+        target_x = getattr(attempt, "x", None)
+        target_y = getattr(attempt, "y", None)
+        impact_gameloop = attempt.castedAtGameLoops + rule.area_position.impact_delay_gameloops
+
+        if target_x is None or target_y is None:
+            results.append(
+                SkillshotLandingResult(
+                    status="unknown",
+                    cast_gameloop=attempt.castedAtGameLoops,
+                    evidence_type="missing_target_point",
+                    evidence_gameloop=impact_gameloop,
+                )
+            )
+            continue
+
+        hits = _enemy_hero_area_hits(
+            hero,
+            hero_list,
+            units_in_game,
+            impact_gameloop,
+            float(target_x),
+            float(target_y),
+            rule.area_position.radius,
+        )
+        target_count = len(hits)
+        results.append(
+            SkillshotLandingResult(
+                status="landed" if target_count else "missed",
+                cast_gameloop=attempt.castedAtGameLoops,
+                evidence_type="area_position_overlap" if target_count else None,
+                evidence_gameloop=impact_gameloop,
+                target_count=target_count,
+                target_hero_names=tuple(hit["hero_name"] for hit in hits),
+                target_player_ids=tuple(hit["player_id"] for hit in hits if hit["player_id"] is not None),
+                target_distances=tuple(hit["distance"] for hit in hits),
+            )
+        )
+
+    return results
+
+
+def _dedupe_area_attempts(attempts: list[BaseAbility], window_gameloops: int) -> list[BaseAbility]:
+    if window_gameloops <= 0:
+        return attempts
+
+    deduped_attempts = []
+    current_cluster: list[BaseAbility] = []
+    for attempt in attempts:
+        if not current_cluster:
+            current_cluster.append(attempt)
+            continue
+
+        previous_attempt = current_cluster[-1]
+        if attempt.castedAtGameLoops - previous_attempt.castedAtGameLoops <= window_gameloops:
+            current_cluster.append(attempt)
+            continue
+
+        deduped_attempts.append(_select_area_attempt(current_cluster))
+        current_cluster = [attempt]
+
+    if current_cluster:
+        deduped_attempts.append(_select_area_attempt(current_cluster))
+    return deduped_attempts
+
+
+def _select_area_attempt(attempts: list[BaseAbility]) -> BaseAbility:
+    target_point_attempts = [
+        attempt
+        for attempt in attempts
+        if getattr(attempt, "x", None) is not None and getattr(attempt, "y", None) is not None
+    ]
+    if target_point_attempts:
+        return target_point_attempts[-1]
+    return attempts[-1]
+
+
+def _enemy_hero_area_hits(
+    caster: Any,
+    hero_list: dict[int, Any],
+    units_in_game: dict[int | None, Any],
+    impact_gameloop: int,
+    target_x: float,
+    target_y: float,
+    radius: float,
+) -> list[dict[str, Any]]:
+    impact_second = get_seconds_from_int_gameloop(impact_gameloop)
+    caster_team = getattr(caster, "team", None)
+    hits = []
+
+    for enemy in hero_list.values():
+        if enemy is caster:
+            continue
+        if caster_team is not None and getattr(enemy, "team", None) == caster_team:
+            continue
+
+        unit_tag = _hero_unit_tag(enemy)
+        unit = units_in_game.get(unit_tag)
+        position = _position_at_second(unit, impact_second)
+        if position is None:
+            continue
+
+        distance = hypot(float(position[0]) - target_x, float(position[1]) - target_y)
+        if distance <= radius:
+            hits.append(
+                {
+                    "hero_name": getattr(enemy, "name", "Unknown"),
+                    "player_id": getattr(enemy, "playerId", None),
+                    "distance": round(distance, 4),
+                }
+            )
+
+    return sorted(hits, key=lambda hit: (hit["distance"], hit["hero_name"]))
+
+
+def _hero_unit_tag(hero: Any) -> int | None:
+    unit_tag = getattr(hero, "unitTag", None)
+    if unit_tag is not None:
+        return unit_tag
+
+    unit_tag_method = getattr(hero, "unit_tag", None)
+    if callable(unit_tag_method):
+        return unit_tag_method()
+    return None
+
+
+def _position_at_second(unit: Any, second: int) -> list[Any] | None:
+    if unit is None:
+        return None
+
+    positions = getattr(unit, "positions", None)
+    if not positions:
+        return None
+
+    if second in positions:
+        return positions[second]
+
+    lower_second = max((position_second for position_second in positions if position_second < second), default=None)
+    upper_second = min((position_second for position_second in positions if position_second > second), default=None)
+
+    if lower_second is None:
+        return None
+    if upper_second is None:
+        return positions[lower_second]
+
+    elapsed = upper_second - lower_second
+    if elapsed <= 0:
+        return positions[lower_second]
+
+    lower_position = positions[lower_second]
+    upper_position = positions[upper_second]
+    ratio = (second - lower_second) / elapsed
+    x = float(lower_position[0]) + (float(upper_position[0]) - float(lower_position[0])) * ratio
+    y = float(lower_position[1]) + (float(upper_position[1]) - float(lower_position[1])) * ratio
+    return [x, y]
+
+
 def _first_quest_event_for_attempt(
     attempt: BaseAbility,
     hero: Any,
@@ -189,8 +371,9 @@ def _aggregate_results(
     hit_rate = round(landed / attempts, 4) if attempts else None
     sample_evidence = [_result_evidence(result) for result in results if result.status == "landed"][:5]
     landed_by_evidence = _landed_by_evidence(results)
+    total_targets_hit = sum(result.target_count for result in results)
 
-    return {
+    stats = {
         "abilityCatalogName": rule.ability_catalog_name,
         "abilityName": rule.ability_name,
         "attemptAbilityLink": rule.attempt.ability_link,
@@ -212,9 +395,24 @@ def _aggregate_results(
         "ruleVersion": rule.rule_version,
     }
 
+    if rule.area_position is not None:
+        stats.update(
+            {
+                "areaImpactDelayGameloops": rule.area_position.impact_delay_gameloops,
+                "areaRadius": rule.area_position.radius,
+                "areaTarget": rule.area_position.target,
+                "attemptDedupeWindowGameloops": rule.area_position.attempt_dedupe_window_gameloops,
+                "averageTargetsHit": round(total_targets_hit / attempts, 4) if attempts else None,
+                "totalTargetsHit": total_targets_hit,
+                rule.area_position.outcome_stat: total_targets_hit,
+            }
+        )
+
+    return stats
+
 
 def _result_evidence(result: SkillshotLandingResult) -> dict[str, Any]:
-    return {
+    evidence = {
         "castGameLoop": result.cast_gameloop,
         "evidenceType": result.evidence_type,
         "evidenceGameLoop": result.evidence_gameloop,
@@ -225,6 +423,16 @@ def _result_evidence(result: SkillshotLandingResult) -> dict[str, Any]:
         "evidenceEventName": result.evidence_event_name,
         "evidenceValue": result.evidence_value,
     }
+    if result.target_count:
+        evidence.update(
+            {
+                "targetCount": result.target_count,
+                "targetHeroNames": list(result.target_hero_names),
+                "targetPlayerIds": list(result.target_player_ids),
+                "targetDistances": list(result.target_distances),
+            }
+        )
+    return evidence
 
 
 def _landed_by_evidence(results: list[SkillshotLandingResult]) -> dict[str, int]:

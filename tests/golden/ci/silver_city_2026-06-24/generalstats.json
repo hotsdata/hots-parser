@@ -2696,6 +2696,121 @@
         ],
         "totalAttempts": 58,
         "unknown": 0
+      },
+      "KelThuzadFrostNova": {
+        "abilityCatalogName": "KelThuzadFrostNova",
+        "abilityName": "Frost Nova",
+        "areaImpactDelayGameloops": 16,
+        "areaRadius": 1.5,
+        "areaTarget": "enemy_heroes",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 1105,
+        "attemptDedupeWindowGameloops": 96,
+        "averageTargetsHit": 0.0645,
+        "confidence": "geometry_proxy",
+        "detector": "area_position_overlap",
+        "evidenceDescription": "Counts a Frost Nova cast as landed when one or more enemy Hero units overlap the center-root radius at the configured impact delay. The target count is the number of enemy Hero units inside that center area; repeated target-point updates inside the configured dedupe window are treated as one cast.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.0645,
+        "landed": 4,
+        "landedByEvidence": {
+          "area_position_overlap": 4
+        },
+        "missed": 58,
+        "questCounterEventNames": [],
+        "questCounterWindowGameloops": null,
+        "rootedHeroUnits": 4,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 5062,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 5078,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.673
+            ],
+            "targetHeroNames": [
+              "Nova"
+            ],
+            "targetPlayerIds": [
+              4
+            ]
+          },
+          {
+            "castGameLoop": 8118,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 8134,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              1.1128
+            ],
+            "targetHeroNames": [
+              "Azmodan"
+            ],
+            "targetPlayerIds": [
+              0
+            ]
+          },
+          {
+            "castGameLoop": 16281,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 16297,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              1.4188
+            ],
+            "targetHeroNames": [
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              2
+            ]
+          },
+          {
+            "castGameLoop": 17364,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 17380,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              1.2863
+            ],
+            "targetHeroNames": [
+              "Maiev"
+            ],
+            "targetPlayerIds": [
+              3
+            ]
+          }
+        ],
+        "totalAttempts": 62,
+        "totalTargetsHit": 4,
+        "unknown": 0
       }
     },
     "soloDeathsCount": 0,
