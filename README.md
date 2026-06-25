@@ -1,6 +1,55 @@
 # hots-parser
 A fast Heroes of the Storm's replay files parser written in Python.
 
+## Python 3 quick start
+
+This project now targets Python 3.10 or newer.
+
+```bash
+git submodule update --init --recursive
+python3 -m venv .venv
+.venv/bin/python -m pip install -e '.[dev]'
+.venv/bin/python -m pytest -q
+```
+
+Parse a replay and dump JSON files:
+
+```bash
+.venv/bin/python main.py --dump-all --output-dir /tmp/hots-parser-output path/to/replay.StormReplay
+```
+
+The package entry point is also available:
+
+```bash
+.venv/bin/python -m hots_parser --help
+```
+
+## Golden replay tests
+
+Private replay fixtures stay out of Git. Put local fixtures under:
+
+```text
+tests/fixtures/replays/local/
+```
+
+The current local golden replay is:
+
+```text
+tests/fixtures/replays/local/2026-06-24_15-49-48_Silver_City.StormReplay
+```
+
+Generate or refresh its ignored golden JSON payloads with:
+
+```bash
+.venv/bin/python scripts/generate_golden.py --update
+```
+
+The golden test skips on machines without the local replay or generated local golden output.
+
+## Database configuration
+
+Parser-only usage and JSON dumping do not require database credentials. Database writes use `HOTSDATA_DATABASE_URL` or `DATABASE_URL` when set, with `credentials.json` retained as a legacy fallback.
+
 
 ## How to run it:
 
@@ -30,7 +79,7 @@ optional arguments:
 ```
 
 # Configuration
-This parser tries to run as fast as possible, in order to do that we use PyPy which perform better than the default interpreter, so the first thing you need to do is to install PyPy. Please note that the default interpreter will still work, but a lot slower (about 1 second per replay on a mac with i7@2.8Ghz with 16GB of RAM)
+The parser is tested with CPython 3.10 or newer. PyPy was used by the legacy Python 2 version, but it is no longer required for normal development.
 
 ## Loading submodules
 The parser relies on Blizzard's heroprotocol project, which is included as a submodule in this repo, in order to pull the data for heroprotocol you need to run this command after cloning the repo:
@@ -40,7 +89,7 @@ git submodule init
 git submodule update
 ```
 
-alternativelly, you can clone hots-parser recursively:
+alternatively, you can clone hots-parser recursively:
 
 ```
 git clone --recursive git@github.com:crorella/hots-parser.git
@@ -59,19 +108,17 @@ REVOKE CONNECT ON DATABASE hotsdata FROM PUBLIC;
 GRANT ALL ON DATABASE hotsdata TO hotsdata;
 ```
 
-- Update credentials.json with the appropriate password and server information.
+- Set `HOTSDATA_DATABASE_URL` or `DATABASE_URL`, or update `credentials.json` with the appropriate password and server information for the legacy fallback path.
 - Load the script in database/database_schema.sql into hotsdata. Please note this schema also contains the tables used by the API, data processing (ETL) and frontend that power www.hotsdata.com
 
 ## Installing python libraries
-For now we just use jsonpickle and psycopg2ct. You can use pip to install them.
+Install the project dependencies from `pyproject.toml`:
 
-> pip install jsonpickle
-
-> pip install psycopg2ct
+> python3 -m pip install -e '.[dev]'
 
 ## Testing all
 To test if everything is working fine run the following command in the root folder of this project:
-> pypy main.py Hanamura.HotsReplay
+> python3 main.py --dump-all --output-dir /tmp/hots-parser-output Hanamura.StormReplay
 
 You should see something like this in the console:
 ```

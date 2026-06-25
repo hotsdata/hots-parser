@@ -1,2 +1,4 @@
 jsonpickle
-psycopg2ct
+mpyq==0.2.5
+psycopg[binary]>=3.1,<4
+six>=1.16
