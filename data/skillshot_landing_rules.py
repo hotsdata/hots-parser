@@ -15,6 +15,8 @@ class AreaPositionRule:
     target: str
     outcome_stat: str
     attempt_dedupe_window_gameloops: int = 0
+    mechanic_radius: float | None = None
+    target_point_strategy: str = "last"
 
 
 @dataclass(frozen=True)

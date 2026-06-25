@@ -2701,83 +2701,42 @@
         "abilityCatalogName": "KelThuzadFrostNova",
         "abilityName": "Frost Nova",
         "areaImpactDelayGameloops": 16,
-        "areaRadius": 1.5,
+        "areaMechanicRadius": 1.5,
+        "areaRadius": 6.0,
         "areaTarget": "enemy_heroes",
         "attemptAbilityCmdIndex": 0,
         "attemptAbilityLink": 1105,
-        "attemptDedupeWindowGameloops": 96,
-        "averageTargetsHit": 0.0645,
-        "confidence": "geometry_proxy",
+        "attemptDedupeWindowGameloops": 48,
+        "averageTargetsHit": 1.1452,
+        "confidence": "geometry_proxy_calibrated",
         "detector": "area_position_overlap",
-        "evidenceDescription": "Counts a Frost Nova cast as landed when one or more enemy Hero units overlap the center-root radius at the configured impact delay. The target count is the number of enemy Hero units inside that center area; repeated target-point updates inside the configured dedupe window are treated as one cast.",
+        "evidenceDescription": "Counts a Frost Nova cast as landed when one or more enemy Hero units overlap the calibrated replay-position radius at the configured impact delay. The mechanic center-root radius is recorded separately; the larger replay radius compensates for one-second unit-position samples. Repeated target-point updates inside the configured dedupe window are treated as one cast, using the first target point in that cast cluster.",
         "followupWindowGameloops": 0,
         "gameVersion": 97039,
-        "hitRate": 0.0645,
-        "landed": 4,
+        "hitRate": 0.6935,
+        "landed": 43,
         "landedByEvidence": {
-          "area_position_overlap": 4
+          "area_position_overlap": 43
         },
-        "missed": 58,
+        "missed": 19,
         "questCounterEventNames": [],
         "questCounterWindowGameloops": null,
-        "rootedHeroUnits": 4,
+        "rootedHeroUnits": 71,
         "ruleVersion": "97039.1",
         "sampleEvidence": [
           {
-            "castGameLoop": 5062,
+            "castGameLoop": 1486,
             "deltaGameloops": 16,
             "evidenceAbilityCmdIndex": null,
             "evidenceAbilityLink": null,
             "evidenceAbilityName": null,
             "evidenceEventName": null,
-            "evidenceGameLoop": 5078,
+            "evidenceGameLoop": 1502,
             "evidenceType": "area_position_overlap",
             "evidenceValue": null,
             "targetCount": 1,
             "targetDistances": [
-              0.673
-            ],
-            "targetHeroNames": [
-              "Nova"
-            ],
-            "targetPlayerIds": [
-              4
-            ]
-          },
-          {
-            "castGameLoop": 8118,
-            "deltaGameloops": 16,
-            "evidenceAbilityCmdIndex": null,
-            "evidenceAbilityLink": null,
-            "evidenceAbilityName": null,
-            "evidenceEventName": null,
-            "evidenceGameLoop": 8134,
-            "evidenceType": "area_position_overlap",
-            "evidenceValue": null,
-            "targetCount": 1,
-            "targetDistances": [
-              1.1128
-            ],
-            "targetHeroNames": [
-              "Azmodan"
-            ],
-            "targetPlayerIds": [
-              0
-            ]
-          },
-          {
-            "castGameLoop": 16281,
-            "deltaGameloops": 16,
-            "evidenceAbilityCmdIndex": null,
-            "evidenceAbilityLink": null,
-            "evidenceAbilityName": null,
-            "evidenceEventName": null,
-            "evidenceGameLoop": 16297,
-            "evidenceType": "area_position_overlap",
-            "evidenceValue": null,
-            "targetCount": 1,
-            "targetDistances": [
-              1.4188
+              4.22
             ],
             "targetHeroNames": [
               "Gazlowe"
@@ -2787,29 +2746,105 @@
             ]
           },
           {
-            "castGameLoop": 17364,
+            "castGameLoop": 1648,
             "deltaGameloops": 16,
             "evidenceAbilityCmdIndex": null,
             "evidenceAbilityLink": null,
             "evidenceAbilityName": null,
             "evidenceEventName": null,
-            "evidenceGameLoop": 17380,
+            "evidenceGameLoop": 1664,
             "evidenceType": "area_position_overlap",
             "evidenceValue": null,
             "targetCount": 1,
             "targetDistances": [
-              1.2863
+              2.8215
             ],
             "targetHeroNames": [
-              "Maiev"
+              "Gazlowe"
             ],
             "targetPlayerIds": [
-              3
+              2
+            ]
+          },
+          {
+            "castGameLoop": 1916,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1932,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              2.1532
+            ],
+            "targetHeroNames": [
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              2
+            ]
+          },
+          {
+            "castGameLoop": 2350,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2366,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 3,
+            "targetDistances": [
+              2.5074,
+              3.6941,
+              3.8257
+            ],
+            "targetHeroNames": [
+              "Maiev",
+              "Azmodan",
+              "Diablo"
+            ],
+            "targetPlayerIds": [
+              3,
+              0,
+              1
+            ]
+          },
+          {
+            "castGameLoop": 2890,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2906,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 3,
+            "targetDistances": [
+              3.9007,
+              4.6714,
+              4.7904
+            ],
+            "targetHeroNames": [
+              "Maiev",
+              "Gazlowe",
+              "Diablo"
+            ],
+            "targetPlayerIds": [
+              3,
+              2,
+              1
             ]
           }
         ],
+        "targetPointStrategy": "first",
         "totalAttempts": 62,
-        "totalTargetsHit": 4,
+        "totalTargetsHit": 71,
         "unknown": 0
       }
     },

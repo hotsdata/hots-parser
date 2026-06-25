@@ -153,7 +153,11 @@ def _process_area_position_overlap(
     casted_abilities = hero.generalStats["castedAbilities"]
     casts = sorted(casted_abilities.values(), key=lambda ability: ability.castedAtGameLoops)
     attempts = [ability for ability in casts if _ability_matches(ability, rule.attempt)]
-    attempts = _dedupe_area_attempts(attempts, rule.area_position.attempt_dedupe_window_gameloops)
+    attempts = _dedupe_area_attempts(
+        attempts,
+        rule.area_position.attempt_dedupe_window_gameloops,
+        rule.area_position.target_point_strategy,
+    )
     results = []
 
     for attempt in attempts:
@@ -198,7 +202,11 @@ def _process_area_position_overlap(
     return results
 
 
-def _dedupe_area_attempts(attempts: list[BaseAbility], window_gameloops: int) -> list[BaseAbility]:
+def _dedupe_area_attempts(
+    attempts: list[BaseAbility],
+    window_gameloops: int,
+    target_point_strategy: str,
+) -> list[BaseAbility]:
     if window_gameloops <= 0:
         return attempts
 
@@ -214,21 +222,23 @@ def _dedupe_area_attempts(attempts: list[BaseAbility], window_gameloops: int) ->
             current_cluster.append(attempt)
             continue
 
-        deduped_attempts.append(_select_area_attempt(current_cluster))
+        deduped_attempts.append(_select_area_attempt(current_cluster, target_point_strategy))
         current_cluster = [attempt]
 
     if current_cluster:
-        deduped_attempts.append(_select_area_attempt(current_cluster))
+        deduped_attempts.append(_select_area_attempt(current_cluster, target_point_strategy))
     return deduped_attempts
 
 
-def _select_area_attempt(attempts: list[BaseAbility]) -> BaseAbility:
+def _select_area_attempt(attempts: list[BaseAbility], target_point_strategy: str) -> BaseAbility:
     target_point_attempts = [
         attempt
         for attempt in attempts
         if getattr(attempt, "x", None) is not None and getattr(attempt, "y", None) is not None
     ]
     if target_point_attempts:
+        if target_point_strategy == "first":
+            return target_point_attempts[0]
         return target_point_attempts[-1]
     return attempts[-1]
 
@@ -399,9 +409,11 @@ def _aggregate_results(
         stats.update(
             {
                 "areaImpactDelayGameloops": rule.area_position.impact_delay_gameloops,
+                "areaMechanicRadius": rule.area_position.mechanic_radius,
                 "areaRadius": rule.area_position.radius,
                 "areaTarget": rule.area_position.target,
                 "attemptDedupeWindowGameloops": rule.area_position.attempt_dedupe_window_gameloops,
+                "targetPointStrategy": rule.area_position.target_point_strategy,
                 "averageTargetsHit": round(total_targets_hit / attempts, 4) if attempts else None,
                 "totalTargetsHit": total_targets_hit,
                 rule.area_position.outcome_stat: total_targets_hit,

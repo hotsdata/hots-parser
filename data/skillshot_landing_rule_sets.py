@@ -54,21 +54,24 @@ CURRENT_BUILD_RULE_SET = SkillshotLandingRuleSet(
             ability_name="Frost Nova",
             attempt=AbilityKey(1105, 0),
             detector="area_position_overlap",
-            confidence="geometry_proxy",
+            confidence="geometry_proxy_calibrated",
             rule_version="97039.1",
             area_position=AreaPositionRule(
                 impact_delay_gameloops=16,
-                radius=1.5,
+                radius=6.0,
                 target="enemy_heroes",
                 outcome_stat="rootedHeroUnits",
-                attempt_dedupe_window_gameloops=96,
+                attempt_dedupe_window_gameloops=48,
+                mechanic_radius=1.5,
+                target_point_strategy="first",
             ),
             evidence_description=(
                 "Counts a Frost Nova cast as landed when one or more enemy Hero units "
-                "overlap the center-root radius at the configured impact delay. The "
-                "target count is the number of enemy Hero units inside that center area; "
-                "repeated target-point updates inside the configured dedupe window are "
-                "treated as one cast."
+                "overlap the calibrated replay-position radius at the configured impact "
+                "delay. The mechanic center-root radius is recorded separately; the "
+                "larger replay radius compensates for one-second unit-position samples. "
+                "Repeated target-point updates inside the configured dedupe window are "
+                "treated as one cast, using the first target point in that cast cluster."
             ),
         ),
     ),

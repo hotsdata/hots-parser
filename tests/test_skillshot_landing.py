@@ -144,14 +144,14 @@ def test_skillshot_rules_are_versioned_by_build():
     assert hero.generalStats["skillshotStats"] == {}
 
 
-def test_kelthuzad_frost_nova_counts_enemy_heroes_inside_root_radius():
+def test_kelthuzad_frost_nova_counts_enemy_heroes_inside_effective_radius():
     hero = _hero([_target_point_ability(1105, 100, 10, 10)], player_id=6, team=0, unit_tag=1)
     enemy_hit = _hero([], name="Enemy Hit", player_id=2, team=1, unit_tag=2)
     enemy_miss = _hero([], name="Enemy Miss", player_id=3, team=1, unit_tag=3)
     ally_inside_area = _hero([], name="Ally", player_id=4, team=0, unit_tag=4)
     units = {
         2: SimpleNamespace(positions={7: [11.0, 10.0]}),
-        3: SimpleNamespace(positions={7: [12.0, 10.0]}),
+        3: SimpleNamespace(positions={7: [17.0, 10.0]}),
         4: SimpleNamespace(positions={7: [10.0, 10.0]}),
     }
 
@@ -187,10 +187,10 @@ def test_kelthuzad_frost_nova_counts_enemy_heroes_inside_root_radius():
     ]
 
 
-def test_kelthuzad_frost_nova_misses_when_no_enemy_hero_is_inside_root_radius():
+def test_kelthuzad_frost_nova_misses_when_no_enemy_hero_is_inside_effective_radius():
     hero = _hero([_target_point_ability(1105, 100, 10, 10)], player_id=6, team=0, unit_tag=1)
     enemy = _hero([], name="Enemy", player_id=2, team=1, unit_tag=2)
-    units = {2: SimpleNamespace(positions={7: [12.0, 10.0]})}
+    units = {2: SimpleNamespace(positions={7: [17.0, 10.0]})}
 
     apply_skillshot_landing_stats({6: hero, 2: enemy}, DEFAULT_ABILITY_BUILD, units_in_game=units)
 
@@ -208,7 +208,7 @@ def test_kelthuzad_frost_nova_deduplicates_target_point_updates():
     hero = _hero(
         [
             _target_point_ability(1105, 100, 10, 10),
-            _target_point_ability(1105, 102, 10, 10),
+            _target_point_ability(1105, 102, 30, 30),
         ],
         player_id=6,
         team=0,
@@ -223,3 +223,4 @@ def test_kelthuzad_frost_nova_deduplicates_target_point_updates():
     assert frost_nova["totalAttempts"] == 1
     assert frost_nova["landed"] == 1
     assert frost_nova["rootedHeroUnits"] == 1
+    assert frost_nova["sampleEvidence"][0]["castGameLoop"] == 100
