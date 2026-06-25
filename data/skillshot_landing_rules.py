@@ -19,7 +19,17 @@ class SkillshotLandingRule:
     rule_version: str
     followup_abilities: tuple[AbilityKey, ...] = ()
     followup_window_gameloops: int = 0
+    quest_counter: QuestCounterRule | None = None
     evidence_description: str = ""
+
+
+@dataclass(frozen=True)
+class QuestCounterRule:
+    event_names: tuple[str, ...]
+    window_gameloops: int
+    player_id_key: str = "PlayerID"
+    value_keys: tuple[str, ...] = ()
+    max_value: int | None = None
 
 
 @dataclass(frozen=True)

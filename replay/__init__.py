@@ -8,7 +8,13 @@ from typing import Any, ClassVar, TypeAlias
 from models import *
 
 from protocol_loader import get_protocol_for_build
-from replay.skillshot_landing import apply_skillshot_landing_stats
+from replay.skillshot_landing import (
+    SkillshotQuestEvent,
+    apply_skillshot_landing_stats,
+    skillshot_quest_event_names,
+    skillshot_quest_player_id_key,
+    skillshot_quest_value_keys,
+)
 
 __author__: str = "Rodrigo Duenas, Cristian Orellana"
 
@@ -34,6 +40,30 @@ def _normalize_protocol_value(value: Any) -> Any:
     return value
 
 
+def _event_data_value(event: ReplayEvent, key: str) -> Any:
+    for data_field in ("m_intData", "m_fixedData", "m_stringData"):
+        for item in event.get(data_field) or []:
+            if item.get("m_key") == key:
+                return item.get("m_value")
+    return None
+
+
+def _tracker_player_id(event: ReplayEvent, game_version: int | None) -> int | None:
+    player_id_key = skillshot_quest_player_id_key(game_version, event["m_eventName"])
+    player_id = _event_data_value(event, player_id_key)
+    if player_id is None:
+        return None
+    return int(player_id) - 1
+
+
+def _quest_counter_value(event: ReplayEvent, game_version: int | None) -> int | None:
+    for key in skillshot_quest_value_keys(game_version, event["m_eventName"]):
+        value = _event_data_value(event, key)
+        if value is not None:
+            return int(value)
+    return None
+
+
 class Replay:
     EVENT_FILES: ClassVar[dict[str, str]] = {
         "replay.tracker.events": "decode_replay_tracker_events",
@@ -49,6 +79,7 @@ class Replay:
     upgrades: ClassVar[dict[int, UnitUpgrade]] = {}  # key = gameloop - content = upgrade instance
     teams: ClassVar[list[Team]] = [Team(), Team()]
     abilityList: ClassVar[list[BaseAbility]] = list()
+    skillshotQuestEvents: ClassVar[list[SkillshotQuestEvent]] = []
     time: ClassVar[Any | None] = None
     players: ClassVar[PlayerCollection] = []
     # stores NNet_Game_SCmdUpdateTargetPointEvent events
@@ -80,6 +111,7 @@ class Replay:
         self.upgrades: dict[int, UnitUpgrade] = {}
         self.teams: list[Team] = [Team(), Team()]
         self.abilityList: list[BaseAbility] = []
+        self.skillshotQuestEvents: list[SkillshotQuestEvent] = []
         self.time: Any | None = None
         self.players: PlayerCollection = []
         self.details: ReplayEvent = {}
@@ -265,7 +297,11 @@ class Replay:
                 self._record_ability_cast(ability)
 
     def process_skillshot_landings(self) -> None:
-        apply_skillshot_landing_stats(self.heroList, self._ability_game_version())
+        apply_skillshot_landing_stats(
+            self.heroList,
+            self._ability_game_version(),
+            tuple(self.skillshotQuestEvents),
+        )
 
     def _ability_from_command_event(self, event: ReplayEvent) -> BaseAbility | None:
         if event["_event"] != "NNet.Game.SCmdEvent" or not event["m_abil"]:
@@ -284,6 +320,20 @@ class Replay:
         if playerId is None or playerId not in self.heroList:
             return
         self.heroList[playerId].generalStats["castedAbilities"][ability.castedAtGameLoops] = ability
+
+    def _record_skillshot_quest_event(self, event: ReplayEvent) -> None:
+        event_name = event["m_eventName"]
+        if event_name not in skillshot_quest_event_names(self._ability_game_version()):
+            return
+
+        self.skillshotQuestEvents.append(
+            SkillshotQuestEvent(
+                event_name=event_name,
+                gameloop=event["_gameloop"],
+                player_id=_tracker_player_id(event, self._ability_game_version()),
+                value=_quest_counter_value(event, self._ability_game_version()),
+            )
+        )
 
     def get_lifespan_time_in_gameloops(self, unitTag):
         return (
@@ -1210,6 +1260,7 @@ class Replay:
 
     def NNet_Replay_Tracker_SStatGameEvent(self, event):
         eventName = event["m_eventName"]
+        self._record_skillshot_quest_event(event)
 
         if eventName == "RegenGlobePickedUp":
             self.process_regen_globes(event)

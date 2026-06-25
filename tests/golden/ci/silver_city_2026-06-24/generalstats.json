@@ -2621,12 +2621,21 @@
         "attemptAbilityLink": 1111,
         "confidence": "proxy",
         "detector": "same_user_followup",
-        "evidenceDescription": "Counts the initial Chains cast as landed when the same user produces a Chains Link or Chains Pull command before the next Chains attempt and within 48 gameloops.",
+        "evidenceDescription": "Counts the initial Chains cast as landed when the same user produces a Chains Link, Chains Pull, or Kel'Thuzad quest-progress event before the next Chains attempt and within the configured evidence window.",
         "followupWindowGameloops": 48,
         "gameVersion": 97039,
         "hitRate": 0.7069,
         "landed": 41,
+        "landedByEvidence": {
+          "followup_ability": 41
+        },
         "missed": 17,
+        "questCounterEventNames": [
+          "KelThuzadMasterOfTheColdDark",
+          "KelThuzadMasterOfTheColdDarkQuest",
+          "MasterOfTheColdDark"
+        ],
+        "questCounterWindowGameloops": 48,
         "ruleVersion": "97039.1",
         "sampleEvidence": [
           {
@@ -2635,7 +2644,10 @@
             "evidenceAbilityCmdIndex": 0,
             "evidenceAbilityLink": 1112,
             "evidenceAbilityName": "Chains of Kel'Thuzad",
-            "evidenceGameLoop": 1480
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1480,
+            "evidenceType": "followup_ability",
+            "evidenceValue": null
           },
           {
             "castGameLoop": 1638,
@@ -2643,7 +2655,10 @@
             "evidenceAbilityCmdIndex": 0,
             "evidenceAbilityLink": 1112,
             "evidenceAbilityName": "Chains of Kel'Thuzad",
-            "evidenceGameLoop": 1647
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1647,
+            "evidenceType": "followup_ability",
+            "evidenceValue": null
           },
           {
             "castGameLoop": 2340,
@@ -2651,7 +2666,10 @@
             "evidenceAbilityCmdIndex": 0,
             "evidenceAbilityLink": 1112,
             "evidenceAbilityName": "Chains of Kel'Thuzad",
-            "evidenceGameLoop": 2353
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2353,
+            "evidenceType": "followup_ability",
+            "evidenceValue": null
           },
           {
             "castGameLoop": 2874,
@@ -2659,7 +2677,10 @@
             "evidenceAbilityCmdIndex": 0,
             "evidenceAbilityLink": 1112,
             "evidenceAbilityName": "Chains of Kel'Thuzad",
-            "evidenceGameLoop": 2892
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2892,
+            "evidenceType": "followup_ability",
+            "evidenceValue": null
           },
           {
             "castGameLoop": 3328,
@@ -2667,7 +2688,10 @@
             "evidenceAbilityCmdIndex": 0,
             "evidenceAbilityLink": 1112,
             "evidenceAbilityName": "Chains of Kel'Thuzad",
-            "evidenceGameLoop": 3345
+            "evidenceEventName": null,
+            "evidenceGameLoop": 3345,
+            "evidenceType": "followup_ability",
+            "evidenceValue": null
           }
         ],
         "totalAttempts": 58,
