@@ -42,6 +42,7 @@ class QuestCounterRule:
     player_id_key: str = "PlayerID"
     value_keys: tuple[str, ...] = ()
     max_value: int | None = None
+    start_offset_gameloops: int = 0
 
 
 @dataclass(frozen=True)

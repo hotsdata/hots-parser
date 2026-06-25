@@ -2635,6 +2635,7 @@
           "KelThuzadMasterOfTheColdDarkQuest",
           "MasterOfTheColdDark"
         ],
+        "questCounterStartOffsetGameloops": 0,
         "questCounterWindowGameloops": 48,
         "ruleVersion": "97039.1",
         "sampleEvidence": [
@@ -2710,7 +2711,7 @@
         "averageTargetsHit": 1.1452,
         "confidence": "geometry_proxy_calibrated",
         "detector": "area_position_overlap",
-        "evidenceDescription": "Counts a Frost Nova cast as landed when one or more enemy Hero units overlap the calibrated replay-position radius at the configured impact delay. The mechanic center-root radius is recorded separately; the larger replay radius compensates for one-second unit-position samples. Repeated target-point updates inside the configured dedupe window are treated as one cast, using the first target point in that cast cluster.",
+        "evidenceDescription": "Counts a Frost Nova cast as landed when one or more enemy Hero units produce Kel'Thuzad quest progress after impact, or when they overlap the calibrated replay-position radius at the configured impact delay. The mechanic center-root radius is recorded separately; the larger replay radius compensates for one-second unit-position samples. Repeated target-point updates inside the configured dedupe window are treated as one cast, using the first target point in that cast cluster.",
         "followupWindowGameloops": 0,
         "gameVersion": 97039,
         "hitRate": 0.6935,
@@ -2719,8 +2720,13 @@
           "area_position_overlap": 43
         },
         "missed": 19,
-        "questCounterEventNames": [],
-        "questCounterWindowGameloops": null,
+        "questCounterEventNames": [
+          "KelThuzadMasterOfTheColdDark",
+          "KelThuzadMasterOfTheColdDarkQuest",
+          "MasterOfTheColdDark"
+        ],
+        "questCounterStartOffsetGameloops": 16,
+        "questCounterWindowGameloops": 48,
         "rootedHeroUnits": 71,
         "ruleVersion": "97039.1",
         "sampleEvidence": [

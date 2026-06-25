@@ -65,11 +65,29 @@ CURRENT_BUILD_RULE_SET = SkillshotLandingRuleSet(
                 mechanic_radius=1.5,
                 target_point_strategy="first",
             ),
+            quest_counter=QuestCounterRule(
+                event_names=(
+                    "KelThuzadMasterOfTheColdDark",
+                    "KelThuzadMasterOfTheColdDarkQuest",
+                    "MasterOfTheColdDark",
+                ),
+                window_gameloops=48,
+                value_keys=(
+                    "QuestProgress",
+                    "StackCount",
+                    "Stacks",
+                    "Value",
+                    "Count",
+                ),
+                max_value=30,
+                start_offset_gameloops=16,
+            ),
             evidence_description=(
                 "Counts a Frost Nova cast as landed when one or more enemy Hero units "
-                "overlap the calibrated replay-position radius at the configured impact "
-                "delay. The mechanic center-root radius is recorded separately; the "
-                "larger replay radius compensates for one-second unit-position samples. "
+                "produce Kel'Thuzad quest progress after impact, or when they overlap "
+                "the calibrated replay-position radius at the configured impact delay. "
+                "The mechanic center-root radius is recorded separately; the larger "
+                "replay radius compensates for one-second unit-position samples. "
                 "Repeated target-point updates inside the configured dedupe window are "
                 "treated as one cast, using the first target point in that cast cluster."
             ),

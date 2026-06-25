@@ -204,6 +204,49 @@ def test_kelthuzad_frost_nova_misses_when_no_enemy_hero_is_inside_effective_radi
     assert frost_nova["sampleEvidence"] == []
 
 
+def test_kelthuzad_frost_nova_uses_quest_counter_as_root_proxy():
+    hero = _hero([_target_point_ability(1105, 100, 10, 10)], player_id=6, team=0, unit_tag=1)
+    enemy = _hero([], name="Enemy", player_id=2, team=1, unit_tag=2)
+    quest_events = (
+        SkillshotQuestEvent(
+            event_name="KelThuzadMasterOfTheColdDark",
+            gameloop=118,
+            player_id=6,
+            value=12,
+        ),
+    )
+    units = {2: SimpleNamespace(positions={7: [17.0, 10.0]})}
+
+    apply_skillshot_landing_stats(
+        {6: hero, 2: enemy},
+        DEFAULT_ABILITY_BUILD,
+        quest_events,
+        units_in_game=units,
+    )
+
+    frost_nova = hero.generalStats["skillshotStats"]["KelThuzadFrostNova"]
+    assert frost_nova["landed"] == 1
+    assert frost_nova["landedByEvidence"] == {"quest_counter": 1}
+    assert frost_nova["rootedHeroUnits"] == 1
+    assert frost_nova["sampleEvidence"] == [
+        {
+            "castGameLoop": 100,
+            "evidenceType": "quest_counter",
+            "evidenceGameLoop": 118,
+            "deltaGameloops": 18,
+            "evidenceAbilityLink": None,
+            "evidenceAbilityCmdIndex": None,
+            "evidenceAbilityName": None,
+            "evidenceEventName": "KelThuzadMasterOfTheColdDark",
+            "evidenceValue": 12,
+            "targetCount": 1,
+            "targetHeroNames": [],
+            "targetPlayerIds": [],
+            "targetDistances": [],
+        }
+    ]
+
+
 def test_kelthuzad_frost_nova_deduplicates_target_point_updates():
     hero = _hero(
         [

@@ -61,7 +61,7 @@ def apply_skillshot_landing_stats(
             if rule.detector == "same_user_followup":
                 results = _process_same_user_followup(hero, rule, quest_events)
             elif rule.detector == "area_position_overlap":
-                results = _process_area_position_overlap(hero, hero_list, units_in_game or {}, rule)
+                results = _process_area_position_overlap(hero, hero_list, units_in_game or {}, rule, quest_events)
             else:
                 continue
             stats[rule.ability_catalog_name] = _aggregate_results(rule, game_version, results)
@@ -146,6 +146,7 @@ def _process_area_position_overlap(
     hero_list: dict[int, Any],
     units_in_game: dict[int | None, Any],
     rule: SkillshotLandingRule,
+    quest_events: tuple[SkillshotQuestEvent, ...],
 ) -> list[SkillshotLandingResult]:
     if rule.area_position is None:
         return []
@@ -160,10 +161,40 @@ def _process_area_position_overlap(
     )
     results = []
 
-    for attempt in attempts:
+    for index, attempt in enumerate(attempts):
+        next_attempt_loop = attempts[index + 1].castedAtGameLoops if index + 1 < len(attempts) else None
         target_x = getattr(attempt, "x", None)
         target_y = getattr(attempt, "y", None)
         impact_gameloop = attempt.castedAtGameLoops + rule.area_position.impact_delay_gameloops
+
+        quest_event = _first_quest_event_for_attempt(attempt, hero, quest_events, next_attempt_loop, rule)
+        if quest_event is not None:
+            hits = []
+            if target_x is not None and target_y is not None:
+                hits = _enemy_hero_area_hits(
+                    hero,
+                    hero_list,
+                    units_in_game,
+                    impact_gameloop,
+                    float(target_x),
+                    float(target_y),
+                    rule.area_position.radius,
+                )
+            results.append(
+                SkillshotLandingResult(
+                    status="landed",
+                    cast_gameloop=attempt.castedAtGameLoops,
+                    evidence_type="quest_counter",
+                    evidence_gameloop=quest_event.gameloop,
+                    evidence_event_name=quest_event.event_name,
+                    evidence_value=quest_event.value,
+                    target_count=max(1, len(hits)),
+                    target_hero_names=tuple(hit["hero_name"] for hit in hits),
+                    target_player_ids=tuple(hit["player_id"] for hit in hits if hit["player_id"] is not None),
+                    target_distances=tuple(hit["distance"] for hit in hits),
+                )
+            )
+            continue
 
         if target_x is None or target_y is None:
             results.append(
@@ -333,7 +364,8 @@ def _first_quest_event_for_attempt(
     if rule.quest_counter is None:
         return None
 
-    upper_bound = attempt.castedAtGameLoops + rule.quest_counter.window_gameloops
+    lower_bound = attempt.castedAtGameLoops + rule.quest_counter.start_offset_gameloops
+    upper_bound = lower_bound + rule.quest_counter.window_gameloops
     if next_attempt_loop is not None:
         upper_bound = min(upper_bound, next_attempt_loop)
     hero_player_id = getattr(hero, "playerId", None)
@@ -346,7 +378,7 @@ def _first_quest_event_for_attempt(
         if rule.quest_counter.max_value is not None and quest_event.value is not None:
             if quest_event.value > rule.quest_counter.max_value:
                 continue
-        if attempt.castedAtGameLoops < quest_event.gameloop < upper_bound:
+        if lower_bound <= quest_event.gameloop < upper_bound:
             return quest_event
     return None
 
@@ -398,6 +430,7 @@ def _aggregate_results(
         "landedByEvidence": landed_by_evidence,
         "missed": missed,
         "questCounterEventNames": list(rule.quest_counter.event_names) if rule.quest_counter else [],
+        "questCounterStartOffsetGameloops": rule.quest_counter.start_offset_gameloops if rule.quest_counter else None,
         "questCounterWindowGameloops": rule.quest_counter.window_gameloops if rule.quest_counter else None,
         "sampleEvidence": sample_evidence,
         "totalAttempts": attempts,
