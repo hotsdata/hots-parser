@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from tests.support.normalization import parse_replay_payloads, write_payloads
+from tests.support.normalization import parse_replay_payloads, redact_player_identities, write_payloads
 
 
 DEFAULT_REPLAY = Path("tests/fixtures/replays/local/2026-06-24_15-49-48_Silver_City.StormReplay")
@@ -18,6 +18,9 @@ def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--replay", type=Path, default=DEFAULT_REPLAY)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument(
+        "--redact-player-identities", action="store_true", help="replace player names, BattleTags, and toon handles"
+    )
     parser.add_argument("--update", action="store_true", help="overwrite an existing golden directory")
     args = parser.parse_args(argv)
 
@@ -27,6 +30,8 @@ def main(argv=None):
         raise SystemExit("Golden output exists; rerun with --update to overwrite: %s" % args.output_dir)
 
     payloads = parse_replay_payloads(args.replay)
+    if args.redact_player_identities:
+        payloads = redact_player_identities(payloads)
     write_payloads(payloads, args.output_dir)
 
     print("wrote %d golden payloads to %s" % (len(payloads), args.output_dir))

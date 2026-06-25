@@ -1,0 +1,52 @@
+[
+  {
+    "battleTag": "Player0#0000",
+    "region": "NA",
+    "toonHandle": "toon-handle-0"
+  },
+  {
+    "battleTag": "Player1#0000",
+    "region": "NA",
+    "toonHandle": "toon-handle-1"
+  },
+  {
+    "battleTag": "Player2#0000",
+    "region": "NA",
+    "toonHandle": "toon-handle-2"
+  },
+  {
+    "battleTag": "Player3#0000",
+    "region": "NA",
+    "toonHandle": "toon-handle-3"
+  },
+  {
+    "battleTag": "Player4#0000",
+    "region": "NA",
+    "toonHandle": "toon-handle-4"
+  },
+  {
+    "battleTag": "Player5#0000",
+    "region": "NA",
+    "toonHandle": "toon-handle-5"
+  },
+  {
+    "battleTag": "Player6#0000",
+    "region": "NA",
+    "toonHandle": "toon-handle-6"
+  },
+  {
+    "battleTag": "Player7#0000",
+    "region": "NA",
+    "toonHandle": "toon-handle-7"
+  },
+  {
+    "battleTag": "Player8#0000",
+    "region": "NA",
+    "toonHandle": "toon-handle-8"
+  },
+  {
+    "battleTag": "Player9#0000",
+    "region": "NA",
+    "toonHandle": "toon-handle-9"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "event": "Generic",
+  "gameLoops": 26175,
+  "gameType": "Unknown",
+  "gameVersion": 97039,
+  "id": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+  "mapName": "Silver City",
+  "mapSize": {
+    "x": 248.0,
+    "y": 216.0
+  },
+  "protocolBuild": 96477,
+  "protocolFallback": true,
+  "replayPath": null,
+  "speed": 4,
+  "stage": "None",
+  "startTime": "2026-06-24 15:49:48",
+  "team1": "Blue",
+  "team2": "Red"
+}
