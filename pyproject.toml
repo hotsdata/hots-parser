@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hots-parser"
+version = "0.1.0"
+description = "Heroes of the Storm replay parser for HotsData"
+requires-python = ">=3.10"
+dependencies = [
+    "jsonpickle",
+    "mpyq==0.2.5",
+    "psycopg[binary]>=3.1,<4",
+    "six>=1.16",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7",
+    "ruff>=0.4",
+]
+
+[project.scripts]
+hots-parser = "hots_parser.__main__:main"
+
+[tool.setuptools]
+packages = ["hots_parser"]
+py-modules = [
+    "hotsparser",
+    "protocol_loader",
+    "main",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["heroprotocol"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+ignore = [
+    "E402",
+    "E741",
+    "F403",
+    "F405",
+    "F841",
+]

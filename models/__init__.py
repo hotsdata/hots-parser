@@ -1,4 +1,4 @@
-__author__ = 'Rodrigo Duenas, Cristian Orellana'
+__author__ = "Rodrigo Duenas, Cristian Orellana"
 
 from collections import OrderedDict
 
@@ -6,13 +6,17 @@ from data import *
 from helpers import *
 
 
-class Team():
-    def __init__(self):
+def _to_text(value, encoding="utf-8"):
+    if isinstance(value, bytes):
+        return value.decode(encoding, errors="replace")
+    return value
 
+
+class Team:
+    def __init__(self):
 
         # General team attributes
         self.generalStats = {
-
             "teamId": None,
             "level": 0,
             "memberList": list(),
@@ -34,9 +38,8 @@ class Team():
             "siegeCampTaken": 0,
             "levelEvents": [],
             "totalEnemyHeroesTakenDown": 0,  # How many enemy heroes this team killed?
-            'totalHeroesKilledByEnemy': 0,  # how many times the heroes of this team were killed by the enemy?
-            'banned': [] # Banned heroes, if any
-
+            "totalHeroesKilledByEnemy": 0,  # how many times the heroes of this team were killed by the enemy?
+            "banned": [],  # Banned heroes, if any
         }
         self.mapStats = {}
 
@@ -57,13 +60,11 @@ class Team():
             "totalBuildingsKilledDuringCenterSpider": 0,
             "totalUnitsKilledDuringCenterSpider": 0,
             "totalBuildingsKilledDuringSouthSpider": 0,
-            "totalUnitsKilledDuringSouthSpider": 0
+            "totalUnitsKilledDuringSouthSpider": 0,
         }
 
         # Braxis Holdout Map specific stats
-        braxisHoldoutStats = {
-            "ZergWaveStrength": 0
-        }
+        braxisHoldoutStats = {"ZergWaveStrength": 0}
 
         # Sky Temple map
         skyTempleStats = {
@@ -105,14 +106,11 @@ class Team():
             "totalPlantPotsPlaced": 0,
             "plantEffectiveness": [],
             "totalPlantPotsKilled": 0,
-            "plantController": []
+            "plantController": [],
         }
 
         # Warhead Junction
-        warheadJunctionStats = {
-            "droppedNukes": 0,
-            "launchedNukes": 0
-        }
+        warheadJunctionStats = {"droppedNukes": 0, "launchedNukes": 0}
 
         # Dragon Shire
         dragonShireStats = {
@@ -143,7 +141,7 @@ class Team():
             "unitsKilledDuringGolem": [],
             "totalBuildingsKilledDuringGolem": 0,
             "buildingsKilledDuringGolem": [],
-            "totalGolemDuration": 0
+            "totalGolemDuration": 0,
         }
 
         # Blackheart's Bay Map
@@ -153,7 +151,7 @@ class Team():
             "shipDurations": [],
             "totalBuildingsDestroyedDuringShip": [],
             "ghostShipScore": [],
-            "shipEffectiveness": []
+            "shipEffectiveness": [],
         }
 
         # Infernal Shrine Map
@@ -167,7 +165,7 @@ class Team():
             "punisherHeroDmg": [],
             "punisherBuildingDmg": [],
             "punisherType": [],
-            "shrineScore": []
+            "shrineScore": [],
         }
 
         # Cursed Hollow Map
@@ -175,7 +173,7 @@ class Team():
             "tributesCapturedAt": [],  # When the tribute was captured
             "curseCaptures": [],  # How many tributes the team captured for each curse. 3": team won the curse
             "curseActivatedAt": [],
-            "totalCursesWon": 0
+            "totalCursesWon": 0,
         }
 
         # Towers of Doom Map
@@ -198,50 +196,52 @@ class Team():
             "unitsKilledDuringImmortal": [],
             "totalUnitsKilledDuringImmortal": 0,
             "buildingsDestroyedDuringImmortal": [],
-            "totalBuildingsDestroyedDuringImmortal": 0
+            "totalBuildingsDestroyedDuringImmortal": 0,
         }
 
-        if map == 'Cursed Hollow':
+        if map == "Cursed Hollow":
             self.mapStats = cursedHollowStats
-        elif map == 'Tomb of the Spider Queen':
+        elif map == "Tomb of the Spider Queen":
             self.mapStats = tombOfSpiderStats
-        elif map == 'Sky Temple':
+        elif map == "Sky Temple":
             self.mapStats = skyTempleStats
-        elif map == 'Battlefield of Eternity':
+        elif map == "Battlefield of Eternity":
             self.mapStats = battlefieldEternityStats
-        elif map == 'Garden of Terror':
+        elif map == "Garden of Terror":
             self.mapStats = gardenStats
-        elif map == 'Dragon Shire':
+        elif map == "Dragon Shire":
             self.mapStats = dragonShireStats
-        elif map == 'Blackheart\'s Bay':
+        elif map == "Blackheart's Bay":
             self.mapStats = blackheartsBayStats
-        elif map == 'Towers of Doom':
+        elif map == "Towers of Doom":
             self.mapStats = towersOfDoomStats
-        elif map == 'Infernal Shrines':
+        elif map == "Infernal Shrines":
             self.mapStats = infernalShrinesStats
-        elif map == 'Haunted Mines':
+        elif map == "Haunted Mines":
             self.mapStats = hauntedMinesStats
-        elif map == 'Warhead Junction':
+        elif map == "Warhead Junction":
             self.mapStats = warheadJunctionStats
-        elif map == 'Braxis Holdout':
+        elif map == "Braxis Holdout":
             self.mapStats = braxisHoldoutStats
 
     def add_member(self, hero, player):
         if hero.playerId is not None:
-            self.generalStats['memberList'].append(hero.playerId)
-            if self.generalStats['isWinner'] is None:
-                self.generalStats['teamId'] = "Blue" if player.team == 0 else "Red"
-                self.generalStats['isWinner'] = player.is_winner()
-                self.generalStats['isLoser'] = player.is_loser()
+            self.generalStats["memberList"].append(hero.playerId)
+            if self.generalStats["isWinner"] is None:
+                self.generalStats["teamId"] = "Blue" if player.team == 0 else "Red"
+                self.generalStats["isWinner"] = player.is_winner()
+                self.generalStats["isLoser"] = player.is_loser()
 
     def get_total_members(self):
-        return len(self.generalStats['memberList'])
+        return len(self.generalStats["memberList"])
 
     def __str__(self):
-        return "%15s\t%15s\t%15s\t%15s" % (self.generalStats['teamId'],
-                                           self.generalStats['level'],
-                                           self.generalStats['isWinner'],
-                                           self.generalStats['isLoser'])
+        return "%15s\t%15s\t%15s\t%15s" % (
+            self.generalStats["teamId"],
+            self.generalStats["level"],
+            self.generalStats["isWinner"],
+            self.generalStats["isLoser"],
+        )
 
 
 class Unit:
@@ -252,15 +252,16 @@ class Unit:
     def unit_tag(self):
         try:
             return (self.unitTagIndex << 18) + self.unitTagRecycle
-        except Exception, e:
-            print "Error: %s" % e.message
+        except Exception as e:
+            print("Error: %s" % e.message)
+
 
 def unit_tag_index(self):
-    return (self.unitTag >> 18) & 0x00003fff
+    return (self.unitTag >> 18) & 0x00003FFF
 
 
 def unit_tag_recycle(self):
-    return (self.unitTag) & 0x0003ffff
+    return (self.unitTag) & 0x0003FFFF
 
 
 def is_hero(self):
@@ -299,34 +300,29 @@ class HeroUnit(Unit):
             "levelEvents": [],
             "totalOutDmg": 0,
             "votesReceivedBy": [],
-            "castedAbilities": OrderedDict()  # key" : gameloops when the ability was casted, value" : ability instance
+            "castedAbilities": OrderedDict(),  # key" : gameloops when the ability was casted, value" : ability instance
         }
         self.set_hero_stats()
 
-    def set_total_out_damage(self):
-        self.generalStats['totalOutDmg'] = self.generalStats['totalStructureDmg'] + \
-                                           self.generalStats['totalMinionDmg'] + \
-                                           self.generalStats['totalHeroDmg'] + \
-                                           self.generalStats['totalCreepDmg'] + \
-                                           self.generalStats['totalSummonDmg']
-
     def set_hero_stats(self):
-        if self.name == 'Gazlowe':
-            self.generalStats['scrapTaken'] = 0
-            self.generalStats['scrapMissed'] = 0
-        elif self.name in ('Butcher', 'The Butcher'):
-            self.generalStats['freshMeatTaken'] = 0
-            self.generalStats['freshMeatMissed'] = 0
-        elif self.name == 'Lunara':
-            self.generalStats['wispsPlaced'] = 0
+        if self.name == "Gazlowe":
+            self.generalStats["scrapTaken"] = 0
+            self.generalStats["scrapMissed"] = 0
+        elif self.name in ("Butcher", "The Butcher"):
+            self.generalStats["freshMeatTaken"] = 0
+            self.generalStats["freshMeatMissed"] = 0
+        elif self.name == "Lunara":
+            self.generalStats["wispsPlaced"] = 0
 
     def set_total_out_damage(self):
-        self.generalStats['totalOutDmg'] = self.generalStats['SiegeDamage'] + \
-                                           self.generalStats['StructureDamage'] + \
-                                           self.generalStats['MinionDamage'] + \
-                                           self.generalStats['HeroDamage'] + \
-                                           self.generalStats['CreepDamage'] + \
-                                           self.generalStats['SummonDamage']
+        self.generalStats["totalOutDmg"] = (
+            self.generalStats["SiegeDamage"]
+            + self.generalStats["StructureDamage"]
+            + self.generalStats["MinionDamage"]
+            + self.generalStats["HeroDamage"]
+            + self.generalStats["CreepDamage"]
+            + self.generalStats["SummonDamage"]
+        )
 
     def set_map_stats(self, map):
         cursedHollowStats = {
@@ -334,9 +330,7 @@ class HeroUnit(Unit):
             "clickedTributes": 0,  # How many times the hero clicked a tribute in the Curse map
         }
 
-        mineStats = {
-            "skullsCollected": 0
-        }
+        mineStats = {"skullsCollected": 0}
 
         # Garden map
         gardenStats = {
@@ -351,19 +345,16 @@ class HeroUnit(Unit):
             "plantDuration": [],
             "totalPlantPotsPlaced": 0,
             "totalPlantPotsKilled": 0,
-            "plantEffectiveness": []
+            "plantEffectiveness": [],
         }
 
         # Warhead junction
-        warheadJunctionStats = {
-            "droppedNukes": 0,
-            "launchedNukes": 0
-        }
+        warheadJunctionStats = {"droppedNukes": 0, "launchedNukes": 0}
 
         # Punisher map
         infernalShrinesStats = {
             "totalShrineMinionDmg": 0,  # Damage inflicted to minions in punisher map
-            "totalMinionsKilled": 0
+            "totalMinionsKilled": 0,
         }
 
         # Spider map
@@ -398,44 +389,52 @@ class HeroUnit(Unit):
             "totalImmortalDmg": 0,  # Total damage done to the immortals
         }
 
-        if map == 'Cursed Hollow':
+        if map == "Cursed Hollow":
             self.mapStats = cursedHollowStats
-        elif map == 'Tomb of the Spider Queen':
+        elif map == "Tomb of the Spider Queen":
             self.mapStats = tombOfSpiderStats
-        elif map == 'Sky Temple':
+        elif map == "Sky Temple":
             self.mapStats = skyTempleStats
-        elif map == 'Battlefield of Eternity':
+        elif map == "Battlefield of Eternity":
             self.mapStats = battlefieldEternityStats
-        elif map == 'Garden of Terror':
+        elif map == "Garden of Terror":
             self.mapStats = gardenStats
-        elif map == 'Dragon Shire':
+        elif map == "Dragon Shire":
             self.mapStats = dragonShireStats
-        elif map == 'Blackheart\'s Bay':
+        elif map == "Blackheart's Bay":
             self.mapStats = blackheartsBayStats
         # elif map == 'Towers of Doom':
         #      self.mapStats = towersOfDoomStats
-        elif map == 'Infernal Shrines':
+        elif map == "Infernal Shrines":
             self.mapStats = infernalShrinesStats
-        elif map == 'Haunted Mines':
+        elif map == "Haunted Mines":
             self.mapStats = mineStats
-        elif map == 'Warhead Junction':
+        elif map == "Warhead Junction":
             self.mapStats = warheadJunctionStats
 
     def get_total_damage(self):
-        return self.generalStats['totalSiegeDmg'] + \
-               self.generalStats['totalStructureDmg'] + \
-               self.generalStats['totalMinionDmg'] + \
-               self.generalStats['totalHeroDmg'] + \
-               self.generalStats['totalCreepDmg']
+        return (
+            self.generalStats["totalSiegeDmg"]
+            + self.generalStats["totalStructureDmg"]
+            + self.generalStats["totalMinionDmg"]
+            + self.generalStats["totalHeroDmg"]
+            + self.generalStats["totalCreepDmg"]
+        )
 
     def __str__(self):
-        return "%15s\t%15s\t%15s\t%15s\t%15s\t%15s\t%15s\t%15s" % (self.name, self.internalName, self.isHuman,
-                                                                         self.playerId, self.id, self.team,
-                                                                         self.generalStats['deathCount'],
-                                                                         self.get_total_casted_abilities())
+        return "%15s\t%15s\t%15s\t%15s\t%15s\t%15s\t%15s\t%15s" % (
+            self.name,
+            self.internalName,
+            self.isHuman,
+            self.playerId,
+            self.id,
+            self.team,
+            self.generalStats["deathCount"],
+            self.get_total_casted_abilities(),
+        )
 
     def get_total_casted_abilities(self):
-        return len(self.generalStats['castedAbilities'])
+        return len(self.generalStats["castedAbilities"])
 
     def get_total_picked_talents(self):
         return len(self.pickedTalents)
@@ -453,14 +452,14 @@ class HeroReplay:
         self.gameType = None
         self.gameVersion = None
         self.randomVal = None
-        self.mapName = MapTranslator().get_base_map_name(details['m_title'])
+        self.mapName = MapTranslator().get_base_map_name(details["m_title"])
         self.mapSize = {}
-        self.startTime = win_timestamp_to_date(details['m_timeUTC'])
+        self.startTime = win_timestamp_to_date(details["m_timeUTC"])
         self.gatesOpenedAt = None  # seconds into the game when the gates open
 
     def duration_in_secs(self):
         if self.gameLoops:
-            return self.gameLoops / 16
+            return self.gameLoops // 16
         else:
             return 0
 
@@ -468,46 +467,53 @@ class HeroReplay:
         return self.gameType not in BANNED_GAME_TYPES
 
     def __str__(self):
-        return "Title: %s\nStarted at: %s\nDuration (min/gl): %d/%d\nSpeed: %s\nGame Type: %s" % (self.mapName,
-                                                                                                  self.startTime,
-                                                                                                  self.duration_in_secs() / 60,
-                                                                                                  self.gameLoops,
-                                                                                                  self.speed,
-                                                                                                  self.gameType
-                                                                                                  )
+        return "Title: %s\nStarted at: %s\nDuration (min/gl): %d/%d\nSpeed: %s\nGame Type: %s" % (
+            self.mapName,
+            self.startTime,
+            self.duration_in_secs() // 60,
+            self.gameLoops,
+            self.speed,
+            self.gameType,
+        )
 
 
-class Player():
+class Player:
     def __init__(self, player):
         self.playerId = None  # Set at process_player_init
         self.heroLevel = 1
-        self.id = player['m_workingSetSlotId']
-        self.team = player['m_teamId']
-        self.hero = HeroTranslator.get_base_hero_name(player['m_hero']) or player['m_hero']
-        self.name = player['m_name']
-        self.isHuman = (player['m_toon']['m_region'] != 0)
-        self.gameResult = int(player['m_result'])
+        self.id = player["m_workingSetSlotId"]
+        self.team = player["m_teamId"]
+        self.hero = HeroTranslator.get_base_hero_name(player["m_hero"]) or _to_text(player["m_hero"])
+        self.name = _to_text(player["m_name"])
+        self.isHuman = player["m_toon"]["m_region"] != 0
+        self.gameResult = int(player["m_result"])
         self.toonHandle = self.get_toon_handle(player)
         self.battleTag = None
-        self.realm = player['m_toon']['m_realm']
-        self.region = player['m_toon']['m_region']
+        self.realm = player["m_toon"]["m_realm"]
+        self.region = player["m_toon"]["m_region"]
         self.rank = None
 
     def get_toon_handle(self, player):
-        return '-'.join(
-            [str(player['m_toon']['m_region']), player['m_toon']['m_programId'], str(player['m_toon']['m_realm']),
-             str(player['m_toon']['m_id'])])
+        return "-".join(
+            [
+                str(player["m_toon"]["m_region"]),
+                _to_text(player["m_toon"]["m_programId"]),
+                str(player["m_toon"]["m_realm"]),
+                str(player["m_toon"]["m_id"]),
+            ]
+        )
 
     def __str__(self):
-        return "%10s\t%10s\t%10s\t%12s\t%10s\t%15s\t%15s\t%15s" % (self.id,
-                                                             self.team,
-                                                             self.hero,
-                                                             self.name,
-                                                             self.heroLevel,
-                                                             self.is_winner(),
-                                                             self.toonHandle,
-                                                             self.battleTag
-                                                             )
+        return "%10s\t%10s\t%10s\t%12s\t%10s\t%15s\t%15s\t%15s" % (
+            self.id,
+            self.team,
+            self.hero,
+            self.name,
+            self.heroLevel,
+            self.is_winner(),
+            self.toonHandle,
+            self.battleTag,
+        )
 
     def is_winner(self):
         return self.gameResult == 1
@@ -526,7 +532,7 @@ class GameUnit(Unit):
         self.diedAtY = None
         self.diedAtGameLoops = None
         self.gameLoopsAlive = -1  # -1 means never died.
-        self.controlPlayerId = e['m_controlPlayerId']
+        self.controlPlayerId = e["m_controlPlayerId"]
         self.killerTeam = None
         self.killerTag = None
         self.killerTagIndex = None
@@ -537,18 +543,19 @@ class GameUnit(Unit):
         self.isHero = False
         self.unitsKilled = 0
         self.buildingsKilled = 0
-        self.unitTagIndex = e['m_unitTagIndex']
-        self.unitTagRecycle = e['m_unitTagRecycle']
+        self.unitTagIndex = e["m_unitTagIndex"]
+        self.unitTagRecycle = e["m_unitTagRecycle"]
         self.unitTag = self.unit_tag()
         self.bornAt = get_seconds_from_event_gameloop(e)  # Seconds into the game when it was created
         self.bornAtGameLoops = get_gameloops(e)
-        self.internalName = e['m_unitTypeName']  # Internal unit name
-        self.team = e['m_upkeepPlayerId'] - 11 if e['m_upkeepPlayerId'] > 10 else e[
-                                                                                      'm_upkeepPlayerId'] - 1  # Team this unit belongs to, or Hero controlling it at born time (if it's <= 10)
-        self.bornAtX = e['m_x']
-        self.bornAtY = e['m_y']
+        self.internalName = _to_text(e["m_unitTypeName"])  # Internal unit name
+        self.team = (
+            e["m_upkeepPlayerId"] - 11 if e["m_upkeepPlayerId"] > 10 else e["m_upkeepPlayerId"] - 1
+        )  # Team this unit belongs to, or Hero controlling it at born time (if it's <= 10)
+        self.bornAtX = e["m_x"]
+        self.bornAtY = e["m_y"]
         self.positions = {self.bornAt: [self.bornAtX, self.bornAtY]}  # key seconds, val = dict {'x','y'}
-        self.distanceFromKiller = -1;
+        self.distanceFromKiller = -1
         if not self.is_plant_vehicle():
             self.positions[get_seconds_from_int_gameloop(self.bornAtGameLoops)] = [self.bornAtX, self.bornAtY]
 
@@ -580,13 +587,13 @@ class GameUnit(Unit):
         return self.internalName in REGEN_GLOBES_PICKABLE
 
     def is_regen_globe_neutral(self):
-        return self.internalName == 'RegenGlobeNeutral'
+        return self.internalName == "RegenGlobeNeutral"
 
     def is_spider_summon(self):
-        return self.internalName == 'SoulEater'
+        return self.internalName == "SoulEater"
 
     def is_plant_pot(self):
-        return self.internalName == 'PlantHorrorOvergrowthPlant'
+        return self.internalName == "PlantHorrorOvergrowthPlant"
 
     def is_mercenary(self):
         return self.internalName in MERCUNITSNPC or self.internalName in MERCUNITSTEAM
@@ -604,7 +611,7 @@ class GameUnit(Unit):
         return self.internalName in TOMB_OF_THE_SPIDER_PICKABLE
 
     def is_seed_pickable(self):
-        return self.internalName == 'ItemSeedPickup'
+        return self.internalName == "ItemSeedPickup"
 
     def is_sky_temple_tower(self):
         return self.internalName in SKY_TEMPLE_TOWER
@@ -658,9 +665,18 @@ class GameUnit(Unit):
             return 0
 
     def __str__(self):
-        val = "%s\t%s\t(%s)\tcreated: %d s (%d,%d) \tdied: %s s\tlifespan: %s gls\tpicked? (%s)\tkilledby: %s" \
-              % (self.unitTag, self.internalName, self.team, self.bornAt, self.bornAtX, self.bornAtY, self.diedAt,
-                 self.gameLoopsAlive, self.was_picked(), self.killerPlayerId)
+        val = "%s\t%s\t(%s)\tcreated: %d s (%d,%d) \tdied: %s s\tlifespan: %s gls\tpicked? (%s)\tkilledby: %s" % (
+            self.unitTag,
+            self.internalName,
+            self.team,
+            self.bornAt,
+            self.bornAtX,
+            self.bornAtY,
+            self.diedAt,
+            self.gameLoopsAlive,
+            self.was_picked(),
+            self.killerPlayerId,
+        )
         if len(self.ownerList) > 0:
             val += "\tOwners: %s" % self.ownerList
         if len(self.clickerList) > 0:
@@ -668,7 +684,7 @@ class GameUnit(Unit):
         return val
 
 
-class BaseAbility():
+class BaseAbility:
     """
     Base class for all abilities, has all the common attributes
     """
@@ -676,9 +692,9 @@ class BaseAbility():
     def __init__(self, event):
         self.abilityName = None
         self.abilityTag = get_ability_tag(event)
-        self.castedAtGameLoops = event['_gameloop']
+        self.castedAtGameLoops = event["_gameloop"]
         self.castedAt = get_seconds_from_event_gameloop(event)
-        self.userId = event['_userid']['m_userId']
+        self.userId = event["_userid"]["m_userId"]
 
     def __str__(self):
         return "%s" % self.abilityTag
@@ -692,16 +708,16 @@ class TargetPointAbility(BaseAbility):
 
         self.abilityTag = get_ability_tag(event)
         self.castedAt = get_seconds_from_event_gameloop(event)
-        self.userId = event['_userid']['m_userId']
-        self.castedAtGameLoops = event['_gameloop']
-        if event.get('m_data'):
-            self.x = event['m_data']['TargetPoint']['x'] / 4096.0
-            self.y = event['m_data']['TargetPoint']['y'] / 4096.0
-            self.z = event['m_data']['TargetPoint']['z'] / 4096.0
-        elif event.get('m_target'):
-            self.x = event['m_target']['x'] / 4096.0
-            self.y = event['m_target']['y'] / 4096.0
-            self.z = event['m_target']['z'] / 4096.0
+        self.userId = event["_userid"]["m_userId"]
+        self.castedAtGameLoops = event["_gameloop"]
+        if event.get("m_data"):
+            self.x = event["m_data"]["TargetPoint"]["x"] / 4096.0
+            self.y = event["m_data"]["TargetPoint"]["y"] / 4096.0
+            self.z = event["m_data"]["TargetPoint"]["z"] / 4096.0
+        elif event.get("m_target"):
+            self.x = event["m_target"]["x"] / 4096.0
+            self.y = event["m_target"]["y"] / 4096.0
+            self.z = event["m_target"]["z"] / 4096.0
 
     def __repr__(self):
         return "TargetPointAbility(%r, (%r, %r, %r))" % (self.abilityTag, self.x, self.y, self.z)
@@ -710,11 +726,11 @@ class TargetPointAbility(BaseAbility):
         return "Skill: %s\tCoords: (%s,%s,%s)" % (self.abilityTag, self.x, self.y, self.z)
 
 
-class UnitUpgrade():
+class UnitUpgrade:
     def __init__(self, event):
-        self.gameloops = event['_gameloop']
-        self.upgradedPlayerId = event['m_playerId'] - 1
-        self.internalName = event['m_upgradeTypeName']
+        self.gameloops = event["_gameloop"]
+        self.upgradedPlayerId = event["m_playerId"] - 1
+        self.internalName = _to_text(event["m_upgradeTypeName"])
 
     def is_dragon_upgrade(self):
         return self.internalName in DRAGON_CONTROLLABLE
@@ -724,27 +740,37 @@ class TargetUnitAbility(BaseAbility):
     def __init__(self, event):
         self.abilityTag = get_ability_tag(event)
         self.castedAt = get_seconds_from_event_gameloop(event)
-        self.userId = event['_userid']['m_userId']
-        self.castedAtGameLoops = event['_gameloop']
-        if event.get('m_data'):
-            self.x = event['m_data']['TargetUnit']['m_snapshotPoint']['x'] / 4096.0
-            self.y = event['m_data']['TargetUnit']['m_snapshotPoint']['y'] / 4096.0
-            self.z = event['m_data']['TargetUnit']['m_snapshotPoint']['z'] / 4096.0
-            self.targetPlayerId = event['m_data']['TargetUnit']['m_snapshotControlPlayerId']
-            self.targetTeamId = event['m_data']['TargetUnit']['m_snapshotUpkeepPlayerId']
-            self.targetUnitTag = event['m_data']['TargetUnit']['m_tag']
-        elif event.get('m_target'):
-            self.x = event['m_target']['m_snapshotPoint']['x'] / 4096.0
-            self.y = event['m_target']['m_snapshotPoint']['y'] / 4096.0
-            self.z = event['m_target']['m_snapshotPoint']['z'] / 4096.0
-            self.targetPlayerId = event['m_target']['m_snapshotControlPlayerId']
-            self.targetTeamId = event['m_target']['m_snapshotUpkeepPlayerId']
-            self.targetUnitTag = event['m_target']['m_tag']
+        self.userId = event["_userid"]["m_userId"]
+        self.castedAtGameLoops = event["_gameloop"]
+        if event.get("m_data"):
+            self.x = event["m_data"]["TargetUnit"]["m_snapshotPoint"]["x"] / 4096.0
+            self.y = event["m_data"]["TargetUnit"]["m_snapshotPoint"]["y"] / 4096.0
+            self.z = event["m_data"]["TargetUnit"]["m_snapshotPoint"]["z"] / 4096.0
+            self.targetPlayerId = event["m_data"]["TargetUnit"]["m_snapshotControlPlayerId"]
+            self.targetTeamId = event["m_data"]["TargetUnit"]["m_snapshotUpkeepPlayerId"]
+            self.targetUnitTag = event["m_data"]["TargetUnit"]["m_tag"]
+        elif event.get("m_target"):
+            self.x = event["m_target"]["m_snapshotPoint"]["x"] / 4096.0
+            self.y = event["m_target"]["m_snapshotPoint"]["y"] / 4096.0
+            self.z = event["m_target"]["m_snapshotPoint"]["z"] / 4096.0
+            self.targetPlayerId = event["m_target"]["m_snapshotControlPlayerId"]
+            self.targetTeamId = event["m_target"]["m_snapshotUpkeepPlayerId"]
+            self.targetUnitTag = event["m_target"]["m_tag"]
 
     def __repr__(self):
         return "TargetUnitAbility(%r, %r, (%r, %r, %r))" % (
-            self.abilityTag, self.targetPlayerId, self.x, self.y, self.z)
+            self.abilityTag,
+            self.targetPlayerId,
+            self.x,
+            self.y,
+            self.z,
+        )
 
     def __str__(self):
         return "Skill: %s\tCoords: (%s,%s,%s)\tTarget: %s" % (
-            self.abilityTag, self.x, self.y, self.z, self.targetUnitTag)
+            self.abilityTag,
+            self.x,
+            self.y,
+            self.z,
+            self.targetUnitTag,
+        )
