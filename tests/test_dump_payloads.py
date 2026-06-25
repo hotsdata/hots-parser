@@ -14,3 +14,11 @@ def test_dump_payloads_writes_standard_json_files(tmp_path, monkeypatch):
 
     assert json.loads((tmp_path / "teamgeneralstats.json").read_text()) == payloads["teamgeneralstats"]
     assert json.loads((tmp_path / "teammapstats.json").read_text()) == payloads["teammapstats"]
+
+
+def test_legacy_dump_warning_is_written_to_stderr(capsys):
+    main.warn_legacy_dump_flags()
+
+    captured = capsys.readouterr()
+    assert "legacy dump flags write jsonpickle object dumps" in captured.err
+    assert "--dump-payloads" in captured.err
