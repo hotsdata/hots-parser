@@ -18,6 +18,14 @@ Parse a replay and dump JSON files:
 .venv/bin/python main.py --dump-all --output-dir /tmp/hots-parser-output path/to/replay.StormReplay
 ```
 
+Dump the cleaner standard JSON payload files used by persistence and golden tests:
+
+```bash
+.venv/bin/python main.py --dump-payloads --output-dir /tmp/hots-parser-payloads path/to/replay.StormReplay
+```
+
+Useful payload files include `teamgeneralstats.json`, `teammapstats.json`, `generalstats.json`, `mapstats.json`, `players.json`, and `timeline.json`.
+
 The package entry point is also available:
 
 ```bash
@@ -49,6 +57,12 @@ The golden test skips on machines without the local replay or generated local go
 ## Database configuration
 
 Parser-only usage and JSON dumping do not require database credentials. Database writes use `HOTSDATA_DATABASE_URL` or `DATABASE_URL` when set, with `credentials.json` retained as a legacy fallback.
+
+Optional PostgreSQL integration tests use the same database URL and require the schema in `database/database_schema.sql` to already be loaded:
+
+```bash
+HOTSDATA_DATABASE_URL=postgresql://user:password@localhost:5432/hotsdata .venv/bin/python -m pytest tests/test_postgres_persistence.py -q
+```
 
 
 ## How to run it:

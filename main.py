@@ -1,11 +1,15 @@
 __author__ = "Rodrigo Duenas, Cristian Orellana"
 
 import argparse
-from os import path
-from hotsparser import processEvents
 import datetime
+import json
+from os import path
+from pathlib import Path
+
+from hotsparser import processEvents
 import jsonpickle
 from protocol_loader import get_header_protocol, get_mpyq_archive_class
+from utils.payloads import build_payloads
 
 
 def save_to_db(replayData, path):
@@ -101,6 +105,22 @@ def dump_timeline(data=None, output_path=None):
         f.write(dump)
 
 
+def dump_payloads(data=None, output_path=None, replay_path=None):
+    if not data or not output_path:
+        return None
+
+    output_dir = Path(output_path)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    payloads = build_payloads(data, replay_path=replay_path)
+    for name, payload in sorted(payloads.items()):
+        file_path = output_dir / ("%s.json" % name)
+        print("dumping payload %s into %s" % (name, file_path))
+        with file_path.open("w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2, sort_keys=True)
+            f.write("\n")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("-o", "--output-dir", help="Path to the output directory")
@@ -126,6 +146,12 @@ def main(argv=None):
         default=False,
         help="Shortcut for --dump-heroes --dump-teams --dump-units --dump-players --dump-timeline",
     )
+    parser.add_argument(
+        "--dump-payloads",
+        action="store_true",
+        default=False,
+        help="Dump standard JSON payload files used by persistence and golden tests",
+    )
     parser.add_argument("replay_path", help="Path to the .StormReplay file to process")
     parser.add_argument("-t1", "--team1", help="Name of the Team 1", default=None)
     parser.add_argument("-t2", "--team2", help="Name of the Team 2", default=None)
@@ -150,7 +176,9 @@ def main(argv=None):
         # If the parameter is not provided then assume the output is the same folder this script resides
         output_path = path.dirname(path.abspath(__file__))
 
-    if args.dump_all:
+    if args.dump_payloads:
+        dump_payloads(data=replayData, output_path=output_path, replay_path=args.replay_path)
+    elif args.dump_all:
         dump_data(entities="all", file_path=output_path, replay_data=replayData)
     elif args.dump_heroes or args.dump_teams or args.dump_units or args.dump_players or args.dump_timeline:
         if args.dump_heroes:
