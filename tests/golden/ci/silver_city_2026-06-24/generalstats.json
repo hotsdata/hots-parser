@@ -268,6 +268,7 @@
     "playerId": 0,
     "regenGlobesTaken": 35,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+    "skillshotStats": {},
     "soloDeathsCount": 0,
     "team": 0,
     "totalOutDmg": 648373,
@@ -599,6 +600,7 @@
     "playerId": 1,
     "regenGlobesTaken": 38,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+    "skillshotStats": {},
     "soloDeathsCount": 0,
     "team": 0,
     "totalOutDmg": 183723,
@@ -917,6 +919,7 @@
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
     "scrapMissed": 0,
     "scrapTaken": 96,
+    "skillshotStats": {},
     "soloDeathsCount": 2,
     "team": 0,
     "totalOutDmg": 419193,
@@ -1320,6 +1323,7 @@
     "playerId": 3,
     "regenGlobesTaken": 29,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+    "skillshotStats": {},
     "soloDeathsCount": 0,
     "team": 0,
     "totalOutDmg": 138573,
@@ -1568,6 +1572,7 @@
     "playerId": 4,
     "regenGlobesTaken": 56,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+    "skillshotStats": {},
     "soloDeathsCount": 0,
     "team": 0,
     "totalOutDmg": 337311,
@@ -1928,6 +1933,7 @@
     "playerId": 5,
     "regenGlobesTaken": 39,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+    "skillshotStats": {},
     "soloDeathsCount": 0,
     "team": 1,
     "totalOutDmg": 331725,
@@ -2274,6 +2280,7 @@
     "playerId": 6,
     "regenGlobesTaken": 38,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+    "skillshotStats": {},
     "soloDeathsCount": 0,
     "team": 1,
     "totalOutDmg": 232201,
@@ -2606,6 +2613,247 @@
     "playerId": 7,
     "regenGlobesTaken": 46,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+    "skillshotStats": {
+      "KelThuzadChains": {
+        "abilityCatalogName": "KelThuzadChains",
+        "abilityName": "Chains of Kel'Thuzad",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 1111,
+        "confidence": "proxy",
+        "detector": "same_user_followup",
+        "evidenceDescription": "Counts the initial Chains cast as landed when the same user produces a Chains Link, Chains Pull, or Kel'Thuzad quest-progress event before the next Chains attempt and within the configured evidence window.",
+        "followupWindowGameloops": 48,
+        "gameVersion": 97039,
+        "hitRate": 0.7069,
+        "landed": 41,
+        "landedByEvidence": {
+          "followup_ability": 41
+        },
+        "missed": 17,
+        "questCounterEventNames": [
+          "KelThuzadMasterOfTheColdDark",
+          "KelThuzadMasterOfTheColdDarkQuest",
+          "MasterOfTheColdDark"
+        ],
+        "questCounterStartOffsetGameloops": 0,
+        "questCounterWindowGameloops": 48,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 1466,
+            "deltaGameloops": 14,
+            "evidenceAbilityCmdIndex": 0,
+            "evidenceAbilityLink": 1112,
+            "evidenceAbilityName": "Chains of Kel'Thuzad",
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1480,
+            "evidenceType": "followup_ability",
+            "evidenceValue": null
+          },
+          {
+            "castGameLoop": 1638,
+            "deltaGameloops": 9,
+            "evidenceAbilityCmdIndex": 0,
+            "evidenceAbilityLink": 1112,
+            "evidenceAbilityName": "Chains of Kel'Thuzad",
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1647,
+            "evidenceType": "followup_ability",
+            "evidenceValue": null
+          },
+          {
+            "castGameLoop": 2340,
+            "deltaGameloops": 13,
+            "evidenceAbilityCmdIndex": 0,
+            "evidenceAbilityLink": 1112,
+            "evidenceAbilityName": "Chains of Kel'Thuzad",
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2353,
+            "evidenceType": "followup_ability",
+            "evidenceValue": null
+          },
+          {
+            "castGameLoop": 2874,
+            "deltaGameloops": 18,
+            "evidenceAbilityCmdIndex": 0,
+            "evidenceAbilityLink": 1112,
+            "evidenceAbilityName": "Chains of Kel'Thuzad",
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2892,
+            "evidenceType": "followup_ability",
+            "evidenceValue": null
+          },
+          {
+            "castGameLoop": 3328,
+            "deltaGameloops": 17,
+            "evidenceAbilityCmdIndex": 0,
+            "evidenceAbilityLink": 1112,
+            "evidenceAbilityName": "Chains of Kel'Thuzad",
+            "evidenceEventName": null,
+            "evidenceGameLoop": 3345,
+            "evidenceType": "followup_ability",
+            "evidenceValue": null
+          }
+        ],
+        "totalAttempts": 58,
+        "unknown": 0
+      },
+      "KelThuzadFrostNova": {
+        "abilityCatalogName": "KelThuzadFrostNova",
+        "abilityName": "Frost Nova",
+        "areaImpactDelayGameloops": 16,
+        "areaMechanicRadius": 1.5,
+        "areaRadius": 6.0,
+        "areaTarget": "enemy_heroes",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 1105,
+        "attemptDedupeWindowGameloops": 48,
+        "averageTargetsHit": 1.1452,
+        "confidence": "geometry_proxy_calibrated",
+        "detector": "area_position_overlap",
+        "evidenceDescription": "Counts a Frost Nova cast as landed when one or more enemy Hero units produce Kel'Thuzad quest progress after impact, or when they overlap the calibrated replay-position radius at the configured impact delay. The mechanic center-root radius is recorded separately; the larger replay radius compensates for one-second unit-position samples. Repeated target-point updates inside the configured dedupe window are treated as one cast, using the first target point in that cast cluster.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.6935,
+        "landed": 43,
+        "landedByEvidence": {
+          "area_position_overlap": 43
+        },
+        "missed": 19,
+        "questCounterEventNames": [
+          "KelThuzadMasterOfTheColdDark",
+          "KelThuzadMasterOfTheColdDarkQuest",
+          "MasterOfTheColdDark"
+        ],
+        "questCounterStartOffsetGameloops": 16,
+        "questCounterWindowGameloops": 48,
+        "rootedHeroUnits": 71,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 1486,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1502,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              4.22
+            ],
+            "targetHeroNames": [
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              2
+            ]
+          },
+          {
+            "castGameLoop": 1648,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1664,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              2.8215
+            ],
+            "targetHeroNames": [
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              2
+            ]
+          },
+          {
+            "castGameLoop": 1916,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1932,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              2.1532
+            ],
+            "targetHeroNames": [
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              2
+            ]
+          },
+          {
+            "castGameLoop": 2350,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2366,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 3,
+            "targetDistances": [
+              2.5074,
+              3.6941,
+              3.8257
+            ],
+            "targetHeroNames": [
+              "Maiev",
+              "Azmodan",
+              "Diablo"
+            ],
+            "targetPlayerIds": [
+              3,
+              0,
+              1
+            ]
+          },
+          {
+            "castGameLoop": 2890,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2906,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 3,
+            "targetDistances": [
+              3.9007,
+              4.6714,
+              4.7904
+            ],
+            "targetHeroNames": [
+              "Maiev",
+              "Gazlowe",
+              "Diablo"
+            ],
+            "targetPlayerIds": [
+              3,
+              2,
+              1
+            ]
+          }
+        ],
+        "targetPointStrategy": "first",
+        "totalAttempts": 62,
+        "totalTargetsHit": 71,
+        "unknown": 0
+      }
+    },
     "soloDeathsCount": 0,
     "team": 1,
     "totalOutDmg": 285043,
@@ -2839,6 +3087,7 @@
     "playerId": 8,
     "regenGlobesTaken": 35,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+    "skillshotStats": {},
     "soloDeathsCount": 0,
     "team": 1,
     "totalOutDmg": 408960,
@@ -3099,6 +3348,7 @@
     "playerId": 9,
     "regenGlobesTaken": 56,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
+    "skillshotStats": {},
     "soloDeathsCount": 0,
     "team": 1,
     "totalOutDmg": 342796,
