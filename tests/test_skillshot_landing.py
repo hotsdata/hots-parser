@@ -267,3 +267,87 @@ def test_kelthuzad_frost_nova_deduplicates_target_point_updates():
     assert frost_nova["landed"] == 1
     assert frost_nova["rootedHeroUnits"] == 1
     assert frost_nova["sampleEvidence"][0]["castGameLoop"] == 100
+
+
+def test_alarak_discord_strike_counts_enemy_heroes_inside_triangle():
+    hero = _hero([_target_point_ability(926, 100, 20, 10)], name="Alarak", player_id=6, team=0, unit_tag=1)
+    enemy_hit = _hero([], name="Enemy Hit", player_id=2, team=1, unit_tag=2)
+    enemy_miss = _hero([], name="Enemy Miss", player_id=3, team=1, unit_tag=3)
+    units = {
+        1: SimpleNamespace(positions={6: [10.0, 10.0]}),
+        2: SimpleNamespace(positions={6: [13.0, 10.0]}),
+        3: SimpleNamespace(positions={6: [13.0, 15.0]}),
+    }
+
+    apply_skillshot_landing_stats({6: hero, 2: enemy_hit, 3: enemy_miss}, DEFAULT_ABILITY_BUILD, units_in_game=units)
+
+    discord_strike = hero.generalStats["skillshotStats"]["AlarakDiscordStrike"]
+    assert discord_strike["totalAttempts"] == 1
+    assert discord_strike["landed"] == 1
+    assert discord_strike["hitRate"] == 1.0
+    assert discord_strike["totalTargetsHit"] == 1
+    assert discord_strike["silencedHeroUnits"] == 1
+    assert discord_strike["sampleEvidence"][0]["targetHeroNames"] == ["Enemy Hit"]
+
+
+def test_alarak_deadly_charge_counts_enemy_heroes_along_charge_line():
+    hero = _hero([_target_point_ability(927, 100, 28, 10)], name="Alarak", player_id=6, team=0, unit_tag=1)
+    enemy_hit = _hero([], name="Enemy Hit", player_id=2, team=1, unit_tag=2)
+    enemy_miss = _hero([], name="Enemy Miss", player_id=3, team=1, unit_tag=3)
+    units = {
+        1: SimpleNamespace(positions={6: [10.0, 10.0]}),
+        2: SimpleNamespace(positions={6: [15.0, 11.0]}),
+        3: SimpleNamespace(positions={6: [15.0, 13.0]}),
+    }
+
+    apply_skillshot_landing_stats({6: hero, 2: enemy_hit, 3: enemy_miss}, DEFAULT_ABILITY_BUILD, units_in_game=units)
+
+    deadly_charge = hero.generalStats["skillshotStats"]["AlarakDeadlyChargeExecute"]
+    assert deadly_charge["totalAttempts"] == 1
+    assert deadly_charge["landed"] == 1
+    assert deadly_charge["totalTargetsHit"] == 1
+    assert deadly_charge["deadlyChargeHeroUnits"] == 1
+    assert deadly_charge["sampleEvidence"][0]["targetHeroNames"] == ["Enemy Hit"]
+
+
+def test_tyrande_sentinel_counts_first_enemy_hero_on_projectile_line():
+    hero = _hero([_target_point_ability(170, 100, 100, 10)], name="Tyrande", player_id=6, team=0, unit_tag=1)
+    enemy_first = _hero([], name="Enemy First", player_id=2, team=1, unit_tag=2)
+    enemy_second = _hero([], name="Enemy Second", player_id=3, team=1, unit_tag=3)
+    units = {
+        1: SimpleNamespace(positions={6: [10.0, 10.0]}),
+        2: SimpleNamespace(positions={6: [20.0, 10.5], 7: [20.0, 10.5]}),
+        3: SimpleNamespace(positions={6: [30.0, 10.0], 7: [30.0, 10.0]}),
+    }
+
+    apply_skillshot_landing_stats(
+        {6: hero, 2: enemy_first, 3: enemy_second},
+        DEFAULT_ABILITY_BUILD,
+        units_in_game=units,
+    )
+
+    sentinel = hero.generalStats["skillshotStats"]["TyrandeSentinelShot"]
+    assert sentinel["totalAttempts"] == 1
+    assert sentinel["landed"] == 1
+    assert sentinel["totalTargetsHit"] == 1
+    assert sentinel["sentinelHeroUnits"] == 1
+    assert sentinel["sampleEvidence"][0]["targetHeroNames"] == ["Enemy First"]
+
+
+def test_tyrande_lunar_flare_counts_enemy_heroes_inside_delayed_area():
+    hero = _hero([_target_point_ability(674, 100, 20, 20)], name="Tyrande", player_id=6, team=0, unit_tag=1)
+    enemy_hit = _hero([], name="Enemy Hit", player_id=2, team=1, unit_tag=2)
+    enemy_miss = _hero([], name="Enemy Miss", player_id=3, team=1, unit_tag=3)
+    units = {
+        2: SimpleNamespace(positions={7: [21.0, 20.0]}),
+        3: SimpleNamespace(positions={7: [30.0, 20.0]}),
+    }
+
+    apply_skillshot_landing_stats({6: hero, 2: enemy_hit, 3: enemy_miss}, DEFAULT_ABILITY_BUILD, units_in_game=units)
+
+    lunar_flare = hero.generalStats["skillshotStats"]["TyrandeLunarFlare"]
+    assert lunar_flare["totalAttempts"] == 1
+    assert lunar_flare["landed"] == 1
+    assert lunar_flare["totalTargetsHit"] == 1
+    assert lunar_flare["stunnedHeroUnits"] == 1
+    assert lunar_flare["sampleEvidence"][0]["targetHeroNames"] == ["Enemy Hit"]

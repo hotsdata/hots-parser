@@ -268,7 +268,174 @@
     "playerId": 0,
     "regenGlobesTaken": 35,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
-    "skillshotStats": {},
+    "skillshotStats": {
+      "AzmodanGlobeOfAnnihilation": {
+        "abilityCatalogName": "AzmodanGlobeOfAnnihilation",
+        "abilityName": "Globe of Annihilation",
+        "areaImpactDelayGameloops": 28,
+        "areaMechanicRadius": 4.0,
+        "areaRadius": 5.0,
+        "areaTarget": "enemy_heroes",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 250,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 0.8182,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "area_position_overlap",
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured delayed target area. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "globeOfAnnihilationHeroUnits": 99,
+        "hitRate": 0.4793,
+        "landed": 58,
+        "landedByEvidence": {
+          "area_position_overlap": 58
+        },
+        "missed": 63,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 1366,
+            "deltaGameloops": 28,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1394,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              4.546
+            ],
+            "targetHeroNames": [
+              "Muradin"
+            ],
+            "targetPlayerIds": [
+              6
+            ]
+          },
+          {
+            "castGameLoop": 1586,
+            "deltaGameloops": 28,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1614,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 2,
+            "targetDistances": [
+              2.5978,
+              3.8798
+            ],
+            "targetHeroNames": [
+              "Muradin",
+              "Zagara"
+            ],
+            "targetPlayerIds": [
+              6,
+              8
+            ]
+          },
+          {
+            "castGameLoop": 1955,
+            "deltaGameloops": 28,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1983,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 3,
+            "targetDistances": [
+              2.3864,
+              2.3898,
+              4.3002
+            ],
+            "targetHeroNames": [
+              "Stitches",
+              "Kel'Thuzad",
+              "Zagara"
+            ],
+            "targetPlayerIds": [
+              5,
+              7,
+              8
+            ]
+          },
+          {
+            "castGameLoop": 2148,
+            "deltaGameloops": 28,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2176,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 4,
+            "targetDistances": [
+              1.8334,
+              2.7857,
+              2.8139,
+              3.0457
+            ],
+            "targetHeroNames": [
+              "Hogger",
+              "Zagara",
+              "Kel'Thuzad",
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              9,
+              8,
+              7,
+              5
+            ]
+          },
+          {
+            "castGameLoop": 2330,
+            "deltaGameloops": 28,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2358,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 4,
+            "targetDistances": [
+              0.4066,
+              1.8421,
+              4.0951,
+              4.3531
+            ],
+            "targetHeroNames": [
+              "Kel'Thuzad",
+              "Muradin",
+              "Hogger",
+              "Zagara"
+            ],
+            "targetPlayerIds": [
+              7,
+              6,
+              9,
+              8
+            ]
+          }
+        ],
+        "targetPointStrategy": "last",
+        "totalAttempts": 121,
+        "totalTargetsHit": 99,
+        "unknown": 0
+      }
+    },
     "soloDeathsCount": 0,
     "team": 0,
     "totalOutDmg": 648373,
@@ -919,7 +1086,472 @@
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
     "scrapMissed": 0,
     "scrapTaken": 96,
-    "skillshotStats": {},
+    "skillshotStats": {
+      "GazloweDethLazor": {
+        "abilityCatalogName": "GazloweDethLazor",
+        "abilityName": "Deth Lazor",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 631,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 0.1296,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "dethLazorHeroUnits": 14,
+        "directionalImpactDelayGameloops": 10,
+        "directionalLength": 10.0,
+        "directionalMaxTargets": null,
+        "directionalMechanicLength": null,
+        "directionalMechanicWidth": null,
+        "directionalMissileSpeed": null,
+        "directionalShape": "line",
+        "directionalTarget": "enemy_heroes",
+        "directionalWidth": 2.5,
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured replay-position line projected from the caster through the target point. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.1204,
+        "landed": 13,
+        "landedByEvidence": {
+          "directional_position_overlap": 13
+        },
+        "missed": 95,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 2363,
+            "deltaGameloops": 10,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2373,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.494
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          },
+          {
+            "castGameLoop": 2387,
+            "deltaGameloops": 10,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2397,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.8884
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          },
+          {
+            "castGameLoop": 2455,
+            "deltaGameloops": 10,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2465,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.77
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          },
+          {
+            "castGameLoop": 5566,
+            "deltaGameloops": 10,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 5576,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.5076
+            ],
+            "targetHeroNames": [
+              "Muradin"
+            ],
+            "targetPlayerIds": [
+              6
+            ]
+          },
+          {
+            "castGameLoop": 7865,
+            "deltaGameloops": 10,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 7875,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 2,
+            "targetDistances": [
+              0.0666,
+              0.5383
+            ],
+            "targetHeroNames": [
+              "Stitches",
+              "Muradin"
+            ],
+            "targetPlayerIds": [
+              5,
+              6
+            ]
+          }
+        ],
+        "targetPointStrategy": "last",
+        "totalAttempts": 108,
+        "totalTargetsHit": 14,
+        "unknown": 0
+      },
+      "TinkerGravOBomb3000": {
+        "abilityCatalogName": "TinkerGravOBomb3000",
+        "abilityName": "Grav-O-Bomb 3000",
+        "areaImpactDelayGameloops": 24,
+        "areaMechanicRadius": 5.0,
+        "areaRadius": 5.5,
+        "areaTarget": "enemy_heroes",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 628,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 1.0174,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "area_position_overlap",
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured delayed target area. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "gravOBombHeroUnits": 117,
+        "hitRate": 0.5913,
+        "landed": 68,
+        "landedByEvidence": {
+          "area_position_overlap": 68
+        },
+        "missed": 47,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 1906,
+            "deltaGameloops": 24,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1930,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 2,
+            "targetDistances": [
+              1.8938,
+              2.8173
+            ],
+            "targetHeroNames": [
+              "Stitches",
+              "Kel'Thuzad"
+            ],
+            "targetPlayerIds": [
+              5,
+              7
+            ]
+          },
+          {
+            "castGameLoop": 2325,
+            "deltaGameloops": 24,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2349,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 4,
+            "targetDistances": [
+              1.2366,
+              3.5297,
+              4.2461,
+              4.3267
+            ],
+            "targetHeroNames": [
+              "Hogger",
+              "Stitches",
+              "Kel'Thuzad",
+              "Muradin"
+            ],
+            "targetPlayerIds": [
+              9,
+              5,
+              7,
+              6
+            ]
+          },
+          {
+            "castGameLoop": 2543,
+            "deltaGameloops": 24,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2567,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 5,
+            "targetDistances": [
+              3.5442,
+              4.8451,
+              4.8754,
+              5.1293,
+              5.3047
+            ],
+            "targetHeroNames": [
+              "Stitches",
+              "Hogger",
+              "Kel'Thuzad",
+              "Zagara",
+              "Muradin"
+            ],
+            "targetPlayerIds": [
+              5,
+              9,
+              7,
+              8,
+              6
+            ]
+          },
+          {
+            "castGameLoop": 3032,
+            "deltaGameloops": 24,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 3056,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 2,
+            "targetDistances": [
+              1.4289,
+              2.7575
+            ],
+            "targetHeroNames": [
+              "Hogger",
+              "Muradin"
+            ],
+            "targetPlayerIds": [
+              9,
+              6
+            ]
+          },
+          {
+            "castGameLoop": 3242,
+            "deltaGameloops": 24,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 3266,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              3.4696
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          }
+        ],
+        "targetPointStrategy": "last",
+        "totalAttempts": 115,
+        "totalTargetsHit": 117,
+        "unknown": 0
+      },
+      "TinkerXplodiumBomb": {
+        "abilityCatalogName": "TinkerXplodiumBomb",
+        "abilityName": "Xplodium Charge",
+        "areaImpactDelayGameloops": 20,
+        "areaMechanicRadius": 2.85,
+        "areaRadius": 3.5,
+        "areaTarget": "enemy_heroes",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 627,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 0.5632,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "area_position_overlap",
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured delayed target area. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.4368,
+        "landed": 38,
+        "landedByEvidence": {
+          "area_position_overlap": 38
+        },
+        "missed": 49,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 1904,
+            "deltaGameloops": 20,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1924,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 2,
+            "targetDistances": [
+              2.0919,
+              3.023
+            ],
+            "targetHeroNames": [
+              "Stitches",
+              "Kel'Thuzad"
+            ],
+            "targetPlayerIds": [
+              5,
+              7
+            ]
+          },
+          {
+            "castGameLoop": 2343,
+            "deltaGameloops": 20,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2363,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 3,
+            "targetDistances": [
+              2.3187,
+              2.9406,
+              3.1549
+            ],
+            "targetHeroNames": [
+              "Hogger",
+              "Muradin",
+              "Kel'Thuzad"
+            ],
+            "targetPlayerIds": [
+              9,
+              6,
+              7
+            ]
+          },
+          {
+            "castGameLoop": 2932,
+            "deltaGameloops": 20,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2952,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 2,
+            "targetDistances": [
+              1.8212,
+              3.4672
+            ],
+            "targetHeroNames": [
+              "Hogger",
+              "Kel'Thuzad"
+            ],
+            "targetPlayerIds": [
+              9,
+              7
+            ]
+          },
+          {
+            "castGameLoop": 3108,
+            "deltaGameloops": 20,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 3128,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              2.3485
+            ],
+            "targetHeroNames": [
+              "Kel'Thuzad"
+            ],
+            "targetPlayerIds": [
+              7
+            ]
+          },
+          {
+            "castGameLoop": 3861,
+            "deltaGameloops": 20,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 3881,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              2.7903
+            ],
+            "targetHeroNames": [
+              "Kel'Thuzad"
+            ],
+            "targetPlayerIds": [
+              7
+            ]
+          }
+        ],
+        "targetPointStrategy": "last",
+        "totalAttempts": 87,
+        "totalTargetsHit": 49,
+        "unknown": 0,
+        "xplodiumHeroUnits": 49
+      }
+    },
     "soloDeathsCount": 2,
     "team": 0,
     "totalOutDmg": 419193,
@@ -1323,7 +1955,438 @@
     "playerId": 3,
     "regenGlobesTaken": 29,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
-    "skillshotStats": {},
+    "skillshotStats": {
+      "MaievContainmentDisc": {
+        "abilityCatalogName": "MaievContainmentDisc",
+        "abilityName": "Containment Disc",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 1155,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 0.3214,
+        "confidence": "geometry_proxy_uncalibrated",
+        "containmentDiscHeroUnits": 9,
+        "detector": "directional_position_overlap",
+        "directionalImpactDelayGameloops": 2,
+        "directionalLength": 10.0,
+        "directionalMaxTargets": 1,
+        "directionalMechanicLength": null,
+        "directionalMechanicWidth": null,
+        "directionalMissileSpeed": null,
+        "directionalShape": "line",
+        "directionalTarget": "enemy_heroes",
+        "directionalWidth": 2.0,
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured replay-position line projected from the caster through the target point. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.3214,
+        "landed": 9,
+        "landedByEvidence": {
+          "directional_position_overlap": 9
+        },
+        "missed": 19,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 9412,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 9414,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.4082
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          },
+          {
+            "castGameLoop": 9415,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 9417,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.1912
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          },
+          {
+            "castGameLoop": 10083,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 10085,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.2219
+            ],
+            "targetHeroNames": [
+              "Hogger"
+            ],
+            "targetPlayerIds": [
+              9
+            ]
+          },
+          {
+            "castGameLoop": 14984,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 14986,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.7297
+            ],
+            "targetHeroNames": [
+              "Muradin"
+            ],
+            "targetPlayerIds": [
+              6
+            ]
+          },
+          {
+            "castGameLoop": 14986,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 14988,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.5762
+            ],
+            "targetHeroNames": [
+              "Muradin"
+            ],
+            "targetPlayerIds": [
+              6
+            ]
+          }
+        ],
+        "targetPointStrategy": "last",
+        "totalAttempts": 28,
+        "totalTargetsHit": 9,
+        "unknown": 0
+      },
+      "MaievFanOfKnives": {
+        "abilityCatalogName": "MaievFanOfKnives",
+        "abilityName": "Fan of Knives",
+        "areaImpactDelayGameloops": 2,
+        "areaMechanicRadius": null,
+        "areaRadius": 4.5,
+        "areaTarget": "enemy_heroes",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 1153,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 0.8644,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "area_position_overlap",
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured delayed target area. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "fanOfKnivesHeroUnits": 102,
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.5424,
+        "landed": 64,
+        "landedByEvidence": {
+          "area_position_overlap": 64
+        },
+        "missed": 54,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 1784,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1786,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 2,
+            "targetDistances": [
+              3.5638,
+              3.9031
+            ],
+            "targetHeroNames": [
+              "Kel'Thuzad",
+              "Muradin"
+            ],
+            "targetPlayerIds": [
+              7,
+              6
+            ]
+          },
+          {
+            "castGameLoop": 1985,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1987,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              4.2483
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          },
+          {
+            "castGameLoop": 2070,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2072,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              1.5847
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          },
+          {
+            "castGameLoop": 2072,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2074,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              2.0
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          },
+          {
+            "castGameLoop": 2109,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2111,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              3.4932
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          }
+        ],
+        "targetPointStrategy": "last",
+        "totalAttempts": 118,
+        "totalTargetsHit": 102,
+        "unknown": 0
+      },
+      "MaievSpiritOfVengeance": {
+        "abilityCatalogName": "MaievSpiritOfVengeance",
+        "abilityName": "Spirit of Vengeance",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 1151,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 0.1667,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "directionalImpactDelayGameloops": 2,
+        "directionalLength": 9.0,
+        "directionalMaxTargets": null,
+        "directionalMechanicLength": null,
+        "directionalMechanicWidth": null,
+        "directionalMissileSpeed": null,
+        "directionalShape": "line",
+        "directionalTarget": "enemy_heroes",
+        "directionalWidth": 2.5,
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured replay-position line projected from the caster through the target point. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.1667,
+        "landed": 12,
+        "landedByEvidence": {
+          "directional_position_overlap": 12
+        },
+        "missed": 60,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 2809,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2811,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.9956
+            ],
+            "targetHeroNames": [
+              "Hogger"
+            ],
+            "targetPlayerIds": [
+              9
+            ]
+          },
+          {
+            "castGameLoop": 3265,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 3267,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.8097
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          },
+          {
+            "castGameLoop": 6436,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 6438,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.2613
+            ],
+            "targetHeroNames": [
+              "Muradin"
+            ],
+            "targetPlayerIds": [
+              6
+            ]
+          },
+          {
+            "castGameLoop": 6438,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 6440,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.5903
+            ],
+            "targetHeroNames": [
+              "Muradin"
+            ],
+            "targetPlayerIds": [
+              6
+            ]
+          },
+          {
+            "castGameLoop": 6849,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 6851,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.2411
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          }
+        ],
+        "spiritOfVengeanceHeroUnits": 12,
+        "targetPointStrategy": "last",
+        "totalAttempts": 72,
+        "totalTargetsHit": 12,
+        "unknown": 0
+      }
+    },
     "soloDeathsCount": 0,
     "team": 0,
     "totalOutDmg": 138573,
@@ -1572,7 +2635,183 @@
     "playerId": 4,
     "regenGlobesTaken": 56,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
-    "skillshotStats": {},
+    "skillshotStats": {
+      "NovaPrecisionStrike": {
+        "abilityCatalogName": "NovaPrecisionStrike",
+        "abilityName": "Precision Strike",
+        "areaImpactDelayGameloops": 24,
+        "areaMechanicRadius": 4.0,
+        "areaRadius": 5.0,
+        "areaTarget": "enemy_heroes",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 525,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": null,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "area_position_overlap",
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured delayed target area. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": null,
+        "landed": 0,
+        "landedByEvidence": {},
+        "missed": 0,
+        "precisionStrikeHeroUnits": 0,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [],
+        "targetPointStrategy": "last",
+        "totalAttempts": 0,
+        "totalTargetsHit": 0,
+        "unknown": 0
+      },
+      "NovaSnipeStorm": {
+        "abilityCatalogName": "NovaSnipeStorm",
+        "abilityName": "Snipe",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 524,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 0.1749,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "directionalImpactDelayGameloops": 0,
+        "directionalLength": 10.9,
+        "directionalMaxTargets": 1,
+        "directionalMechanicLength": null,
+        "directionalMechanicWidth": null,
+        "directionalMissileSpeed": 50.0,
+        "directionalShape": "line",
+        "directionalTarget": "enemy_heroes",
+        "directionalWidth": 2.0,
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured replay-position line projected from the caster through the target point. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.1749,
+        "landed": 32,
+        "landedByEvidence": {
+          "directional_position_overlap": 32
+        },
+        "missed": 151,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 1726,
+            "deltaGameloops": 3,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1729,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.3328
+            ],
+            "targetHeroNames": [
+              "Kel'Thuzad"
+            ],
+            "targetPlayerIds": [
+              7
+            ]
+          },
+          {
+            "castGameLoop": 4392,
+            "deltaGameloops": 1,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 4393,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.646
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          },
+          {
+            "castGameLoop": 4936,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 4938,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.3209
+            ],
+            "targetHeroNames": [
+              "Muradin"
+            ],
+            "targetPlayerIds": [
+              6
+            ]
+          },
+          {
+            "castGameLoop": 5154,
+            "deltaGameloops": 3,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 5157,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.5638
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          },
+          {
+            "castGameLoop": 5223,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 5225,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.0141
+            ],
+            "targetHeroNames": [
+              "Stitches"
+            ],
+            "targetPlayerIds": [
+              5
+            ]
+          }
+        ],
+        "snipedHeroUnits": 32,
+        "targetPointStrategy": "last",
+        "totalAttempts": 183,
+        "totalTargetsHit": 32,
+        "unknown": 0
+      }
+    },
     "soloDeathsCount": 0,
     "team": 0,
     "totalOutDmg": 337311,
@@ -1933,7 +3172,305 @@
     "playerId": 5,
     "regenGlobesTaken": 39,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
-    "skillshotStats": {},
+    "skillshotStats": {
+      "StitchesHook": {
+        "abilityCatalogName": "StitchesHook",
+        "abilityName": "Hook",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 580,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 0.2708,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "directionalImpactDelayGameloops": 3,
+        "directionalLength": 12.0,
+        "directionalMaxTargets": 1,
+        "directionalMechanicLength": null,
+        "directionalMechanicWidth": null,
+        "directionalMissileSpeed": null,
+        "directionalShape": "line",
+        "directionalTarget": "enemy_heroes",
+        "directionalWidth": 2.5,
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured replay-position line projected from the caster through the target point. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.2708,
+        "hookedHeroUnits": 13,
+        "landed": 13,
+        "landedByEvidence": {
+          "directional_position_overlap": 13
+        },
+        "missed": 35,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 2035,
+            "deltaGameloops": 3,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2038,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.216
+            ],
+            "targetHeroNames": [
+              "Diablo"
+            ],
+            "targetPlayerIds": [
+              1
+            ]
+          },
+          {
+            "castGameLoop": 2885,
+            "deltaGameloops": 3,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2888,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.3883
+            ],
+            "targetHeroNames": [
+              "Maiev"
+            ],
+            "targetPlayerIds": [
+              3
+            ]
+          },
+          {
+            "castGameLoop": 3602,
+            "deltaGameloops": 3,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 3605,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.382
+            ],
+            "targetHeroNames": [
+              "Azmodan"
+            ],
+            "targetPlayerIds": [
+              0
+            ]
+          },
+          {
+            "castGameLoop": 4512,
+            "deltaGameloops": 3,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 4515,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.5566
+            ],
+            "targetHeroNames": [
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              2
+            ]
+          },
+          {
+            "castGameLoop": 6497,
+            "deltaGameloops": 3,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 6500,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.5292
+            ],
+            "targetHeroNames": [
+              "Maiev"
+            ],
+            "targetPlayerIds": [
+              3
+            ]
+          }
+        ],
+        "targetPointStrategy": "last",
+        "totalAttempts": 48,
+        "totalTargetsHit": 13,
+        "unknown": 0
+      },
+      "StitchesSlam": {
+        "abilityCatalogName": "StitchesSlam",
+        "abilityName": "Slam",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 579,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 0.3426,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "directionalImpactDelayGameloops": 0,
+        "directionalLength": 9.5,
+        "directionalMaxTargets": null,
+        "directionalMechanicLength": null,
+        "directionalMechanicWidth": null,
+        "directionalMissileSpeed": null,
+        "directionalShape": "triangle",
+        "directionalTarget": "enemy_heroes",
+        "directionalWidth": 7.0,
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured replay-position triangle projected from the caster through the target point. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.3056,
+        "landed": 33,
+        "landedByEvidence": {
+          "directional_position_overlap": 33
+        },
+        "missed": 75,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 2393,
+            "deltaGameloops": 0,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2393,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              1.496
+            ],
+            "targetHeroNames": [
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              2
+            ]
+          },
+          {
+            "castGameLoop": 2909,
+            "deltaGameloops": 0,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2909,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              1.2655
+            ],
+            "targetHeroNames": [
+              "Maiev"
+            ],
+            "targetPlayerIds": [
+              3
+            ]
+          },
+          {
+            "castGameLoop": 3074,
+            "deltaGameloops": 0,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 3074,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 2,
+            "targetDistances": [
+              0.9296,
+              2.3705
+            ],
+            "targetHeroNames": [
+              "Diablo",
+              "Azmodan"
+            ],
+            "targetPlayerIds": [
+              1,
+              0
+            ]
+          },
+          {
+            "castGameLoop": 3077,
+            "deltaGameloops": 0,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 3077,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 2,
+            "targetDistances": [
+              1.0521,
+              2.5568
+            ],
+            "targetHeroNames": [
+              "Diablo",
+              "Azmodan"
+            ],
+            "targetPlayerIds": [
+              1,
+              0
+            ]
+          },
+          {
+            "castGameLoop": 3127,
+            "deltaGameloops": 0,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 3127,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 2,
+            "targetDistances": [
+              0.5013,
+              1.1562
+            ],
+            "targetHeroNames": [
+              "Diablo",
+              "Nova"
+            ],
+            "targetPlayerIds": [
+              1,
+              4
+            ]
+          }
+        ],
+        "slamHeroUnits": 37,
+        "targetPointStrategy": "last",
+        "totalAttempts": 108,
+        "totalTargetsHit": 37,
+        "unknown": 0
+      }
+    },
     "soloDeathsCount": 0,
     "team": 1,
     "totalOutDmg": 331725,
@@ -2280,7 +3817,152 @@
     "playerId": 6,
     "regenGlobesTaken": 38,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
-    "skillshotStats": {},
+    "skillshotStats": {
+      "MuradinStormBolt": {
+        "abilityCatalogName": "MuradinStormBolt",
+        "abilityName": "Storm Bolt",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 494,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 0.25,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "directionalImpactDelayGameloops": 2,
+        "directionalLength": 8.75,
+        "directionalMaxTargets": 1,
+        "directionalMechanicLength": null,
+        "directionalMechanicWidth": null,
+        "directionalMissileSpeed": 25.0,
+        "directionalShape": "line",
+        "directionalTarget": "enemy_heroes",
+        "directionalWidth": 2.0,
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured replay-position line projected from the caster through the target point. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.25,
+        "landed": 6,
+        "landedByEvidence": {
+          "directional_position_overlap": 6
+        },
+        "missed": 18,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 7813,
+            "deltaGameloops": 3,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 7816,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.2526
+            ],
+            "targetHeroNames": [
+              "Diablo"
+            ],
+            "targetPlayerIds": [
+              1
+            ]
+          },
+          {
+            "castGameLoop": 10849,
+            "deltaGameloops": 5,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 10854,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.9748
+            ],
+            "targetHeroNames": [
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              2
+            ]
+          },
+          {
+            "castGameLoop": 15380,
+            "deltaGameloops": 7,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 15387,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.5619
+            ],
+            "targetHeroNames": [
+              "Diablo"
+            ],
+            "targetPlayerIds": [
+              1
+            ]
+          },
+          {
+            "castGameLoop": 15558,
+            "deltaGameloops": 7,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 15565,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.0984
+            ],
+            "targetHeroNames": [
+              "Nova"
+            ],
+            "targetPlayerIds": [
+              4
+            ]
+          },
+          {
+            "castGameLoop": 17868,
+            "deltaGameloops": 2,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 17870,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.7293
+            ],
+            "targetHeroNames": [
+              "Diablo"
+            ],
+            "targetPlayerIds": [
+              1
+            ]
+          }
+        ],
+        "stormBoltHeroUnits": 6,
+        "targetPointStrategy": "last",
+        "totalAttempts": 24,
+        "totalTargetsHit": 6,
+        "unknown": 0
+      }
+    },
     "soloDeathsCount": 0,
     "team": 1,
     "totalOutDmg": 232201,
@@ -3087,7 +4769,297 @@
     "playerId": 8,
     "regenGlobesTaken": 35,
     "replayId": "5a3c3a2c774d12eb271fe9ed14523b4850aa0c1d20d9924163af915764432df5",
-    "skillshotStats": {},
+    "skillshotStats": {
+      "ZagaraBanelingBarrage": {
+        "abilityCatalogName": "ZagaraBanelingBarrage",
+        "abilityName": "Baneling Barrage",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 714,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 0.1592,
+        "banelingBarrageHeroUnits": 32,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "directionalImpactDelayGameloops": 0,
+        "directionalLength": 14.0,
+        "directionalMaxTargets": null,
+        "directionalMechanicLength": null,
+        "directionalMechanicWidth": null,
+        "directionalMissileSpeed": 12.0,
+        "directionalShape": "line",
+        "directionalTarget": "enemy_heroes",
+        "directionalWidth": 3.0,
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured replay-position line projected from the caster through the target point. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.1343,
+        "landed": 27,
+        "landedByEvidence": {
+          "directional_position_overlap": 27
+        },
+        "missed": 174,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 1455,
+            "deltaGameloops": 13,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1468,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.2321
+            ],
+            "targetHeroNames": [
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              2
+            ]
+          },
+          {
+            "castGameLoop": 1676,
+            "deltaGameloops": 16,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1692,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.2552
+            ],
+            "targetHeroNames": [
+              "Maiev"
+            ],
+            "targetPlayerIds": [
+              3
+            ]
+          },
+          {
+            "castGameLoop": 1815,
+            "deltaGameloops": 11,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1826,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.5161
+            ],
+            "targetHeroNames": [
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              2
+            ]
+          },
+          {
+            "castGameLoop": 2238,
+            "deltaGameloops": 13,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2251,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.7563
+            ],
+            "targetHeroNames": [
+              "Azmodan"
+            ],
+            "targetPlayerIds": [
+              0
+            ]
+          },
+          {
+            "castGameLoop": 2246,
+            "deltaGameloops": 13,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2259,
+            "evidenceType": "directional_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.5575
+            ],
+            "targetHeroNames": [
+              "Azmodan"
+            ],
+            "targetPlayerIds": [
+              0
+            ]
+          }
+        ],
+        "targetPointStrategy": "last",
+        "totalAttempts": 201,
+        "totalTargetsHit": 32,
+        "unknown": 0
+      },
+      "ZagaraInfestedDrop": {
+        "abilityCatalogName": "ZagaraInfestedDrop",
+        "abilityName": "Infested Drop",
+        "areaImpactDelayGameloops": 12,
+        "areaMechanicRadius": null,
+        "areaRadius": 2.5,
+        "areaTarget": "enemy_heroes",
+        "attemptAbilityCmdIndex": 0,
+        "attemptAbilityLink": 712,
+        "attemptDedupeWindowGameloops": 0,
+        "averageTargetsHit": 0.233,
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "area_position_overlap",
+        "evidenceDescription": "Counts this ability as landed when one or more enemy Hero units overlap the configured delayed target area. This is an uncalibrated geometry proxy generated from the all-hero subagent pass and should be refined with replay-specific stats.",
+        "followupWindowGameloops": 0,
+        "gameVersion": 97039,
+        "hitRate": 0.2039,
+        "infestedDropHeroUnits": 24,
+        "landed": 21,
+        "landedByEvidence": {
+          "area_position_overlap": 21
+        },
+        "missed": 82,
+        "questCounterEventNames": [],
+        "questCounterStartOffsetGameloops": null,
+        "questCounterWindowGameloops": null,
+        "ruleVersion": "97039.1",
+        "sampleEvidence": [
+          {
+            "castGameLoop": 1573,
+            "deltaGameloops": 12,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1585,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              1.9409
+            ],
+            "targetHeroNames": [
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              2
+            ]
+          },
+          {
+            "castGameLoop": 1919,
+            "deltaGameloops": 12,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 1931,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              0.9443
+            ],
+            "targetHeroNames": [
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              2
+            ]
+          },
+          {
+            "castGameLoop": 2876,
+            "deltaGameloops": 12,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 2888,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 1,
+            "targetDistances": [
+              2.3038
+            ],
+            "targetHeroNames": [
+              "Maiev"
+            ],
+            "targetPlayerIds": [
+              3
+            ]
+          },
+          {
+            "castGameLoop": 4352,
+            "deltaGameloops": 12,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 4364,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 2,
+            "targetDistances": [
+              1.2567,
+              2.3699
+            ],
+            "targetHeroNames": [
+              "Diablo",
+              "Maiev"
+            ],
+            "targetPlayerIds": [
+              1,
+              3
+            ]
+          },
+          {
+            "castGameLoop": 5090,
+            "deltaGameloops": 12,
+            "evidenceAbilityCmdIndex": null,
+            "evidenceAbilityLink": null,
+            "evidenceAbilityName": null,
+            "evidenceEventName": null,
+            "evidenceGameLoop": 5102,
+            "evidenceType": "area_position_overlap",
+            "evidenceValue": null,
+            "targetCount": 2,
+            "targetDistances": [
+              1.136,
+              2.2827
+            ],
+            "targetHeroNames": [
+              "Nova",
+              "Gazlowe"
+            ],
+            "targetPlayerIds": [
+              4,
+              2
+            ]
+          }
+        ],
+        "targetPointStrategy": "last",
+        "totalAttempts": 103,
+        "totalTargetsHit": 24,
+        "unknown": 0
+      }
+    },
     "soloDeathsCount": 0,
     "team": 1,
     "totalOutDmg": 408960,

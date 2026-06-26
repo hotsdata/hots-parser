@@ -20,6 +20,22 @@ class AreaPositionRule:
 
 
 @dataclass(frozen=True)
+class DirectionalPositionRule:
+    impact_delay_gameloops: int
+    length: float
+    width: float
+    shape: str
+    target: str
+    outcome_stat: str
+    attempt_dedupe_window_gameloops: int = 0
+    mechanic_length: float | None = None
+    mechanic_width: float | None = None
+    target_point_strategy: str = "last"
+    missile_speed: float | None = None
+    max_targets: int | None = None
+
+
+@dataclass(frozen=True)
 class SkillshotLandingRule:
     hero_name: str
     ability_catalog_name: str
@@ -32,6 +48,7 @@ class SkillshotLandingRule:
     followup_window_gameloops: int = 0
     quest_counter: QuestCounterRule | None = None
     area_position: AreaPositionRule | None = None
+    directional_position: DirectionalPositionRule | None = None
     evidence_description: str = ""
 
 

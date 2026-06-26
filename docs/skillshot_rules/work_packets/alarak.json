@@ -1,0 +1,330 @@
+{
+  "agentWorkflow": [
+    {
+      "agent": "Coordinator",
+      "task": "Create the branch, assign abilities, keep this packet current, and create one PR for the hero."
+    },
+    {
+      "agent": "Research",
+      "task": "Browse current ability sources for each backlog ability and record mechanics, delays, radius, target type, and source URLs."
+    },
+    {
+      "agent": "Rule Designer",
+      "task": "Choose detector type, evidence priority, confidence, gameloop windows, and docstring/evidence description."
+    },
+    {
+      "agent": "Implementer",
+      "task": "Add versioned rules and detector support in data/replay modules without changing unrelated heroes."
+    },
+    {
+      "agent": "Validation",
+      "task": "Parse at least two real replays for this hero and record generated skillshot stats in the PR body."
+    },
+    {
+      "agent": "Reviewer",
+      "task": "Check plausibility, double counting, evidence strength, tests, and PR summary completeness."
+    }
+  ],
+  "branchName": "codex/skillshot-alarak",
+  "build": 97039,
+  "exampleStatsCommand": ".venv/bin/python scripts/skillshot_rule_pipeline.py example-stats \"Alarak\" --replay-dir \"$HOTSDATA_REPLAY_CORPUS_DIR\" --limit 2",
+  "hero": {
+    "heroCatalogName": "Alarak",
+    "heroName": "Alarak",
+    "heroSlug": "alarak"
+  },
+  "implementedRules": [
+    {
+      "abilityCatalogName": "AlarakDeadlyChargeExecute2ndHeroic",
+      "abilityName": "AlarakDeadlyChargeExecute2ndHeroic",
+      "decision": "implemented",
+      "reason": "A versioned skillshot landing rule already exists for this ability.",
+      "rule": {
+        "abilityCatalogName": "AlarakDeadlyChargeExecute2ndHeroic",
+        "abilityName": "Unleash Deadly Charge",
+        "attempt": {
+          "abilityCmdIndex": 0,
+          "abilityLink": 928
+        },
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "directionalPosition": {
+          "attempt_dedupe_window_gameloops": 0,
+          "impact_delay_gameloops": 0,
+          "length": 18.25,
+          "max_targets": null,
+          "mechanic_length": 18.25,
+          "mechanic_width": 3.0,
+          "missile_speed": 42.0,
+          "outcome_stat": "deadlyChargeHeroUnits",
+          "shape": "line",
+          "target": "enemy_heroes",
+          "target_point_strategy": "last",
+          "width": 4.0
+        },
+        "evidenceDescription": "Counts the second-heroic Deadly Charge execution with the same charge-line geometry used for the primary Deadly Charge rule.",
+        "ruleVersion": "97039.1"
+      }
+    },
+    {
+      "abilityCatalogName": "AlarakCounterStrikeTargeted",
+      "abilityName": "Counter-Strike",
+      "decision": "implemented",
+      "reason": "A versioned skillshot landing rule already exists for this ability.",
+      "rule": {
+        "abilityCatalogName": "AlarakCounterStrikeTargeted",
+        "abilityName": "Counter-Strike",
+        "attempt": {
+          "abilityCmdIndex": 0,
+          "abilityLink": 921
+        },
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "directionalPosition": {
+          "attempt_dedupe_window_gameloops": 0,
+          "impact_delay_gameloops": 16,
+          "length": 13.0,
+          "max_targets": null,
+          "mechanic_length": 13.0,
+          "mechanic_width": 4.6,
+          "missile_speed": null,
+          "outcome_stat": "counterStrikeHeroUnits",
+          "shape": "triangle",
+          "target": "enemy_heroes",
+          "target_point_strategy": "last",
+          "width": 7.0
+        },
+        "evidenceDescription": "Counts Counter-Strike as landed when enemy Hero positions overlap the targeted triangular shockwave after the one-second channel. This is a geometry proxy: replays do not expose the enemy-Hero damage trigger directly in the current parser path.",
+        "ruleVersion": "97039.1"
+      }
+    },
+    {
+      "abilityCatalogName": "AlarakCounterStrikeTargeted2ndHeroic",
+      "abilityName": "Counter-Strike",
+      "decision": "implemented",
+      "reason": "A versioned skillshot landing rule already exists for this ability.",
+      "rule": {
+        "abilityCatalogName": "AlarakCounterStrikeTargeted2ndHeroic",
+        "abilityName": "Counter-Strike",
+        "attempt": {
+          "abilityCmdIndex": 0,
+          "abilityLink": 922
+        },
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "directionalPosition": {
+          "attempt_dedupe_window_gameloops": 0,
+          "impact_delay_gameloops": 16,
+          "length": 13.0,
+          "max_targets": null,
+          "mechanic_length": 13.0,
+          "mechanic_width": 4.6,
+          "missile_speed": null,
+          "outcome_stat": "counterStrikeHeroUnits",
+          "shape": "triangle",
+          "target": "enemy_heroes",
+          "target_point_strategy": "last",
+          "width": 7.0
+        },
+        "evidenceDescription": "Counts the second-heroic Counter-Strike with the same targeted triangular shockwave proxy used for the primary Counter-Strike rule.",
+        "ruleVersion": "97039.1"
+      }
+    },
+    {
+      "abilityCatalogName": "AlarakDiscordStrike",
+      "abilityName": "Discord Strike",
+      "decision": "implemented",
+      "reason": "A versioned skillshot landing rule already exists for this ability.",
+      "rule": {
+        "abilityCatalogName": "AlarakDiscordStrike",
+        "abilityName": "Discord Strike",
+        "attempt": {
+          "abilityCmdIndex": 0,
+          "abilityLink": 926
+        },
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "directionalPosition": {
+          "attempt_dedupe_window_gameloops": 0,
+          "impact_delay_gameloops": 10,
+          "length": 6.5,
+          "max_targets": null,
+          "mechanic_length": 6.5,
+          "mechanic_width": 5.5,
+          "missile_speed": null,
+          "outcome_stat": "silencedHeroUnits",
+          "shape": "triangle",
+          "target": "enemy_heroes",
+          "target_point_strategy": "last",
+          "width": 8.0
+        },
+        "evidenceDescription": "Counts Discord Strike as landed when one or more enemy Hero units overlap a calibrated triangular area in front of Alarak after the 0.625 second cast delay. The replay target point supplies direction; the wider replay triangle compensates for one-second position samples.",
+        "ruleVersion": "97039.1"
+      }
+    },
+    {
+      "abilityCatalogName": "AlarakDeadlyChargeExecute",
+      "abilityName": "Unleash Deadly Charge",
+      "decision": "implemented",
+      "reason": "A versioned skillshot landing rule already exists for this ability.",
+      "rule": {
+        "abilityCatalogName": "AlarakDeadlyChargeExecute",
+        "abilityName": "Unleash Deadly Charge",
+        "attempt": {
+          "abilityCmdIndex": 0,
+          "abilityLink": 927
+        },
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "directionalPosition": {
+          "attempt_dedupe_window_gameloops": 0,
+          "impact_delay_gameloops": 0,
+          "length": 18.25,
+          "max_targets": null,
+          "mechanic_length": 18.25,
+          "mechanic_width": 3.0,
+          "missile_speed": 42.0,
+          "outcome_stat": "deadlyChargeHeroUnits",
+          "shape": "line",
+          "target": "enemy_heroes",
+          "target_point_strategy": "last",
+          "width": 4.0
+        },
+        "evidenceDescription": "Counts Deadly Charge as landed when one or more enemy Hero units overlap Alarak's charge line. The release target point supplies direction, and the configured missile speed estimates where each enemy was when the charge reached their path distance.",
+        "ruleVersion": "97039.1"
+      }
+    }
+  ],
+  "noRuleLikely": [],
+  "prBodyTemplate": "## Summary\n\n- Hero: Alarak\n- Build: 97039\n- Implemented landing rules: TODO\n- Omitted abilities: TODO\n- Blocked abilities: TODO\n\n## Research\n\n- TODO: ability source URLs and mechanics notes\n\n## Example Replay Stats\n\n- TODO: paste output from `scripts/skillshot_rule_pipeline.py example-stats`\n\n## Validation\n\n- [ ] `.venv/bin/python -m pytest tests/test_skillshot_landing.py -q`\n- [ ] `.venv/bin/python -m pytest`\n- [ ] `.venv/bin/python -m ruff check .`",
+  "prTitle": "[skillshots] Add Alarak landing rules",
+  "researchBacklog": [
+    {
+      "abilityCatalogName": "AlarakMightOfTheHighlordSetCounterStrikeAsHeroic",
+      "abilityName": "AlarakMightOfTheHighlordSetCounterStrikeAsHeroic",
+      "decision": "needs_research",
+      "reason": "First-pass name triage matched a likely skillshot term: strike.",
+      "researchQueries": [
+        "Heroes of the Storm Alarak AlarakMightOfTheHighlordSetCounterStrikeAsHeroic mechanics",
+        "Heroes of the Storm Alarak AlarakMightOfTheHighlordSetCounterStrikeAsHeroic radius delay hit",
+        "Heroes of the Storm Alarak AlarakMightOfTheHighlordSetCounterStrikeAsHeroic quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "AlarakDeadlyChargeActivate",
+      "abilityName": "Deadly Charge",
+      "decision": "needs_research",
+      "reason": "First-pass name triage matched a likely skillshot term: charge.",
+      "researchQueries": [
+        "Heroes of the Storm Alarak Deadly Charge mechanics",
+        "Heroes of the Storm Alarak Deadly Charge radius delay hit",
+        "Heroes of the Storm Alarak Deadly Charge quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "AlarakDeadlyChargeActivate2ndHeroic",
+      "abilityName": "Deadly Charge",
+      "decision": "needs_research",
+      "reason": "First-pass name triage matched a likely skillshot term: charge.",
+      "researchQueries": [
+        "Heroes of the Storm Alarak Deadly Charge mechanics",
+        "Heroes of the Storm Alarak Deadly Charge radius delay hit",
+        "Heroes of the Storm Alarak Deadly Charge quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "AlarakHastyBargain",
+      "abilityName": "Hasty Bargain",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Alarak Hasty Bargain mechanics",
+        "Heroes of the Storm Alarak Hasty Bargain radius delay hit",
+        "Heroes of the Storm Alarak Hasty Bargain quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "AlarakLastLaugh",
+      "abilityName": "Last Laugh",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Alarak Last Laugh mechanics",
+        "Heroes of the Storm Alarak Last Laugh radius delay hit",
+        "Heroes of the Storm Alarak Last Laugh quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "AlarakLightningSurge",
+      "abilityName": "Lightning Surge",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Alarak Lightning Surge mechanics",
+        "Heroes of the Storm Alarak Lightning Surge radius delay hit",
+        "Heroes of the Storm Alarak Lightning Surge quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "AlarakLightningSurgeLightningBarrage",
+      "abilityName": "Lightning Surge",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Alarak Lightning Surge mechanics",
+        "Heroes of the Storm Alarak Lightning Surge radius delay hit",
+        "Heroes of the Storm Alarak Lightning Surge quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "AlarakMightOfTheHighlordSetDeadlyChargeAsHeroic",
+      "abilityName": "Might of the Highlord",
+      "decision": "needs_research",
+      "reason": "First-pass name triage matched a likely skillshot term: charge.",
+      "researchQueries": [
+        "Heroes of the Storm Alarak Might of the Highlord mechanics",
+        "Heroes of the Storm Alarak Might of the Highlord radius delay hit",
+        "Heroes of the Storm Alarak Might of the Highlord quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "AlarakRiteofRakShir",
+      "abilityName": "Rite of Rak'Shir",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Alarak Rite of Rak'Shir mechanics",
+        "Heroes of the Storm Alarak Rite of Rak'Shir radius delay hit",
+        "Heroes of the Storm Alarak Rite of Rak'Shir quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "AlarakTelekinesis",
+      "abilityName": "Telekinesis",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Alarak Telekinesis mechanics",
+        "Heroes of the Storm Alarak Telekinesis radius delay hit",
+        "Heroes of the Storm Alarak Telekinesis quest talent interaction"
+      ]
+    }
+  ],
+  "schemaVersion": 1,
+  "summary": {
+    "abilityCount": 15,
+    "decisionCounts": {
+      "implemented": 5,
+      "needs_research": 4,
+      "needs_triage": 6
+    },
+    "implementedCount": 5,
+    "noRuleLikelyCount": 0,
+    "researchBacklogCount": 10
+  },
+  "validationCommands": [
+    ".venv/bin/python -m pytest tests/test_skillshot_landing.py -q",
+    ".venv/bin/python -m pytest",
+    ".venv/bin/python -m ruff check ."
+  ]
+}
