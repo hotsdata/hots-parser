@@ -1,0 +1,185 @@
+{
+  "agentWorkflow": [
+    {
+      "agent": "Coordinator",
+      "task": "Create the branch, assign abilities, keep this packet current, and create one PR for the hero."
+    },
+    {
+      "agent": "Research",
+      "task": "Browse current ability sources for each backlog ability and record mechanics, delays, radius, target type, and source URLs."
+    },
+    {
+      "agent": "Rule Designer",
+      "task": "Choose detector type, evidence priority, confidence, gameloop windows, and docstring/evidence description."
+    },
+    {
+      "agent": "Implementer",
+      "task": "Add versioned rules and detector support in data/replay modules without changing unrelated heroes."
+    },
+    {
+      "agent": "Validation",
+      "task": "Parse at least two real replays for this hero and record generated skillshot stats in the PR body."
+    },
+    {
+      "agent": "Reviewer",
+      "task": "Check plausibility, double counting, evidence strength, tests, and PR summary completeness."
+    }
+  ],
+  "branchName": "codex/skillshot-tyrande",
+  "build": 97039,
+  "exampleStatsCommand": ".venv/bin/python scripts/skillshot_rule_pipeline.py example-stats \"Tyrande\" --replay-dir \"$HOTSDATA_REPLAY_CORPUS_DIR\" --limit 2",
+  "hero": {
+    "heroCatalogName": "Tyrande",
+    "heroName": "Tyrande",
+    "heroSlug": "tyrande"
+  },
+  "implementedRules": [
+    {
+      "abilityCatalogName": "TyrandeLunarFlare",
+      "abilityName": "Lunar Flare",
+      "decision": "implemented",
+      "reason": "A versioned skillshot landing rule already exists for this ability.",
+      "rule": {
+        "abilityCatalogName": "TyrandeLunarFlare",
+        "abilityName": "Lunar Flare",
+        "areaPosition": {
+          "attempt_dedupe_window_gameloops": 0,
+          "impact_delay_gameloops": 12,
+          "mechanic_radius": 1.5,
+          "outcome_stat": "stunnedHeroUnits",
+          "radius": 4.5,
+          "target": "enemy_heroes",
+          "target_point_strategy": "last"
+        },
+        "attempt": {
+          "abilityCmdIndex": 0,
+          "abilityLink": 674
+        },
+        "confidence": "geometry_proxy_uncalibrated",
+        "detector": "area_position_overlap",
+        "evidenceDescription": "Counts Lunar Flare as landed when one or more enemy Hero units overlap the target area after the 0.75 second delay. The replay radius is wider than the mechanic radius to compensate for one-second unit-position samples.",
+        "ruleVersion": "97039.1"
+      }
+    },
+    {
+      "abilityCatalogName": "TyrandeSentinelShot",
+      "abilityName": "Sentinel",
+      "decision": "implemented",
+      "reason": "A versioned skillshot landing rule already exists for this ability.",
+      "rule": {
+        "abilityCatalogName": "TyrandeSentinelShot",
+        "abilityName": "Sentinel",
+        "attempt": {
+          "abilityCmdIndex": 0,
+          "abilityLink": 170
+        },
+        "confidence": "projectile_geometry_proxy_uncalibrated",
+        "detector": "directional_position_overlap",
+        "directionalPosition": {
+          "attempt_dedupe_window_gameloops": 0,
+          "impact_delay_gameloops": 2,
+          "length": 250.0,
+          "max_targets": 1,
+          "mechanic_length": null,
+          "mechanic_width": 2.25,
+          "missile_speed": 20.0,
+          "outcome_stat": "sentinelHeroUnits",
+          "shape": "line",
+          "target": "enemy_heroes",
+          "target_point_strategy": "last",
+          "width": 3.5
+        },
+        "evidenceDescription": "Counts Sentinel as landed when the first enemy Hero intersects the owl's projectile line. The target point supplies direction, missile speed estimates impact timing, and maxTargets=1 models the baseline non-piercing Sentinel behavior.",
+        "ruleVersion": "97039.1"
+      }
+    }
+  ],
+  "noRuleLikely": [],
+  "prBodyTemplate": "## Summary\n\n- Hero: Tyrande\n- Build: 97039\n- Implemented landing rules: TODO\n- Omitted abilities: TODO\n- Blocked abilities: TODO\n\n## Research\n\n- TODO: ability source URLs and mechanics notes\n\n## Example Replay Stats\n\n- TODO: paste output from `scripts/skillshot_rule_pipeline.py example-stats`\n\n## Validation\n\n- [ ] `.venv/bin/python -m pytest tests/test_skillshot_landing.py -q`\n- [ ] `.venv/bin/python -m pytest`\n- [ ] `.venv/bin/python -m ruff check .`",
+  "prTitle": "[skillshots] Add Tyrande landing rules",
+  "researchBacklog": [
+    {
+      "abilityCatalogName": "TyrandeElunesChosen",
+      "abilityName": "Elune's Chosen",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Tyrande Elune's Chosen mechanics",
+        "Heroes of the Storm Tyrande Elune's Chosen radius delay hit",
+        "Heroes of the Storm Tyrande Elune's Chosen quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "TyrandeHuntersMark",
+      "abilityName": "Hunter's Mark",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Tyrande Hunter's Mark mechanics",
+        "Heroes of the Storm Tyrande Hunter's Mark radius delay hit",
+        "Heroes of the Storm Tyrande Hunter's Mark quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "TyrandeLightofElune",
+      "abilityName": "Light of Elune",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Tyrande Light of Elune mechanics",
+        "Heroes of the Storm Tyrande Light of Elune radius delay hit",
+        "Heroes of the Storm Tyrande Light of Elune quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "TyrandeShadowstalk",
+      "abilityName": "Shadowstalk",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Tyrande Shadowstalk mechanics",
+        "Heroes of the Storm Tyrande Shadowstalk radius delay hit",
+        "Heroes of the Storm Tyrande Shadowstalk quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "TyrandeStarfall",
+      "abilityName": "Starfall",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Tyrande Starfall mechanics",
+        "Heroes of the Storm Tyrande Starfall radius delay hit",
+        "Heroes of the Storm Tyrande Starfall quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "TyrandeTrueshotAura",
+      "abilityName": "Trueshot Aura",
+      "decision": "needs_research",
+      "reason": "First-pass name triage matched a likely skillshot term: shot.",
+      "researchQueries": [
+        "Heroes of the Storm Tyrande Trueshot Aura mechanics",
+        "Heroes of the Storm Tyrande Trueshot Aura radius delay hit",
+        "Heroes of the Storm Tyrande Trueshot Aura quest talent interaction"
+      ]
+    }
+  ],
+  "schemaVersion": 1,
+  "summary": {
+    "abilityCount": 8,
+    "decisionCounts": {
+      "implemented": 2,
+      "needs_research": 1,
+      "needs_triage": 5
+    },
+    "implementedCount": 2,
+    "noRuleLikelyCount": 0,
+    "researchBacklogCount": 6
+  },
+  "validationCommands": [
+    ".venv/bin/python -m pytest tests/test_skillshot_landing.py -q",
+    ".venv/bin/python -m pytest",
+    ".venv/bin/python -m ruff check ."
+  ]
+}

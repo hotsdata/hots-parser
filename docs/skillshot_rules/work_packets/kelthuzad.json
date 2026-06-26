@@ -1,0 +1,273 @@
+{
+  "agentWorkflow": [
+    {
+      "agent": "Coordinator",
+      "task": "Create the branch, assign abilities, keep this packet current, and create one PR for the hero."
+    },
+    {
+      "agent": "Research",
+      "task": "Browse current ability sources for each backlog ability and record mechanics, delays, radius, target type, and source URLs."
+    },
+    {
+      "agent": "Rule Designer",
+      "task": "Choose detector type, evidence priority, confidence, gameloop windows, and docstring/evidence description."
+    },
+    {
+      "agent": "Implementer",
+      "task": "Add versioned rules and detector support in data/replay modules without changing unrelated heroes."
+    },
+    {
+      "agent": "Validation",
+      "task": "Parse at least two real replays for this hero and record generated skillshot stats in the PR body."
+    },
+    {
+      "agent": "Reviewer",
+      "task": "Check plausibility, double counting, evidence strength, tests, and PR summary completeness."
+    }
+  ],
+  "branchName": "codex/skillshot-kelthuzad",
+  "build": 97039,
+  "exampleStatsCommand": ".venv/bin/python scripts/skillshot_rule_pipeline.py example-stats \"Kel'Thuzad\" --replay-dir \"$HOTSDATA_REPLAY_CORPUS_DIR\" --limit 2",
+  "hero": {
+    "heroCatalogName": "KelThuzad",
+    "heroName": "Kel'Thuzad",
+    "heroSlug": "kelthuzad"
+  },
+  "implementedRules": [
+    {
+      "abilityCatalogName": "KelThuzadChains",
+      "abilityName": "Chains of Kel'Thuzad",
+      "decision": "implemented",
+      "reason": "A versioned skillshot landing rule already exists for this ability.",
+      "rule": {
+        "abilityCatalogName": "KelThuzadChains",
+        "abilityName": "Chains of Kel'Thuzad",
+        "attempt": {
+          "abilityCmdIndex": 0,
+          "abilityLink": 1111
+        },
+        "confidence": "proxy",
+        "detector": "same_user_followup",
+        "evidenceDescription": "Counts the initial Chains cast as landed when the same user produces a Chains Link, Chains Pull, or Kel'Thuzad quest-progress event before the next Chains attempt and within the configured evidence window.",
+        "followupAbilities": [
+          {
+            "abilityCmdIndex": 0,
+            "abilityLink": 1112
+          },
+          {
+            "abilityCmdIndex": 0,
+            "abilityLink": 1109
+          }
+        ],
+        "followupWindowGameloops": 48,
+        "questCounter": {
+          "event_names": [
+            "KelThuzadMasterOfTheColdDark",
+            "KelThuzadMasterOfTheColdDarkQuest",
+            "MasterOfTheColdDark"
+          ],
+          "max_value": 30,
+          "player_id_key": "PlayerID",
+          "start_offset_gameloops": 0,
+          "value_keys": [
+            "QuestProgress",
+            "StackCount",
+            "Stacks",
+            "Value",
+            "Count"
+          ],
+          "window_gameloops": 48
+        },
+        "ruleVersion": "97039.1"
+      }
+    },
+    {
+      "abilityCatalogName": "KelThuzadFrostNova",
+      "abilityName": "Frost Nova",
+      "decision": "implemented",
+      "reason": "A versioned skillshot landing rule already exists for this ability.",
+      "rule": {
+        "abilityCatalogName": "KelThuzadFrostNova",
+        "abilityName": "Frost Nova",
+        "areaPosition": {
+          "attempt_dedupe_window_gameloops": 48,
+          "impact_delay_gameloops": 16,
+          "mechanic_radius": 1.5,
+          "outcome_stat": "rootedHeroUnits",
+          "radius": 6.0,
+          "target": "enemy_heroes",
+          "target_point_strategy": "first"
+        },
+        "attempt": {
+          "abilityCmdIndex": 0,
+          "abilityLink": 1105
+        },
+        "confidence": "geometry_proxy_calibrated",
+        "detector": "area_position_overlap",
+        "evidenceDescription": "Counts a Frost Nova cast as landed when one or more enemy Hero units produce Kel'Thuzad quest progress after impact, or when they overlap the calibrated replay-position radius at the configured impact delay. The mechanic center-root radius is recorded separately; the larger replay radius compensates for one-second unit-position samples. Repeated target-point updates inside the configured dedupe window are treated as one cast, using the first target point in that cast cluster.",
+        "questCounter": {
+          "event_names": [
+            "KelThuzadMasterOfTheColdDark",
+            "KelThuzadMasterOfTheColdDarkQuest",
+            "MasterOfTheColdDark"
+          ],
+          "max_value": 30,
+          "player_id_key": "PlayerID",
+          "start_offset_gameloops": 16,
+          "value_keys": [
+            "QuestProgress",
+            "StackCount",
+            "Stacks",
+            "Value",
+            "Count"
+          ],
+          "window_gameloops": 48
+        },
+        "ruleVersion": "97039.1"
+      }
+    }
+  ],
+  "noRuleLikely": [],
+  "prBodyTemplate": "## Summary\n\n- Hero: Kel'Thuzad\n- Build: 97039\n- Implemented landing rules: TODO\n- Omitted abilities: TODO\n- Blocked abilities: TODO\n\n## Research\n\n- TODO: ability source URLs and mechanics notes\n\n## Example Replay Stats\n\n- TODO: paste output from `scripts/skillshot_rule_pipeline.py example-stats`\n\n## Validation\n\n- [ ] `.venv/bin/python -m pytest tests/test_skillshot_landing.py -q`\n- [ ] `.venv/bin/python -m pytest`\n- [ ] `.venv/bin/python -m ruff check .`",
+  "prTitle": "[skillshots] Add Kel'Thuzad landing rules",
+  "researchBacklog": [
+    {
+      "abilityCatalogName": "KelThuzadArchlichArmor",
+      "abilityName": "Armor of the Archlich",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Kel'Thuzad Armor of the Archlich mechanics",
+        "Heroes of the Storm Kel'Thuzad Armor of the Archlich radius delay hit",
+        "Heroes of the Storm Kel'Thuzad Armor of the Archlich quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "KelThuzadChainsPull",
+      "abilityName": "Chains Pull",
+      "decision": "needs_research",
+      "reason": "First-pass name triage matched a likely skillshot term: chain.",
+      "researchQueries": [
+        "Heroes of the Storm Kel'Thuzad Chains Pull mechanics",
+        "Heroes of the Storm Kel'Thuzad Chains Pull radius delay hit",
+        "Heroes of the Storm Kel'Thuzad Chains Pull quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "KelThuzadChainsLink",
+      "abilityName": "Chains of Kel'Thuzad",
+      "decision": "needs_research",
+      "reason": "First-pass name triage matched a likely skillshot term: chain.",
+      "researchQueries": [
+        "Heroes of the Storm Kel'Thuzad Chains of Kel'Thuzad mechanics",
+        "Heroes of the Storm Kel'Thuzad Chains of Kel'Thuzad radius delay hit",
+        "Heroes of the Storm Kel'Thuzad Chains of Kel'Thuzad quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "KelThuzadDeathAndDecay",
+      "abilityName": "Death and Decay",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Kel'Thuzad Death and Decay mechanics",
+        "Heroes of the Storm Kel'Thuzad Death and Decay radius delay hit",
+        "Heroes of the Storm Kel'Thuzad Death and Decay quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "KelThuzadDeathAndDecayShade",
+      "abilityName": "Death and Decay",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Kel'Thuzad Death and Decay mechanics",
+        "Heroes of the Storm Kel'Thuzad Death and Decay radius delay hit",
+        "Heroes of the Storm Kel'Thuzad Death and Decay quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "KelThuzadFrozenTomb",
+      "abilityName": "Frost Blast",
+      "decision": "needs_research",
+      "reason": "First-pass name triage matched a likely skillshot term: blast.",
+      "researchQueries": [
+        "Heroes of the Storm Kel'Thuzad Frost Blast mechanics",
+        "Heroes of the Storm Kel'Thuzad Frost Blast radius delay hit",
+        "Heroes of the Storm Kel'Thuzad Frost Blast quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "KelThuzadGlacialSpike",
+      "abilityName": "Glacial Spike",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Kel'Thuzad Glacial Spike mechanics",
+        "Heroes of the Storm Kel'Thuzad Glacial Spike radius delay hit",
+        "Heroes of the Storm Kel'Thuzad Glacial Spike quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "KelThuzadPhylacteryItem",
+      "abilityName": "Phylactery of Kel'Thuzad",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Kel'Thuzad Phylactery of Kel'Thuzad mechanics",
+        "Heroes of the Storm Kel'Thuzad Phylactery of Kel'Thuzad radius delay hit",
+        "Heroes of the Storm Kel'Thuzad Phylactery of Kel'Thuzad quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "KelThuzadShadowFissure",
+      "abilityName": "Shadow Fissure",
+      "decision": "needs_research",
+      "reason": "First-pass name triage matched a likely skillshot term: fissure.",
+      "researchQueries": [
+        "Heroes of the Storm Kel'Thuzad Shadow Fissure mechanics",
+        "Heroes of the Storm Kel'Thuzad Shadow Fissure radius delay hit",
+        "Heroes of the Storm Kel'Thuzad Shadow Fissure quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "KelThuzadShiftingMalice",
+      "abilityName": "Shifting Malice",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Kel'Thuzad Shifting Malice mechanics",
+        "Heroes of the Storm Kel'Thuzad Shifting Malice radius delay hit",
+        "Heroes of the Storm Kel'Thuzad Shifting Malice quest talent interaction"
+      ]
+    },
+    {
+      "abilityCatalogName": "KelThuzadSpawnShade",
+      "abilityName": "The Damned Return",
+      "decision": "needs_triage",
+      "reason": "No first-pass rule matched. A classifier or research agent should inspect the mechanics.",
+      "researchQueries": [
+        "Heroes of the Storm Kel'Thuzad The Damned Return mechanics",
+        "Heroes of the Storm Kel'Thuzad The Damned Return radius delay hit",
+        "Heroes of the Storm Kel'Thuzad The Damned Return quest talent interaction"
+      ]
+    }
+  ],
+  "schemaVersion": 1,
+  "summary": {
+    "abilityCount": 13,
+    "decisionCounts": {
+      "implemented": 2,
+      "needs_research": 4,
+      "needs_triage": 7
+    },
+    "implementedCount": 2,
+    "noRuleLikelyCount": 0,
+    "researchBacklogCount": 11
+  },
+  "validationCommands": [
+    ".venv/bin/python -m pytest tests/test_skillshot_landing.py -q",
+    ".venv/bin/python -m pytest",
+    ".venv/bin/python -m ruff check ."
+  ]
+}

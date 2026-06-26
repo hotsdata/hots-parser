@@ -4,7 +4,12 @@ from dataclasses import dataclass
 from math import hypot
 from typing import Any
 
-from data.skillshot_landing_rules import AbilityKey, SkillshotLandingRule, get_skillshot_landing_rules
+from data.skillshot_landing_rules import (
+    AbilityKey,
+    DirectionalPositionRule,
+    SkillshotLandingRule,
+    get_skillshot_landing_rules,
+)
 from helpers import get_seconds_from_int_gameloop
 from models import BaseAbility
 
@@ -62,6 +67,8 @@ def apply_skillshot_landing_stats(
                 results = _process_same_user_followup(hero, rule, quest_events)
             elif rule.detector == "area_position_overlap":
                 results = _process_area_position_overlap(hero, hero_list, units_in_game or {}, rule, quest_events)
+            elif rule.detector == "directional_position_overlap":
+                results = _process_directional_position_overlap(hero, hero_list, units_in_game or {}, rule)
             else:
                 continue
             stats[rule.ability_catalog_name] = _aggregate_results(rule, game_version, results)
@@ -233,6 +240,67 @@ def _process_area_position_overlap(
     return results
 
 
+def _process_directional_position_overlap(
+    hero: Any,
+    hero_list: dict[int, Any],
+    units_in_game: dict[int | None, Any],
+    rule: SkillshotLandingRule,
+) -> list[SkillshotLandingResult]:
+    if rule.directional_position is None:
+        return []
+
+    casted_abilities = hero.generalStats["castedAbilities"]
+    casts = sorted(casted_abilities.values(), key=lambda ability: ability.castedAtGameLoops)
+    attempts = [ability for ability in casts if _ability_matches(ability, rule.attempt)]
+    attempts = _dedupe_area_attempts(
+        attempts,
+        rule.directional_position.attempt_dedupe_window_gameloops,
+        rule.directional_position.target_point_strategy,
+    )
+    results = []
+
+    for attempt in attempts:
+        target_x = getattr(attempt, "x", None)
+        target_y = getattr(attempt, "y", None)
+        impact_gameloop = attempt.castedAtGameLoops + rule.directional_position.impact_delay_gameloops
+        if target_x is None or target_y is None:
+            results.append(
+                SkillshotLandingResult(
+                    status="unknown",
+                    cast_gameloop=attempt.castedAtGameLoops,
+                    evidence_type="missing_target_point",
+                    evidence_gameloop=impact_gameloop,
+                )
+            )
+            continue
+
+        hits = _enemy_hero_directional_hits(
+            hero,
+            hero_list,
+            units_in_game,
+            attempt.castedAtGameLoops,
+            float(target_x),
+            float(target_y),
+            rule.directional_position,
+        )
+        target_count = len(hits)
+        evidence_gameloop = hits[0]["evidence_gameloop"] if hits else impact_gameloop
+        results.append(
+            SkillshotLandingResult(
+                status="landed" if target_count else "missed",
+                cast_gameloop=attempt.castedAtGameLoops,
+                evidence_type="directional_position_overlap" if target_count else None,
+                evidence_gameloop=evidence_gameloop,
+                target_count=target_count,
+                target_hero_names=tuple(hit["hero_name"] for hit in hits),
+                target_player_ids=tuple(hit["player_id"] for hit in hits if hit["player_id"] is not None),
+                target_distances=tuple(hit["distance"] for hit in hits),
+            )
+        )
+
+    return results
+
+
 def _dedupe_area_attempts(
     attempts: list[BaseAbility],
     window_gameloops: int,
@@ -310,6 +378,117 @@ def _enemy_hero_area_hits(
             )
 
     return sorted(hits, key=lambda hit: (hit["distance"], hit["hero_name"]))
+
+
+def _enemy_hero_directional_hits(
+    caster: Any,
+    hero_list: dict[int, Any],
+    units_in_game: dict[int | None, Any],
+    cast_gameloop: int,
+    target_x: float,
+    target_y: float,
+    directional_rule: DirectionalPositionRule,
+) -> list[dict[str, Any]]:
+    source_unit = units_in_game.get(_hero_unit_tag(caster))
+    source_position = _position_at_second(source_unit, get_seconds_from_int_gameloop(cast_gameloop))
+    if source_position is None:
+        return []
+
+    source_x = float(source_position[0])
+    source_y = float(source_position[1])
+    direction_x = target_x - source_x
+    direction_y = target_y - source_y
+    direction_length = hypot(direction_x, direction_y)
+    if direction_length <= 0:
+        return []
+
+    unit_x = direction_x / direction_length
+    unit_y = direction_y / direction_length
+    caster_team = getattr(caster, "team", None)
+    hits = []
+
+    for enemy in hero_list.values():
+        if enemy is caster:
+            continue
+        if caster_team is not None and getattr(enemy, "team", None) == caster_team:
+            continue
+
+        unit = units_in_game.get(_hero_unit_tag(enemy))
+        evidence_gameloop = cast_gameloop + directional_rule.impact_delay_gameloops
+        position = _position_at_second(unit, get_seconds_from_int_gameloop(evidence_gameloop))
+        if position is None:
+            continue
+
+        if directional_rule.missile_speed is not None:
+            initial_measure = _directional_measurement(
+                source_x,
+                source_y,
+                unit_x,
+                unit_y,
+                float(position[0]),
+                float(position[1]),
+                directional_rule,
+            )
+            if initial_measure is None:
+                continue
+            travel_gameloops = int(round((initial_measure["along"] / directional_rule.missile_speed) * 16))
+            evidence_gameloop = cast_gameloop + directional_rule.impact_delay_gameloops + travel_gameloops
+            position = _position_at_second(unit, get_seconds_from_int_gameloop(evidence_gameloop))
+            if position is None:
+                continue
+
+        measurement = _directional_measurement(
+            source_x,
+            source_y,
+            unit_x,
+            unit_y,
+            float(position[0]),
+            float(position[1]),
+            directional_rule,
+        )
+        if measurement is None:
+            continue
+
+        hits.append(
+            {
+                "hero_name": getattr(enemy, "name", "Unknown"),
+                "player_id": getattr(enemy, "playerId", None),
+                "distance": round(measurement["perpendicular"], 4),
+                "path_distance": round(measurement["along"], 4),
+                "evidence_gameloop": evidence_gameloop,
+            }
+        )
+
+    hits = sorted(hits, key=lambda hit: (hit["path_distance"], hit["distance"], hit["hero_name"]))
+    if directional_rule.max_targets is not None:
+        hits = hits[: directional_rule.max_targets]
+    return hits
+
+
+def _directional_measurement(
+    source_x: float,
+    source_y: float,
+    unit_x: float,
+    unit_y: float,
+    point_x: float,
+    point_y: float,
+    directional_rule: DirectionalPositionRule,
+) -> dict[str, float] | None:
+    relative_x = point_x - source_x
+    relative_y = point_y - source_y
+    along = relative_x * unit_x + relative_y * unit_y
+    if along < 0 or along > directional_rule.length:
+        return None
+
+    perpendicular = abs(relative_x * unit_y - relative_y * unit_x)
+    if directional_rule.shape == "triangle":
+        half_width = (directional_rule.width / 2.0) * (along / directional_rule.length)
+    else:
+        half_width = directional_rule.width / 2.0
+    if perpendicular > half_width:
+        return None
+
+    return {"along": along, "perpendicular": perpendicular}
 
 
 def _hero_unit_tag(hero: Any) -> int | None:
@@ -450,6 +629,26 @@ def _aggregate_results(
                 "averageTargetsHit": round(total_targets_hit / attempts, 4) if attempts else None,
                 "totalTargetsHit": total_targets_hit,
                 rule.area_position.outcome_stat: total_targets_hit,
+            }
+        )
+
+    if rule.directional_position is not None:
+        stats.update(
+            {
+                "directionalImpactDelayGameloops": rule.directional_position.impact_delay_gameloops,
+                "directionalLength": rule.directional_position.length,
+                "directionalMechanicLength": rule.directional_position.mechanic_length,
+                "directionalMechanicWidth": rule.directional_position.mechanic_width,
+                "directionalMaxTargets": rule.directional_position.max_targets,
+                "directionalMissileSpeed": rule.directional_position.missile_speed,
+                "directionalShape": rule.directional_position.shape,
+                "directionalTarget": rule.directional_position.target,
+                "directionalWidth": rule.directional_position.width,
+                "attemptDedupeWindowGameloops": rule.directional_position.attempt_dedupe_window_gameloops,
+                "targetPointStrategy": rule.directional_position.target_point_strategy,
+                "averageTargetsHit": round(total_targets_hit / attempts, 4) if attempts else None,
+                "totalTargetsHit": total_targets_hit,
+                rule.directional_position.outcome_stat: total_targets_hit,
             }
         )
 
